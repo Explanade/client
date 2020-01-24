@@ -1,32 +1,22 @@
 <template>
-  <div>
-    <input id="panel-1-ctrl" class="panel-radios" type="radio" name="tab-radios" checked>
-    <input id="panel-2-ctrl" class="panel-radios" type="radio" name="tab-radios">
-    <input id="panel-3-ctrl" class="panel-radios" type="radio" name="tab-radios">
-    <input id="panel-4-ctrl" class="panel-radios" type="radio" name="tab-radios">
-    <input id="panel-5-ctrl" class="panel-radios" type="radio" name="tab-radios">
-
+  <div class="mt-4">
     <ul id="tabs-list">
       <li v-for="(itin, index) in dayData.activities" :key="itin.date" :id="'li-for-panel-' + Number(index + 1)">
-        <label class="panel-label" :for="'panel-'+ Number(index+1) +'-ctrl'"
-          @click="selected = itin.date"
-        > 
-        {{itin.date}}</label>
+        <label class="panel-label" @click="selected = itin.date" :id="itin.date == selected ? 'checked' : ''">
+          {{itin.date}}
+        </label>
       </li>
     </ul>
 
     <article id="panels">
-      <div class="container" v-for="itin in dayData.activities" :key="itin.date">
-        <section>
-          <main v-if="itin.date == selected">
-            <draggable v-model="itin.places" group="places" @start="drag=true" @end="drag=false">
-              <div v-for="element in itin.places" :key="element.order" class="row">
-                {{element.name}}
-              </div>
-            </draggable>
-            <!-- {{itin.date}} -->
-          </main>
-        </section>
+      <div v-for="itin in dayData.activities" :key="itin.date">
+        <div v-if="itin.date == selected">
+          <draggable v-model="itin.places" group="places" @start="drag=true" @end="drag=false">
+            <div v-for="element in itin.places" :key="element.order" class="row list my-4">
+              <ActivityCard :activity="element" />
+            </div>
+          </draggable>
+        </div>
       </div>
     </article>
   </div>
@@ -34,6 +24,8 @@
 
 <script>
 import draggable from 'vuedraggable';
+import ActivityCard from '@/components/ActiviesCard';
+
 const itinerary = {
             "id": "akshd8937149askdjk",
             "location": {
@@ -226,18 +218,14 @@ export default {
     }),
     components: {
       draggable,
+      ActivityCard
     },
 }
 </script>
 
 <style>
-.row {
-  padding: 50px 0;
-}
-
 ul#tabs-list {
 	 list-style: none;
-	 text-align: center;
 	 border-bottom: 1px solid #dfdfdf;
 	 margin: 0;
 	 padding: 0;
@@ -279,82 +267,6 @@ label.panel-label:hover {
 	 #tabs-list label.panel-label {
 		 padding: 12px 0;
 	}
-	 #tabs-list #li-for-panel-1 {
-		 max-height: 0;
-		 overflow-y: hidden;
-		 transition: max-height 200ms;
-	}
-	 #tabs-list #li-for-panel-2 {
-		 max-height: 0;
-		 overflow-y: hidden;
-		 transition: max-height 200ms;
-	}
-	 #tabs-list #li-for-panel-3 {
-		 max-height: 0;
-		 overflow-y: hidden;
-		 transition: max-height 200ms;
-	}
-	 #tabs-list #li-for-panel-4 {
-		 max-height: 0;
-		 overflow-y: hidden;
-		 transition: max-height 200ms;
-	}
-	 #tabs-list #li-for-panel-5 {
-		 max-height: 0;
-		 overflow-y: hidden;
-		 transition: max-height 200ms;
-	}
-	 #panel-1-ctrl:checked ~ #tabs-list #li-for-panel-1 {
-		 max-height: 46px;
-		 opacity: 1;
-	}
-
-	 #panel-1-ctrl:checked ~ #tabs-list #li-for-panel-1 label.panel-label {
-		 background-color: white;
-		 color: #68C7BD;
-		 background-color: #68C7BD;
-		 color: white;
-	}
-	 #panel-2-ctrl:checked ~ #tabs-list #li-for-panel-2 {
-		 max-height: 46px;
-		 opacity: 1;
-	}
-	 #panel-2-ctrl:checked ~ #tabs-list #li-for-panel-2 label.panel-label {
-		 background-color: white;
-		 color: #68C7BD;
-		 background-color: #68C7BD;
-		 color: white;
-	}
-	 #panel-3-ctrl:checked ~ #tabs-list #li-for-panel-3 {
-		 max-height: 46px;
-		 opacity: 1;
-	}
-	 #panel-3-ctrl:checked ~ #tabs-list #li-for-panel-3 label.panel-label {
-		 background-color: white;
-		 color: #68C7BD;
-		 background-color: #68C7BD;
-		 color: white;
-	}
-	 #panel-4-ctrl:checked ~ #tabs-list #li-for-panel-4 {
-		 max-height: 46px;
-		 opacity: 1;
-	}
-	 #panel-4-ctrl:checked ~ #tabs-list #li-for-panel-4 label.panel-label {
-		 background-color: white;
-		 color: #68C7BD;
-		 background-color: #68C7BD;
-		 color: white;
-	}
-	 #panel-5-ctrl:checked ~ #tabs-list #li-for-panel-5 {
-		 max-height: 46px;
-		 opacity: 1;
-	}
-	 #panel-5-ctrl:checked ~ #tabs-list #li-for-panel-5 label.panel-label {
-		 background-color: white;
-		 color: #68C7BD;
-		 background-color: #68C7BD;
-		 color: white;
-	}
 	 #panels .container {
 		 width: 100%;
 	}
@@ -364,113 +276,15 @@ label.panel-label:hover {
 }
 
 @media all and (min-width: 768px) {
-	 #panel-1-ctrl:checked ~ #tabs-list #li-for-panel-1 {
-		 pointer-events: none;
-		 cursor: default;
-		 transform: translate3d(0, 1px, 0);
-		 box-shadow: none;
-		 border-right: none;
-	}
-	 #panel-1-ctrl:checked ~ #tabs-list #li-for-panel-1.last {
-		 border-right: 1px solid transparent;
-	}
-	 #panel-1-ctrl:checked ~ #tabs-list #li-for-panel-1 + li {
-		 border-left: 1px solid #dfdfdf;
-	}
-	 #panel-1-ctrl:checked ~ #tabs-list #li-for-panel-1 label.panel-label {
-		 background-color: white;
-		 color: #68C7BD;
-		 padding-top: 26px;
-	}
-	 #panel-1-ctrl:checked ~ #tabs-list #li-for-panel-1 label.panel-label::after {
-		 height: 6px;
-	}
-	 #panel-2-ctrl:checked ~ #tabs-list #li-for-panel-2 {
-		 pointer-events: none;
-		 cursor: default;
-		 transform: translate3d(0, 1px, 0);
-		 box-shadow: none;
-		 border-right: none;
-	}
-	 #panel-2-ctrl:checked ~ #tabs-list #li-for-panel-2.last {
-		 border-right: 1px solid transparent;
-	}
-	 #panel-2-ctrl:checked ~ #tabs-list #li-for-panel-2 + li {
-		 border-left: 1px solid #dfdfdf;
-	}
-	 #panel-2-ctrl:checked ~ #tabs-list #li-for-panel-2 label.panel-label {
-		 background-color: white;
-		 color: #68C7BD;
-		 padding-top: 26px;
-	}
-	 #panel-2-ctrl:checked ~ #tabs-list #li-for-panel-2 label.panel-label::after {
-		 height: 6px;
-	}
-	 #panel-3-ctrl:checked ~ #tabs-list #li-for-panel-3 {
-		 pointer-events: none;
-		 cursor: default;
-		 transform: translate3d(0, 1px, 0);
-		 box-shadow: none;
-		 border-right: none;
-	}
-	 #panel-3-ctrl:checked ~ #tabs-list #li-for-panel-3.last {
-		 border-right: 1px solid transparent;
-	}
-	 #panel-3-ctrl:checked ~ #tabs-list #li-for-panel-3 + li {
-		 border-left: 1px solid #dfdfdf;
-	}
-	 #panel-3-ctrl:checked ~ #tabs-list #li-for-panel-3 label.panel-label {
-		 background-color: white;
-		 color: #68C7BD;
-		 padding-top: 26px;
-	}
-	 #panel-3-ctrl:checked ~ #tabs-list #li-for-panel-3 label.panel-label::after {
-		 height: 6px;
-	}
-	 #panel-4-ctrl:checked ~ #tabs-list #li-for-panel-4 {
-		 pointer-events: none;
-		 cursor: default;
-		 transform: translate3d(0, 1px, 0);
-		 box-shadow: none;
-		 border-right: none;
-	}
-	 #panel-4-ctrl:checked ~ #tabs-list #li-for-panel-4.last {
-		 border-right: 1px solid transparent;
-	}
-	 #panel-4-ctrl:checked ~ #tabs-list #li-for-panel-4 + li {
-		 border-left: 1px solid #dfdfdf;
-	}
-	 #panel-4-ctrl:checked ~ #tabs-list #li-for-panel-4 label.panel-label {
-		 background-color: white;
-		 color: #68C7BD;
-		 padding-top: 26px;
-	}
-	 #panel-4-ctrl:checked ~ #tabs-list #li-for-panel-4 label.panel-label::after {
-		 height: 6px;
-	}
-	 #panel-5-ctrl:checked ~ #tabs-list #li-for-panel-5 {
-		 pointer-events: none;
-		 cursor: default;
-		 transform: translate3d(0, 1px, 0);
-		 box-shadow: none;
-		 border-right: none;
-	}
-	 #panel-5-ctrl:checked ~ #tabs-list #li-for-panel-5.last {
-		 border-right: 1px solid transparent;
-	}
-	 #panel-5-ctrl:checked ~ #tabs-list #li-for-panel-5 + li {
-		 border-left: 1px solid #dfdfdf;
-	}
-	 #panel-5-ctrl:checked ~ #tabs-list #li-for-panel-5 label.panel-label {
-		 background-color: white;
-		 color: #68C7BD;
-		 padding-top: 26px;
-	}
-	 #panel-5-ctrl:checked ~ #tabs-list #li-for-panel-5 label.panel-label::after {
-		 height: 6px;
-	}
+  #checked {
+    background-color: white;
+    color: #68C7BD;
+    padding-top: 26px;
+    border-top: 6px solid;
+    margin-bottom: 0 !important;
+  }
+
 	 ul#tabs-list {
-		 text-align: center;
 		 border-bottom: 1px solid #dfdfdf;
 	}
 	 ul#tabs-list li {

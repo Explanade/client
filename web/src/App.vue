@@ -1,12 +1,26 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    
+    <NavBar style="z-index:0"/>
     <router-view/>
+    <Footer style="z-index:1" />
+    
   </div>
 </template>
 
+<script>
+
+import NavBar from './components/NavBar'
+import Footer from './components/Footer'
+
+export default {
+  components:{
+    NavBar,
+    Footer
+  }
+}
+</script>
+
 <style>
+
 </style>
