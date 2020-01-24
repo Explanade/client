@@ -7,12 +7,9 @@
 
         <div class="options">
                <div class="form-group">
-                   <div class="option" style="display:flex; justify-content:space-between; align-items:center">
+                   
                     <h3>Select Options</h3>
-                   <div>
-                        <i class="fas fa-sort-amount-down" style="font-size:24px;"></i>
-                   </div>
-                   </div>
+                   
                     <br>
                     <select class="form-control" id="exampleFormControlSelect1">
                     <option>Landmarks</option>
@@ -30,23 +27,29 @@
                     <div id='highlight-options' style="background-image: url('https://picsum.photos/125/125/?image=58')"></div>
                     <div id='highlight-options' style="background-image: url('https://picsum.photos/125/125/?image=58')"></div>
                 </div>
+                
                 <div class="day-list">
                     <div class="days">
-                        <h3>Day 1</h3>
+                        <h5>Day 1</h5>
                     </div>
                      <div class="days">
-                        <h3>Day 2</h3>
+                        <h5>Day 2</h5>
                     </div>
                      <div class="days">
-                        <h3>Day 3</h3>
+                        <h5>Day 3</h5>
                     </div>
                 </div>
                 <div class="days-detail">
-                    <ActivityCard />
-                    <ActivityCard />
-                    <ActivityCard />
-                    <ActivityCard />
-                    <ActivityCard />
+                    <button type="submit" class="btn btn-primary" id="button-sort">
+                        <i class="fas fa-sort-amount-down" style="font-size:20px;margin-right:10px"></i> Sort by distance
+                    </button>                  
+                    <div class="list">
+                        <ActivityCard />
+                        <ActivityCard />
+                        <ActivityCard />
+                        <ActivityCard />
+                        <ActivityCard />
+                    </div>
                     <!-- <div class="card mb-3" style="max-width: auto;max-height:20vh"> 
                         <div class="row no-gutters">
                             <div class="col-md-4">
@@ -109,6 +112,13 @@ export default {
     margin-left:20px
 }
 
+#button-sort{
+    margin-top:-30px;
+    margin-bottom:50px;
+    background: #007D62;   
+    border: #68C7BD;
+}
+
 .review{
     margin-top:-10px;
 }
@@ -138,7 +148,7 @@ span.step {
 
 .days{
     background-color:#68C7BD;
-    width: 120px;
+    width: 100px;
     height: 60px;
     display: flex;
     margin:5px;
@@ -152,7 +162,7 @@ span.step {
     margin-top: 50px;
     display: flex;
     justify-content: flex-start;
-    margin-left:50px;
+    margin-left:20px;
    
 }
 

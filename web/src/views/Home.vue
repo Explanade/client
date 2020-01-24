@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-
+    
+    <div class="flying-leaf"></div>
     <div class="header">
       <div class="header-content">
         <h1 class ="title">Create Your</h1>
@@ -69,6 +70,14 @@ export default {
 </script>
 
 <style scoped>
+
+.flying-leaf{
+  background-image: url('../assets/home-leaf.png');
+  height: 100vh;
+  top:100px;
+  position: absolute;
+  z-index: 1;
+}
 
 span.step {
   background:  #68C7BD;
@@ -146,13 +155,15 @@ h1{
   height: 120vh;
   align-items: center;
   background-color: black;
+  background-image: url('../assets/home-hero.jpg');
+  background-size:cover
 }
 
 .header-content{
   display: flex;
   flex-direction: column;
   padding-top:30vh;
-  padding-left:60vw;
+  padding-left:65vw;
 }
 
 .title{
@@ -170,7 +181,7 @@ h1{
 
 .btn-info {
     color: #fff;
-    background-color: #68C7BD;
+    background-color:#007D62;
     border-color: #68C7BD;
 }
 
