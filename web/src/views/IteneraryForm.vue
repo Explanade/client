@@ -1,13 +1,18 @@
 <template>
   <div class="mainContainer">
-    <div class="maps">
-      <img class="maps-images" src="../assets/map-template.png" alt="">
+    <div class="maps" style="background-images:url('')">
+      
     </div>
     <div class="input">
 
         <div class="options">
                <div class="form-group">
+                   <div class="option" style="display:flex; justify-content:space-between; align-items:center">
                     <h3>Select Options</h3>
+                   <div>
+                        <i class="fas fa-sort-amount-down" style="font-size:24px;"></i>
+                   </div>
+                   </div>
                     <br>
                     <select class="form-control" id="exampleFormControlSelect1">
                     <option>Landmarks</option>
@@ -37,58 +42,39 @@
                     </div>
                 </div>
                 <div class="days-detail">
-
-                    <div class="card mb-3" style="max-width: auto;">
+                    <ActivityCard />
+                    <ActivityCard />
+                    <ActivityCard />
+                    <ActivityCard />
+                    <ActivityCard />
+                    <!-- <div class="card mb-3" style="max-width: auto;max-height:20vh"> 
                         <div class="row no-gutters">
                             <div class="col-md-4">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSBKsEDRAzp13nh2mKkIMMeQvxbuBNKbTvpxt0axtB1sOwKgakI" class="card-img" alt="...">
+                            <span class="step">1</span>
+                            <div style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSBKsEDRAzp13nh2mKkIMMeQvxbuBNKbTvpxt0axtB1sOwKgakI');height:20vh;width:11vw; background-size:cover">
+                            </div>
                             </div>
                             <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">Destination Name</h5>
+                                <h6 class="card-title">Destination Name</h6>
                                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                                 <div class="review">
                                     <star-rating    v-bind:increment="0.5"
                                                     v-bind:max-rating="5"
                                                     active-color="#ed8a19"
                                                     inactive-color="#737373"
-                                                    v-bind:star-size="20"
+                                                    v-bind:star-size="15"
                                                     v-bind:rating="3"
                                                     >
                                     </star-rating>
                                 </div>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                             </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="card mb-3" style="max-width: auto;">
-                        <div class="row no-gutters">
-                            <div class="col-md-4">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSBKsEDRAzp13nh2mKkIMMeQvxbuBNKbTvpxt0axtB1sOwKgakI" class="card-img" alt="...">
-                            </div>
-                            <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Destination Name</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <div class="review">
-                                    <star-rating    v-bind:increment="0.5"
-                                                    v-bind:max-rating="5"
-                                                    active-color="#ed8a19"
-                                                    inactive-color="#737373"
-                                                    v-bind:star-size="20"
-                                                    v-bind:rating="3"
-                                                    >
-                                    </star-rating>
-                                </div>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    </div> -->
                 </div>
+                <button type="button" id="button" class="btn btn-info">Create</button>
+                <button type="button" id="button" style="background:gray" class="btn btn-info">Back</button>
         </div>
     </div>
 
@@ -98,10 +84,12 @@
 <script>
 
 import StarRating from 'vue-star-rating'
+import ActivityCard from '../components/ActiviesCard'
 
 export default {
     components :{
-        StarRating
+        StarRating,
+        ActivityCard
     },
     data() {
         return {
@@ -112,6 +100,33 @@ export default {
 </script>
 
 <style>
+
+#button{
+    background: #68C7BD;   
+    border: #68C7BD;
+    font-size: 25px;
+    margin-top:50px;
+    margin-left:20px
+}
+
+.review{
+    margin-top:-10px;
+}
+
+span.step {
+  background: #68C7BD;
+  color: white;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 3em;
+  left: 10px;
+  top:-10px;
+  text-align: center;
+  font-size: 20px;
+  width: 3em;
+  height: 3em;
+  position: absolute;
+}
 
 .days-detail{
     width: 40vw;
@@ -160,7 +175,7 @@ export default {
 
 .maps-images{
     background-size:cover;
-    width: auto;
+    width: 50vw;
     height:100%;
 }
 
@@ -184,6 +199,8 @@ export default {
 .maps{
     height: 100vh;
     width: 50vw;
+    background-image: url('../assets/map-template.png');
+    background-size: cover;
 
 }
 

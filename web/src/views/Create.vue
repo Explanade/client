@@ -64,19 +64,7 @@ box-shadow: 6px 6px 0px -1px rgba(0,0,0,0.19);
 }
 
 
-span.step {
-  background:  rgb(255, 255, 255);
-  border-radius: 2em;
-  -moz-border-radius: 2em;
-  -webkit-border-radius: 2em;
-  color: #007D62;
-  display: inline-block;
-  font-weight: bold;
-  line-height: 2em;
-  margin-right: 12px;
-  text-align: center;
-  width: 2em; 
-}
+
 
 h1{
     color:white;
