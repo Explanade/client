@@ -28,6 +28,7 @@ export default {
     position: sticky;
     height: 100px;
     padding-left:70px;
+    box-shadow: 0px 3px 16px -1px rgba(0,0,0,0.19);
     padding-right:70px;
 }
 .logoBrand{

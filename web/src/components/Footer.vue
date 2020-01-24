@@ -1,5 +1,5 @@
 <template>
-  <div class="footerPage">
+  <div class="footerPage" >
         <!-- Site footer -->
     <footer class="site-footer">
         <div class="container">

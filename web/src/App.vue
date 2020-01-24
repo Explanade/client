@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     
-    <NavBar />
+    <NavBar style="z-index:0"/>
     <router-view/>
-    <Footer />
+    <Footer style="z-index:1" />
     
   </div>
 </template>
