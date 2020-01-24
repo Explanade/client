@@ -1,7 +1,37 @@
 <template>
   <div class="mainContainer">
-    <div class="maps" style="background-images:url('')">
-      
+    <div class="maps">
+      <gmap-map
+        :center="center"
+        :zoom="12"
+        style="width: auto; height:100%;;"
+        :options="mapStyle"
+        >
+        <gmap-marker
+            :position="m"
+            v-transition
+            v-for="(m, index) in markers" :key="index"
+            @click="center=m"
+            :icon="{url : require('../assets/icon-pin-poin.png')}"
+        >
+        </gmap-marker>
+        <gmap-polyline :path.sync="markers" 
+            :options="{
+            strokeColor:'red',
+            geodesic: true,
+            icons:  [{
+                icon: {
+                path: 'M 0,-1 0,1',
+                strokeOpacity:5,
+                scale: 7
+                },
+                offset: '100%',
+                repeat: '10px'
+            }], 
+            }"
+            >
+        </gmap-polyline>
+     </gmap-map>
     </div>
     <div class="input">
 
@@ -18,14 +48,13 @@
                     </select>
                 </div>
                 <div class="options-images">
-                    <div id='highlight-options' style="background-image: url('https://picsum.photos/125/125/?image=58')"></div>
-                    <div id='highlight-options' style="background-image: url('https://picsum.photos/125/125/?image=58')"></div>
-                    <div id='highlight-options' style="background-image: url('https://picsum.photos/125/125/?image=58')"></div>
-                    <div id='highlight-options' style="background-image: url('https://picsum.photos/125/125/?image=58')"></div>
-                    <div id='highlight-options' style="background-image: url('https://picsum.photos/125/125/?image=58')"></div>
-                    <div id='highlight-options' style="background-image: url('https://picsum.photos/125/125/?image=58')"></div>
-                    <div id='highlight-options' style="background-image: url('https://picsum.photos/125/125/?image=58')"></div>
-                    <div id='highlight-options' style="background-image: url('https://picsum.photos/125/125/?image=58')"></div>
+                    <drag style="border-radius: 205px">
+                        <div 
+                            id='highlight-options' 
+                            style="background-image: url('https://picsum.photos/125/125/?image=58');"
+                        >
+                        </div>
+                    </drag>
                 </div>
                 
                 <div class="day-list">
@@ -96,7 +125,259 @@ export default {
     },
     data() {
         return {
-           
+            center: { lat: -6.229728, lng: 106.6894304 },
+            markers: [],
+            currentPlace: null,
+            mapStyle: {
+                styles: [
+                {
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#ebe3cd"
+                    }
+                    ]
+                },
+                {
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#523735"
+                    }
+                    ]
+                },
+                {
+                    "elementType": "labels.text.stroke",
+                    "stylers": [
+                    {
+                        "color": "#f5f1e6"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "administrative",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                    {
+                        "color": "#c9b2a6"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "administrative.land_parcel",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                    {
+                        "color": "#dcd2be"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "administrative.land_parcel",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#ae9e90"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "landscape.natural",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#dfd2ae"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#dfd2ae"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#93817c"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                    {
+                        "color": "#a5b076"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#447530"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#f5f1e6"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.arterial",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#fdfcf8"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#f8c967"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                    {
+                        "color": "#92ddc8"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                    {
+                        "color": "#92ddc8"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway.controlled_access",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#e98d58"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway.controlled_access",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                    {
+                        "color": "#357b63"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway.controlled_access",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                    {
+                        "color": "#357b63"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.local",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#806b63"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "transit.line",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#dfd2ae"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "transit.line",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#8f7d77"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "transit.line",
+                    "elementType": "labels.text.stroke",
+                    "stylers": [
+                    {
+                        "color": "#ebe3cd"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "transit.station",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#dfd2ae"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                    {
+                        "color": "#b9d3c2"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#92998d"
+                    }
+                    ]
+                }
+                ]
+            }
+        }
+    },
+
+    mounted() {
+        this.geolocate();
+    },
+
+    methods:{
+        geolocate: function() {
+            navigator.geolocation.getCurrentPosition(position => {
+                this.center = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+                };
+            });
         }
     }
 }
