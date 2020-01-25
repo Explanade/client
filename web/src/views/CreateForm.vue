@@ -11,9 +11,7 @@
           <HotelDatePicker/>
           <!-- <input type="password" class="form-control" id="input" placeholder="Insert password.."> -->
         </div>
-        <div>
-          <button type="button" id="button" class="btn btn-info">Submit</button>
-        </div>
+        <button type="button" id="button" class="btn btn-primary">Primary</button>
       </form>
 
     </div>
@@ -32,6 +30,27 @@ export default {
 
 
 <style>
+.form-group{
+  width: 25vw;
+}
+h1{
+  color:white;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+
+#button{
+  background-color: #19459b;
+  border-color: #19459b;
+  height: 50px;
+  width: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0px;
+}
+
 
 .btn-info {
   color: #fff;
@@ -48,7 +67,8 @@ export default {
   background-color: white;
   padding: 25px;
   font-size: 20px;
-  width:20vw;
+  width:25vw;
+  border-radius: 0px;
 }
 
 .create-form{
@@ -68,6 +88,9 @@ export default {
   background-color: black;
   display: flex;
   justify-content: center;
-  align-items: center
+  align-items: center;
+  background-image: url('../assets/photoAssets/explanade-create2.jpg');
+  background-size:cover;
+  
 }
 </style>

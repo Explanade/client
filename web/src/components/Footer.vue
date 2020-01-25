@@ -41,7 +41,7 @@ export default {
 <style>
 .site-footer
 {
-  background-color:#082B27;
+  background-color:rgb(14, 18, 40);
   padding:45px 0 20px;
   font-size:15px;
   line-height:24px;
