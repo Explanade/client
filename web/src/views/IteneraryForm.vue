@@ -42,13 +42,14 @@
                    
                     <br>
                     <select class="form-control" id="exampleFormControlSelect1">
-                    <option>Landmarks</option>
-                    <option>Restaurants</option>
-                    <option>Events</option>
+                        <option>Landmarks</option>
+                        <option>Restaurants</option>
+                        <option>Events</option>
                     </select>
                 </div>
-                <div class="options-images">
+                <div class="options-images" v-for="restaurant in restaurants" :key="restaurant.id">
                     <drag style="border-radius: 205px">
+                        {{restaurant.name}}
                         <div 
                             id='highlight-options' 
                             style="background-image: url('https://picsum.photos/125/125/?image=58');"
@@ -121,6 +122,7 @@
 import StarRating from 'vue-star-rating'
 import ActivityCard from '../components/ActiviesCard'
 import ItineraryTable from '../components/ItineraryTable'
+import { mapState } from 'vuex'
 
 export default {
     components :{
@@ -369,6 +371,10 @@ export default {
                 ]
             }
         }
+    },
+
+    computed: {
+        ...mapState(['restaurants'])
     },
 
     mounted() {
