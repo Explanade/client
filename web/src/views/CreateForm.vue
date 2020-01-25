@@ -3,6 +3,15 @@
     
     <form class="create-form" @submit.prevent="submitIten">
       <div class="form-group">
+        <label for="exampleInputEmail1">Itinerary Name</label>
+        <input 
+          type="text" 
+          class="form-control"
+          placeholder="insert name.."
+          v-model="itinName"
+        />
+      </div>
+      <div class="form-group">
         <label for="exampleInputEmail1">Destination</label>
         <gmap-autocomplete
           @place_changed="setPlace"
@@ -31,6 +40,7 @@
 <script>
 
 import HotelDatePicker from 'vue-hotel-datepicker'
+import axios from 'axios'
 
 export default {
   data(){
@@ -38,11 +48,13 @@ export default {
       currentCity : null,
       startDate : null,
       endDate : null,
+      itinName : ''
     }
   },
   methods : {
     setPlace(place) {
       this.currentPlace = place;
+      console.log(place.name)
     },
     setStartDate(date){
       this.startDate = date
@@ -52,13 +64,30 @@ export default {
     },
     getLatLng(){
       const location = {
+          name : this.currentPlace.name,
           lat: this.currentPlace.geometry.location.lat(),
           lng: this.currentPlace.geometry.location.lng()
       }
       return location
     },
     submitIten(){
-      console.log(this.getLatLng())
+      const data = {
+        name : this.itinName,
+        start_date : this.startDate,
+        end_date : this.endDate,
+        location : getLatLng()
+      }
+
+      axios.post('http://localhost:3000/itineraries/', data, {
+        access_token : localStorage.access_token
+      })
+        .then(({data}) => {
+
+        })
+        .catch(err => {
+          console.log(err)
+        })
+
     }
   },
   components: {
