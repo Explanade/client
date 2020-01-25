@@ -22,6 +22,7 @@ export default new Vuex.Store({
     createItinerary({ commit }, payload) {
       return serverAPI({
         url: '/itineraries',
+        method: 'post',
         data: payload,
         headers: {
           token: localStorage.getItem('access_token')
@@ -41,12 +42,25 @@ export default new Vuex.Store({
           query: `restaurants+in+${payload}`,
         }
       })
-      // .then(({ data }) => {
-      //   commit('SET_RESTAURANTS', data.results)
-      // })
-      // .catch(err => {
-      //   this.$store.commit('SET_ERROR_MESSAGE', err)
-      // })
+    },
+    fetchLandmarks({ commit }, payload) {
+      return serverAPI({
+        url: '/google/places',
+        method: 'get',
+        params: {
+          query: `point+of+interest+in+${payload}`
+        }
+      })
+    },
+    updateItinerary({ commit }, payload) {
+      return serverAPI({
+        url: `/itineraries/${payload._id}`,
+        method: 'put',
+        data: { itinerary: payload },
+        headers: {
+          token: localStorage.getItem('access_token')
+        }
+      })
     }
   },
   modules: {

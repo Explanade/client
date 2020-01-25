@@ -51,7 +51,7 @@
                 <draggable class="test" v-model="restaurants" group="activities">
                     <div
                         class="options-images"
-                        v-for="(element, index) in restaurants"
+                        v-for="element in restaurants"
                             :key="element.name"
                         >
                         {{element.name}}
@@ -114,7 +114,7 @@
                         </div>
                     </div> -->
                 <!-- </div> -->
-                <button type="button" id="button" class="btn btn-info">Create</button>
+                <button type="button" id="button" class="btn btn-info" @click="submitItinerary">Create</button>
                 <button type="button" id="button" style="background:gray" class="btn btn-info">Back</button>
         </div>
     </div>
@@ -138,12 +138,9 @@ export default {
     data() {
         return {
             itineraryDetail: null,
-            activities: {
-                0: [],
-                1: [],
-                2: []
-            },
+            activities: {},
             restaurants: [],
+            landmarks: [],
             center: { lat: -6.229728, lng: 106.6894304 },
             markers: [],
             currentPlace: null,
@@ -404,26 +401,45 @@ export default {
         },
         getItinDetail() {
             const id = this.$route.params.id;
+            let locationName;
             this.$store.dispatch('fetchItineraryDetail', id)
                 .then(({ data }) => {
                     this.itineraryDetail = data;
-                    // this.itineraryDetail.activities = {}
-                    // for (let i = 0; i < data.date.total_days.length; i++) {
-                    //     this.itineraryDetail.activities[i] = 'asd'
-                    // }
-                    
-
-                    console.log(this.itineraryDetail.activities)
-
-                    return this.$store.dispatch('fetchRestaurants', data.location.name)
+                    let activities = {};
+                    if (!data.activities) {
+                        for (let i = 0; i < data.date.total_days; i++) {
+                            activities[i] = []
+                        }
+                        this.activities = activities;
+                    } else {
+                        this.activities = data.activities
+                    }
+                    locationName = data.location.name;
+                    return this.$store.dispatch('fetchRestaurants', locationName)
                 })
                 .then(({ data }) => {
                     this.restaurants = data.results;
+                    
+                    return this.$store.dispatch('fetchLandmarks', locationName)
+                })
+                .then(({ data }) => {
+                    this.landmarks = data.results;
                 })
                 .catch(err => {
                     this.$store.commit('SET_ERROR_MESSAGE', err)
                 })
         },
+        submitItinerary() {
+            this.itineraryDetail.activities = this.activities;
+            this.$store.dispatch('updateItinerary', this.itineraryDetail)
+                .then(({ data }) => {
+                    this.itineraryDetail = data;
+                    this.$router.push(`/summary/${data._id}`)
+                })
+                .catch(err => {
+                    this.$store.commit('SET_ERROR_MESSAGE')
+                })
+        }
     }
 }
 </script>

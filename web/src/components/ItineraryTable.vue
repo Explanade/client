@@ -11,7 +11,7 @@
     <article id="panels">
       <div v-for="(itin, index) in activities" :key="index">
         <div v-if="index == selected">
-           <draggable class="test" v-model="activities[index]" group="activities" @change="updateIndex">
+           <draggable class="test" v-model="activities[index]" group="activities" @change="updateIndex()">
                <div v-for="(element, index2) in activities[index]" :key="element.id" class="row list my-4">
                   <ActivityCard :activity="element" :index="index2" />
                </div>
@@ -40,7 +40,6 @@ export default {
          window.console.log(evt);
       },
       updateIndex() {
-         console.log(this.activities)
          for (let act in this.activities) {
             let places = this.activities[act];
             for (let i = 0; i < places.length; i++) {

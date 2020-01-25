@@ -77,10 +77,9 @@ export default {
         end_date : this.endDate,
         location : this.getLatLng()
       }
-
-      this.$store.dispatch('createItinerary')
+      this.$store.dispatch('createItinerary', data)
         .then(({data}) => {
-          this.$router.push(`/itinerary/${data[0]._id}`)
+          this.$router.push(`/itinerary/${data._id}`)
         })
         .catch(err => {
           this.$store.commit('SET_ERROR_MESSAGE', err)
