@@ -1,17 +1,16 @@
 <template>
     <div>
          <b-navbar class="header" toggleable="lg" type="light" variant="faded" sticky>
-             <img class="logoBrand" src="../assets/explanade-logo-white.png" alt="">
+         <a href="/"> <img class="logoBrand" src="../assets/explanade-logo-white.png" alt=""></a>
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
             <b-collapse id="nav-collapse" is-nav>
-            <!-- Right aligned nav items -->
             <b-navbar-nav class="ml-auto">
-                <!-- Using 'button-content' slot -->
-            <h5>PLANNERS</h5>
-            <h5>IDEAS</h5>
-            <h5>ABOUT US</h5>
-            <h5>LOGOUT</h5>
+            <h5><a style="color:white;text-decoration: none;" href="#" @click="plannerPage()">PLANNER </a></h5>
+            <h5><a style="color:white;text-decoration: none;" href="#" @click="itineraryPage()" >ITINERARIES </a></h5>
+            <h5><a style="color:white;text-decoration: none;" href="#">ABOUT US </a></h5>
+            <h5><a style="color:white;text-decoration: none;" href="#" @click="userPage()" >LOGOUT </a></h5>
+
             </b-navbar-nav>
             </b-collapse>
         </b-navbar>
@@ -20,6 +19,22 @@
 
 <script>
 export default {
+    data(){
+        return {
+            
+        }
+    },
+    methods : {
+        plannerPage(){
+            this.$router.push('/create')
+        },
+        itineraryPage(){
+            this.$router.push('/itinerary')
+        },
+        userPage(){
+            this.$router.push('/user')
+        }
+    },
 
 }
 </script>

@@ -51,8 +51,22 @@ export default {
 
 #button{
 font-size: 25px;
+background-color: #19459b;
+border-color: #19459b;
 padding: 15px;
-box-shadow: 6px 6px 0px -1px rgba(0,0,0,0.19);
+border-radius:0px;
+transition: all .2s ease-in-out;
+}
+
+#button:hover{
+font-size: 25px;
+background-color: #eec925;
+border-color: #eec925;
+color:black;
+padding: 15px;
+border-radius:0px;
+box-shadow: 10px 10px 22px -5px rgba(0,0,0,0.22);
+transform: scale(1.1);
 }
 
 .white-line{
@@ -62,9 +76,6 @@ box-shadow: 6px 6px 0px -1px rgba(0,0,0,0.19);
   margin-left: 15vw;
   z-index:0;
 }
-
-
-
 
 h1{
     color:white;

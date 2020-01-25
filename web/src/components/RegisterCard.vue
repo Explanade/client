@@ -1,24 +1,25 @@
 <template>
   <div class="form">
-   <form style="display:flex;flex-direction:row; justify-content:space-between" action="">
+   <form @submit.prevent="register()" style="display:flex;flex-direction:row; justify-content:space-between" action="">
       <div style="width:50%">
           <div class="input">
             <h4>FULL NAME</h4>
-            <input id="input" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Destination">
+            <input v-model="fullname" id="input" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Destination">
           </div>
           <div class="input">
             <h4>EMAIL</h4>
-            <input id="input" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Destination">
+            <input v-model="email" id="input" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Destination">
           </div>
           <div class="input">
             <h4>PASSWORD</h4>
-            <input id="input" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Destination">
+            <input v-model="password" id="input" type="password" class="form-control" aria-describedby="emailHelp" placeholder="Enter Destination">
           </div>
-          <button style="background-color:#19459b; border-radius:0px; margin-left:15px" type="button" class="btn btn-primary">Register</button>
-          <button style="background-color:#2b2b2b; border-radius:0px; margin-left:15px" type="button" class="btn btn-primary">Back</button>
+          <button style="background-color:#19459b; border-radius:0px; margin-left:15px" type="submit" class="btn btn-primary">Register</button>
+          <button style="background-color:#2b2b2b; border-radius:0px; margin-left:15px" type="button" class="btn btn-primary" @click="loginPage()" >Back</button>
       </div>
       <div style="display:flex; justify-content:center;align-items:center">
-        <button id="addButton" type="button" class="btn btn-primary">+</button>
+        <button @click.prevent="$refs.file.click()" for="exampleFormControlFile1" id="addButton" type="file" class="btn btn-primary">+</button>
+        <input type="file" ref="file" @change="processFile($event)" style="display: none">
       <div id="avatar"></div>
       </div>
     </form>          
@@ -27,13 +28,39 @@
 
 <script>
 export default {
+  data(){
+    return{
+      file : '',
+      fullname: '',
+      email: '',
+      password: ''
+    }
+  },
+  methods:{
+    loginPage(){
+      this.$emit('isLoginPage',true)
+    },
+    processFile(event) {
+      this.file = event.target.files
+    },
+    register(){
+      let formData = new FormData()
 
+      formData.set('name', this.fullname)
+      formData.set('email', this.email)
+      formData.set('password', this.password)
+      formData.append('file', this.file)
+
+      this.$store.dispatch('register',formData)
+    }
+  }
 }
 </script>
 
 <style>
 
-#addButton{
+
+#addButton {
     background-color:#ffda69;
     border-radius:100%;
     height: 80px;

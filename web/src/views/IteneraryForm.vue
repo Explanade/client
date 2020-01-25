@@ -82,32 +82,64 @@ export default {
 <style>
 
 .button{
-  background-color: #ffda69;
-  height: 7%;
-  width: 7%;
-  display: flex;
-  bottom:0vh;
-  right:14vw;
-  position: absolute;
-  z-index: 1;
-  justify-content: center;
-  align-items: center;
+    background-color: #ffda69;
+    height: 7%;
+    width: 7%;
+    display: flex;
+    bottom:0vh;
+    right:14vw;
+    position: absolute;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    transition: all .2s ease-in-out;
+}
+
+.button:hover{
+    background-color: #f3b806;
+    height: 7%;
+    width: 7%;
+    display: flex;
+    bottom:0vh;
+    right:14vw;
+    position: absolute;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 10px 10px 22px -5px rgba(0,0,0,0.22);
+    transform: scale(1.1);
 }
 
 .button2{
-  background-color: #545454;
-  color:white;
-  height: 7%;
-  width: 7%;
-  display: flex;
-  bottom:0vh;
-  right:6vw;
-  position: absolute;
-  z-index: 1;
-  justify-content: center;
-  align-items: center;
+    background-color: #545454;
+    color:white;
+    height: 7%;
+    width: 7%;
+    display: flex;
+    bottom:0vh;
+    right:6vw;
+    position: absolute;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    transition: all .2s ease-in-out;
 }
 
+.button2:hover{
+    background-color: #353535;
+    color:white;
+    height: 7%;
+    width: 7%;
+    display: flex;
+    bottom:0vh;
+    right:6vw;
+    position: absolute;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    transform: scale(1.1);
+    box-shadow: 10px 10px 22px -5px rgba(0,0,0,0.22);
+}
 
 
 .options-images::-webkit-scrollbar-track
@@ -152,55 +184,6 @@ h2{
   align-items: center;
 }
 
-#button{
-    background: #68C7BD;   
-    border: #68C7BD;
-    font-size: 25px;
-    margin-top:50px;
-    margin-left:20px
-}
-
-#button-sort{
-    margin-top:-30px;
-    margin-bottom:50px;
-    background: #007D62;   
-    border: #68C7BD;
-}
-
-span.step {
-  background: #68C7BD;
-  color: white;
-  display: inline-block;
-  font-weight: bold;
-  line-height: 3em;
-  left: 10px;
-  top:-10px;
-  text-align: center;
-  font-size: 20px;
-  width: 3em;
-  height: 3em;
-  position: absolute;
-}
-
-.days-detail{
-    width: 40vw;
-    margin-top:-4vh;
-    background-color: rgb(239, 239, 239);
-    padding:30px;
-    padding-top:100px;
-}
-
-.days{
-    background-color:#68C7BD;
-    width: 100px;
-    height: 60px;
-    display: flex;
-    margin:5px;
-    justify-content: center;
-    align-items: center;
-    color: white;
-
-}
 
 .day-list{
     margin-top: 50px;
@@ -210,15 +193,7 @@ span.step {
    
 }
 
-#highlight-options{
-    min-height:100px;
-    min-width:100px; 
-    background-size: cover;
-    background-position: center;
-    border-radius:100%;
-    margin:10px
- 
-}
+
 
 .mainContainer{
     height: 120vh;
@@ -260,7 +235,20 @@ span.step {
     left:0px;
     background-image: url('../assets/map-template.png');
     background-size: cover;
+    transition: all .2s ease-in-out;
+    
+}
 
+.maps:hover{
+    margin-top: 20px;
+    height: 50vh;
+    width: 40vw;
+    position: absolute;
+    left:0px;
+    background-image: url('../assets/map-template.png');
+    background-size: cover;
+    transform: scale(1.05);
+    box-shadow: 10px 10px 22px -5px rgba(0,0,0,0.22);
 }
 
 </style>

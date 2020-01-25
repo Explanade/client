@@ -4,14 +4,14 @@
                 <div style="width:100%;">
                     <div class="input">
                       <h4>EMAIL</h4>
-                      <input id="input" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Destination">
+                      <input v-model="email" id="input" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Destination" required>
                     </div>
                     <div class="input">
                       <h4>PASSWORD</h4>
-                      <input id="input" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Destination">
+                      <input v-model="password" id="input" type="password" class="form-control" aria-describedby="emailHelp" placeholder="Enter Destination" required>
                     </div>
-                    <button style="background-color:#19459b; border-radius:0px; margin-left:15px" type="button" class="btn btn-primary">Login</button>
-                    <button style="background-color:#2b2b2b; border-radius:0px; margin-left:15px" type="button" class="btn btn-primary">Register</button>
+                    <button style="background-color:#19459b; border-radius:0px; margin-left:15px" type="button" class="btn btn-primary" @click.prevent="login()" >Login</button>
+                    <button style="background-color:#2b2b2b; border-radius:0px; margin-left:15px" type="button" class="btn btn-primary" v-on:click.prevent="register()" >Register</button>
                     <div style="margin-top:10px">
                     <p style="margin-left:20px;font-size:18px;font-style:italic;color:grey;margin-top:20px; margin-bottom:10px">Have an google account?</p>
                     <button style="background-color:#2b2b2b; border-radius:0px; margin-left:15px" type="button" class="btn btn-primary">Google-Signin
@@ -24,7 +24,25 @@
 
 <script>
 export default {
+  data(){
+    return{
+      email : '',
+      password : ''
+    }
+  },
+  methods : {
+    register(){
+      this.$emit('isLoginPage',false)
+    },
+    login(){
+      let payload = {
+        email : this.email,
+        password : this.password
+      }
+      this.$store.dispatch('login',payload)
+    }
 
+ }
 }
 </script>
 

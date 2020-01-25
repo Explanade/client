@@ -3,6 +3,10 @@
     
       <form class="create-form">
         <div class="form-group">
+          <label for="exampleInputEmail1">Itinerary Name</label>
+          <input type="email" class="form-control" id="input" aria-describedby="emailHelp" placeholder="Insert your itinerary name..">
+        </div>
+        <div class="form-group">
           <label for="exampleInputEmail1">Destination</label>
           <input type="email" class="form-control" id="input" aria-describedby="emailHelp" placeholder="Insert city..">
         </div>
@@ -49,7 +53,24 @@ h1{
   justify-content: center;
   align-items: center;
   border-radius: 0px;
+  transition: all .2s ease-in-out;
 }
+
+
+#button:hover{
+  background-color: #eec925;
+  border-color: #eec925;
+  color:black;
+  height: 50px;
+  width: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0px;
+  box-shadow: 10px 10px 22px -5px rgba(0,0,0,0.22);
+  transform: scale(1.1);
+}
+
 
 
 .btn-info {

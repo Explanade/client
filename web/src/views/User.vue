@@ -2,8 +2,8 @@
   <div class="home">
      <div class="content"></div>
       <div class="user-page">
-        <!-- <LoginForm/> -->
-        <RegisterForm/>
+        <LoginForm v-if="this.isLoginPage === true" @isLoginPage='changeLogin' />
+        <RegisterForm v-else @isLoginPage='changeLogin' />
       </div>
   </div>
 </template>
@@ -14,9 +14,21 @@ import LoginForm from '../components/LoginCard'
 import RegisterForm from '../components/RegisterCard'
 
 export default {
+  name:'user',
   components:{
     LoginForm,
     RegisterForm
+  },
+  data(){
+    return{
+      isLoginPage : true
+    }
+  },
+  methods : {
+    changeLogin(value){
+      // console.log(value)
+      this.isLoginPage = value
+    }
   }
 }
 </script>

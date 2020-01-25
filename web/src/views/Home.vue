@@ -11,18 +11,23 @@
       </div>
       <div class="form">
         <div class="input">
+          <h4>ITENERARY NAME</h4>
+          <p>Name your awesome itenerary before you gonna share it to others</p>
+          <input id="input" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Itenerary Name">
+        </div>
+        <div class="input">
           <h4>DESTINATION</h4>
           <p>Looking for holiday? Do you have any ideas or places in your mind?</p>
           <input id="input" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Destination">
         </div>
-        <div class="input">
+        <div class="input" style="width:400px">
           <h4>DATES</h4>
           <p>Choose your days so you can prepare and ready for your awesome trip!</p>
           <HotelDatePicker/>
         </div>
-        <div class="button">
-          <h1>SUBMIT</h1>
-        </div>
+          <div class="button"  style="cursor: pointer;">
+                <h1>SUBMIT</h1>
+          </div>
       </div>
 
       </div>
@@ -70,7 +75,7 @@
           <div class="set1"  style="max-width:80vw; height:40vh; display:flex; flex-wrap:wrap; margin-top:-50px;">
             
             <div class="idea">
-              <div class="images" style="height:70%;width:100%; background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover"></div>
+              <div class="images" style=" background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover"></div>
               <div class="captions" style="height:30%;max-width:100%;padding:15px;">
                 <h1 style="color:black; font-weight:600;margin-top:20px;">3days 2night in Bali</h1>              
                 <p style="color:black; font-size:15px;color:grey  "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
@@ -79,7 +84,7 @@
             </div>
 
             <div class="idea">
-              <div class="images" style="height:70%;width:100%; background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ9eKIRE27oUSKzAodD3qqtKboeLSLBRsnQ6sNLiOnKMa4HOKn5'); background-size:cover"></div>
+              <div class="images" style=" background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ9eKIRE27oUSKzAodD3qqtKboeLSLBRsnQ6sNLiOnKMa4HOKn5'); background-size:cover"></div>
               <div class="captions" style="height:30%;max-width:100%;padding:15px;">
                 <h1 style="color:black; font-weight:600;margin-top:20px;">3days 2night in Bali</h1>              
                 <p style="color:black; font-size:15px;color:grey  "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
@@ -88,7 +93,7 @@
             </div>
 
             <div class="idea">
-              <div class="images" style="height:70%;width:100%; background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQwY_4fOndGpRSuxe_1MxYjFsDPc0gYLWtAc4ghT0AMrPglY2yu'); background-size:cover"></div>
+              <div class="images" style=" background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQwY_4fOndGpRSuxe_1MxYjFsDPc0gYLWtAc4ghT0AMrPglY2yu'); background-size:cover"></div>
               <div class="captions" style="height:30%;max-width:100%;padding:15px;">
                 <h1 style="color:black; font-weight:600;margin-top:20px;">Damai Sejahtera di Ubud</h1>              
                 <p style="color:black; font-size:15px; color:grey "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
@@ -129,6 +134,28 @@ export default {
 
 <style scoped>
 
+.images{
+  height:70%;
+  width:100%;
+  transition: all .2s ease-in-out;
+}
+
+.images:hover {
+  opacity: 1;
+  box-shadow: 10px 10px 22px -5px rgba(0,0,0,0.22);
+  transform: scale(1.05);
+}
+
+
+.datepicker__dummy-wrapper {
+    border: 1px solid #d7d9e2;
+    cursor: pointer;
+    display: block;
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+
 .button3{
   height: 15vh;
   width: 12vw;
@@ -140,6 +167,25 @@ export default {
   text-align: left;
   flex-direction: column;
   background-color: #ffda69;
+  transition-property: background;
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
+  transition: all .2s ease-in-out;
+}
+
+.button3:hover{
+  height: 15vh;
+  width: 12vw;
+  top: 15vh;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-content:flex-start;
+  text-align: left;
+  flex-direction: column;
+  background-color: #f3b806;
+  box-shadow: 10px 10px 22px -5px rgba(0,0,0,0.22);
+  transform: scale(1.1);
 }
 
 .idea{
@@ -188,8 +234,27 @@ export default {
   text-align: left;
   flex-direction: column;
   background-color: #ffda69;
+  transition-property: background;
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
+  transition: all .2s ease-in-out;
 }
 
+.button2:hover{
+  height: 150px;
+  width: 250px;
+  top: 26vh;
+  left: 50vw;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-content:flex-start;
+  text-align: left;
+  flex-direction: column;
+  background-color: #f3b806;
+  box-shadow: 10px 10px 22px -5px rgba(0,0,0,0.22);
+  transform: scale(1.1);
+}
 .header{
   position: absolute;
   top:22vh;
@@ -226,11 +291,12 @@ export default {
   widows: 100vw;
 }
 .input{
-  padding: 50px;
-  width: 35%;
+  padding: 30px;
+  width: 28%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color:white;
 }
 
 p{
@@ -280,20 +346,35 @@ h4{
 .button{
   background-color: #19459b;
   height: 100%;
-  width: 20%;
+  width: 15%;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition-property: background;
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
+  transition: all .2s ease-in-out;
+}
+
+.button:hover{
+  background-color: #0a152b;
+  height: 100%;
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 10px 10px 22px -5px rgba(0,0,0,0.22);
+  transform: scale(1.1);
 }
 
 .form{
   display: flex;
-  justify-content: space-between;
-  background-color:white;
+  /* justify-content: space-between; */
+  /* background-color:white; */
   position: absolute;
   bottom: 20vh;
   left:7vw;
-  width:58vw;
+  width:70vw;
   height: 20vh;
 }
 
