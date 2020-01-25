@@ -69,16 +69,16 @@ export default {
       return location
     },
     submitItem(){
-      const data = {
+      const datas = {
         name : this.itinName,
         start_date : this.startDate,
         end_date : this.endDate,
         location : this.getLatLng()
       }
 
-      this.$store.dispatch('createItinerary')
+      this.$store.dispatch('createItinerary', datas)
         .then(({data}) => {
-          this.$router.push(`/itinerary/${data[0]._id}`)
+          this.$router.push(`/itinerary/${data._id}`)
         })
         .catch(err => {
           this.$store.commit('SET_ERROR_MESSAGE', err)

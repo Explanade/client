@@ -7,12 +7,43 @@
         <h5>BACK</h5>
     </div>
     <div class="left">
-            <div class="titleContent">
-                <h2>START YOUR</h2>
-                <h2>AWESOME PLAN</h2>
-            </div>
-            <div class="maps">
-            </div>
+        <div class="titleContent">
+            <h2>START YOUR</h2>
+            <h2>AWESOME PLAN</h2>
+        </div>
+        <div class="maps">
+            <gmap-map
+                :center="this.$store.state.itineraryDetail.activities[this.selectedDay].places[0]"
+                :zoom="12"
+                style="width: auto; height:100%;;"
+                :options="mapStyle"
+                >
+                <gmap-marker
+                    :position="m"
+                    :animation="Number(4)"
+                    v-for="(m, index) in this.$store.state.itineraryDetail.activities[selectedDay].places" :key="index"
+                    @click="center=m"
+                    :icon="{url : require('../assets/icon-pin-poin.png')}"
+                >
+                </gmap-marker>
+                <gmap-polyline :path.sync="this.$store.state.itineraryDetail.activities[selectedDay].places" 
+                    :options="{
+                    strokeColor:'red',
+                    geodesic: true,
+                    icons:  [{
+                        icon: {
+                        path: 'M 0,-1 0,1',
+                        strokeOpacity:5,
+                        scale: 7
+                        },
+                        offset: '100%',
+                        repeat: '10px'
+                    }], 
+                    }"
+                    >
+                </gmap-polyline>
+            </gmap-map>
+        </div>
     </div>
     <div class="input">
         <div class="options" style="display:flex">
@@ -40,10 +71,10 @@
                <div class="form-group">
                     <h2 style="color:black">Select Days</h2>
                     <br>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                    <option>Day 1 : 16/07/202</option>
-                    <option>Day 2 : 17/07/202</option>
-                    <option>Day 3 : 18/07/202</option>
+                    <select class="form-control" id="exampleFormControlSelect1" v-model="selectedDay">
+                        <option value=0>Day 1 : 16/07/202</option>
+                        <option value=1>Day 2 : 17/07/202</option>
+                        <option value=2>Day 3 : 18/07/202</option>
                     </select>
                 </div>
                 <div class="options-images">
@@ -73,7 +104,277 @@ export default {
     },
     data() {
         return {
-           
+            itineraryDetail: null,
+            selectedDay: 0,
+            activities: {},
+            restaurants: [],
+            landmarks: [],
+            center: { lat: -6.229728, lng: 106.6894304 },
+            markers: [],
+            currentPlace: null,
+            mapStyle: {
+                styles: [
+                {
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#ebe3cd"
+                    }
+                    ]
+                },
+                {
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#523735"
+                    }
+                    ]
+                },
+                {
+                    "elementType": "labels.text.stroke",
+                    "stylers": [
+                    {
+                        "color": "#f5f1e6"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "administrative",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                    {
+                        "color": "#c9b2a6"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "administrative.land_parcel",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                    {
+                        "color": "#dcd2be"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "administrative.land_parcel",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#ae9e90"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "landscape.natural",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#dfd2ae"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#dfd2ae"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#93817c"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                    {
+                        "color": "#a5b076"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#447530"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#f5f1e6"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.arterial",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#fdfcf8"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#f8c967"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                    {
+                        "color": "#92ddc8"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                    {
+                        "color": "#92ddc8"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway.controlled_access",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#e98d58"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway.controlled_access",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                    {
+                        "color": "#357b63"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway.controlled_access",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                    {
+                        "color": "#357b63"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.local",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#806b63"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "transit.line",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#dfd2ae"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "transit.line",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#8f7d77"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "transit.line",
+                    "elementType": "labels.text.stroke",
+                    "stylers": [
+                    {
+                        "color": "#ebe3cd"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "transit.station",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#dfd2ae"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                    {
+                        "color": "#b9d3c2"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#92998d"
+                    }
+                    ]
+                }
+                ]
+            }
+        }
+    },
+    computed:{
+        places(){
+            if(this.$store.itineraryDetail){
+                return this.$store.state.itineraryDetail.activities[this.selectedDay].places
+            }else{
+                return 
+            }
+        }
+    },
+    mounted() {
+        this.geolocate();
+        this.getItinDetail()
+    },
+    methods:{
+        geolocate: function() {
+            navigator.geolocation.getCurrentPosition(position => {
+                this.center = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+                };
+            });
+        },
+        getItinDetail(){
+            const id = this.$route.params.id;
+            let locationName;
+            this.$store.dispatch('fetchItineraryDetail', id)
         }
     }
 }
