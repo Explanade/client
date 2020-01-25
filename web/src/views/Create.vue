@@ -34,7 +34,7 @@
             </div>
             <div class="section-1" style="z-index:1">
                 <h1 class ="description"> YOU CAN ALSO CREATED YOUR OWN AND SHARE YOUR ITINERARY!</h1>
-                <button type="button" id="button" class="btn btn-info">Create Yours!</button>
+                <button type="button" id="button" class="btn btn-info" @click="goToForm">Create Yours!</button>
             </div>
         </div>
         
@@ -43,7 +43,11 @@
 
 <script>
 export default {
-
+    methods: {
+        goToForm(){
+            this.$router.push('/create/form')
+        }
+    }
 }
 </script>
 

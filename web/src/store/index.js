@@ -1,18 +1,27 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import GetData from '../apis/server'
+import ServerApi from '../apis/server'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     isLogin : false,
+    errorMessage: '',
+    successMessage: '',
   },
   mutations: {
+    SET_RESTAURANTS(state, payload) {
+      state.restaurants = payload
+    },
+    SET_ERROR_MESSAGE(state, payload) {
+      state.errorMessage = payload
+      setTimeout(state.errorMessage = null, 2000);
+    }
   },
   actions: {
     login(context,payload){
-      GetData({
+      ServerApi({
         method: 'post',
         url:'/user/login',
         data : {
@@ -29,7 +38,7 @@ export default new Vuex.Store({
     },
     register(context,payload){
       // console.log(payload)
-      GetData({
+      ServerApi({
         method: 'post',
         url:'/user/register',
         data : payload,
@@ -45,8 +54,30 @@ export default new Vuex.Store({
       .catch(({err}) => {
         // console.log(err)
       })
+    },
+    createItinerary({ commit }, payload) {
+      return serverAPI({
+        url: '/itineraries',
+        data: payload,
+        headers: {
+          token: localStorage.getItem('access_token')
+        }
+      })
+    },
+    fetchItineraryDetail({ commit }, payload) {
+      return serverAPI({
+        url: `/itineraries/${payload}`
+      })
+    },
+    fetchRestaurants({ commit }, payload) {
+      return serverAPI({
+        url: '/google/places',
+        method: 'get',
+        params: {
+          query: `restaurants+in+${payload}`,
+        }
+      })
     }
-
   },
 
   

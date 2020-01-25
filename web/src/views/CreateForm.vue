@@ -1,21 +1,35 @@
 <template>
   <div class="user-page">
     
-      <form class="create-form">
+      <form class="create-form" @submit.prevent="submitItem">
         <div class="form-group">
           <label for="exampleInputEmail1">Itinerary Name</label>
-          <input type="email" class="form-control" id="input" aria-describedby="emailHelp" placeholder="Insert your itinerary name..">
+          <input 
+            type="text" 
+            class="form-control"
+            placeholder="Insert your itinerary name.."
+            v-model="itinName"
+          />
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Destination</label>
-          <input type="email" class="form-control" id="input" aria-describedby="emailHelp" placeholder="Insert city..">
+          <gmap-autocomplete
+            @place_changed="setPlace"
+            class="form-control"
+            id="input"
+            placeholder="Insert city.."
+          >
+          </gmap-autocomplete>
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Pick dates</label>
-          <HotelDatePicker/>
+          <HotelDatePicker
+            @check-in-changed="setStartDate"
+            @check-out-changed="setEndDate"
+          />
           <!-- <input type="password" class="form-control" id="input" placeholder="Insert password.."> -->
         </div>
-        <button type="button" id="button" class="btn btn-primary">Primary</button>
+        <button type="submit" id="button" class="btn btn-primary">Submit</button>
       </form>
 
     </div>
@@ -24,13 +38,59 @@
 <script>
 
 import HotelDatePicker from 'vue-hotel-datepicker'
+import axios from 'axios'
 
 export default {
-    components: {
-        HotelDatePicker,
+  data(){
+    return{
+      currentCity : null,
+      startDate : null,
+      endDate : null,
+      itinName : '',
+      currentPlace: null
+    }
+  },
+  methods : {
+    setPlace(place) {
+      this.currentPlace = place;
     },
+    setStartDate(date){
+      this.startDate = date
+    },
+    setEndDate(date){
+      this.endDate = date
+    },
+    getLatLng(){
+      const location = {
+          name : this.currentPlace.name,
+          lat: this.currentPlace.geometry.location.lat(),
+          lng: this.currentPlace.geometry.location.lng()
+      }
+      return location
+    },
+    submitItem(){
+      const data = {
+        name : this.itinName,
+        start_date : this.startDate,
+        end_date : this.endDate,
+        location : this.getLatLng()
+      }
+
+      this.$store.dispatch('createItinerary')
+        .then(({data}) => {
+          this.$router.push(`/itinerary/${data[0]._id}`)
+        })
+        .catch(err => {
+          this.$store.commit('SET_ERROR_MESSAGE', err)
+        })
+    }
+  },
+  components: {
+      HotelDatePicker,
+  },
 }
 </script>
+
 
 
 <style>
