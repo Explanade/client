@@ -57,7 +57,9 @@
                     </drag>
                 </div>
                 
-                <div class="day-list">
+                <ItineraryTable />
+                
+                <!-- <div class="day-list">
                     <div class="days">
                         <h5>Day 1</h5>
                     </div>
@@ -67,18 +69,19 @@
                      <div class="days">
                         <h5>Day 3</h5>
                     </div>
-                </div>
-                <div class="days-detail">
-                    <button type="submit" class="btn btn-primary" id="button-sort">
+                </div> -->
+                
+                <!-- <div class="days-detail"> -->
+                    <!-- <button type="submit" class="btn btn-primary" id="button-sort">
                         <i class="fas fa-sort-amount-down" style="font-size:20px;margin-right:10px"></i> Sort by distance
-                    </button>                  
-                    <div class="list">
+                    </button>                   -->
+                    <!-- <div class="list">
                         <ActivityCard />
                         <ActivityCard />
                         <ActivityCard />
                         <ActivityCard />
                         <ActivityCard />
-                    </div>
+                    </div> -->
                     <!-- <div class="card mb-3" style="max-width: auto;max-height:20vh"> 
                         <div class="row no-gutters">
                             <div class="col-md-4">
@@ -104,7 +107,7 @@
                             </div>
                         </div>
                     </div> -->
-                </div>
+                <!-- </div> -->
                 <button type="button" id="button" class="btn btn-info">Create</button>
                 <button type="button" id="button" style="background:gray" class="btn btn-info">Back</button>
         </div>
@@ -117,11 +120,13 @@
 
 import StarRating from 'vue-star-rating'
 import ActivityCard from '../components/ActiviesCard'
+import ItineraryTable from '../components/ItineraryTable'
 
 export default {
     components :{
         StarRating,
-        ActivityCard
+        ActivityCard,
+        ItineraryTable
     },
     data() {
         return {
@@ -368,6 +373,10 @@ export default {
 
     mounted() {
         this.geolocate();
+    },
+
+    created () {
+        this.$store.dispatch('fetchRestaurants')
     },
 
     methods:{

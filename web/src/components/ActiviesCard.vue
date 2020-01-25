@@ -2,14 +2,14 @@
     <div class="card mb-3" style="max-width: auto;max-height:20vh"> 
         <div class="row no-gutters">
             <div class="col-md-4">
-            <span class="step">1</span>
+            <span class="step">{{activity.order}}</span>
             <div style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSBKsEDRAzp13nh2mKkIMMeQvxbuBNKbTvpxt0axtB1sOwKgakI');height:20vh;width:11vw; background-size:cover">
             </div>
             </div>
             <div class="col-md-8">
             <div class="card-body">
-                <h6 class="card-title">Destination Name</h6>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <h6 class="card-title">{{activity.name}}</h6>
+                <p class="card-text">{{activity.formatted_address}}</p>
                 <div class="review">
                     <star-rating    v-bind:increment="0.5"
                                     v-bind:max-rating="5"
@@ -31,7 +31,8 @@
 import StarRating from 'vue-star-rating'
 
 export default {
-    StarRating
+    StarRating,
+    props: ['activity']
 }
 </script>
 

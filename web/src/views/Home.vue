@@ -1,16 +1,13 @@
 <template>
   <div class="home">
-    
     <div class="flying-leaf"></div>
-    <div class="header">
-      <div class="header-content">
-        <h1 class ="title">Create Your</h1>
-        <h1 class ="title">Awesome Trip</h1>
-        <button type="button" id="button" class="btn btn-info">Let's do it</button>
+      <div class="header">
+        <div class="header-content">
+          <h1 class ="title">Create Your</h1>
+          <h1 class ="title">Awesome Trip</h1>
+          <button type="button" id="button" class="btn btn-info">Let's do it</button>
+        </div>
       </div>
-    </div>
-
-    
 
       <div class="itineraryCards">
         <ItineraryHome/>
@@ -20,7 +17,7 @@
       </div>
 
       <div class="brief">
-         <div>
+        <div>
           <img class="icon" src="../assets/icon2.png" alt="">
           
           <h1 class ="icon-text"><span class="step">1</span>Planner Tools</h1>
@@ -35,11 +32,9 @@
           <img class="icon" src="../assets/icon3.png" alt="">
           <h1 class ="icon-text"><span class="step">3</span>Itenarary Library</h1>
         </div>
-
       </div>
 
        <div class="testimonial">
-          
           <div>
             <b-img src="https://picsum.photos/125/125/?image=58" rounded="circle" alt="Circle image" style="margin-bottom:30px"></b-img>
             <p>In promotion and of advertising, a testimonial or show consists of a person's written or spoken statement extolling the virtue of a product. 
@@ -49,16 +44,12 @@
             <h3>Hendrikus Sirait</h3>
             <p style="font-style:italic">@hecrikus</p>
           </div>
-        
-
       </div>
-
-    </div>
+  </div>
 </template>
 
 <script>
-
-
+// @ is an alias to /src
 import ItineraryHome from '../components/IteneraryHome'
 
 export default {
