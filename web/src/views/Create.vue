@@ -35,7 +35,9 @@
             </div>
             <div class="section-1" style="z-index:1">
                 <h1 class ="description"><span class="step">3</span> Not interested? Create your own! </h1>
-                <button type="button" id="button" class="btn btn-info">Create Yours!</button>
+                <router-link to="/create/form">
+                    <button type="button" id="button" class="btn btn-info">Create Yours!</button>
+                </router-link>
             </div>
         </div>
         

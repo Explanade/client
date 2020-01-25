@@ -47,18 +47,23 @@
                         <option>Events</option>
                     </select>
                 </div>
-                <div class="options-images" v-for="restaurant in restaurants" :key="restaurant.id">
-                    <drag style="border-radius: 205px">
-                        {{restaurant.name}}
+
+                <draggable class="test" v-model="restaurants" group="activities">
+                    <div
+                        class="options-images"
+                        v-for="(element, index) in restaurants"
+                            :key="element.name"
+                        >
+                        {{element.name}}
                         <div 
                             id='highlight-options' 
-                            style="background-image: url('https://picsum.photos/125/125/?image=58');"
+                            :style="{backgroundImage: 'url(' + element.icon + ')'}"
                         >
-                        </div>
-                    </drag>
-                </div>
-                
-                <ItineraryTable />
+                    </div>
+                    </div>
+                </draggable>
+
+                <ItineraryTable :itinerary="itineraryDetail" :activities="activities" />
                 
                 <!-- <div class="day-list">
                     <div class="days">
@@ -118,20 +123,27 @@
 </template>
 
 <script>
-
+import draggable from 'vuedraggable';
 import StarRating from 'vue-star-rating'
 import ActivityCard from '../components/ActiviesCard'
 import ItineraryTable from '../components/ItineraryTable'
-import { mapState } from 'vuex'
 
 export default {
     components :{
         StarRating,
         ActivityCard,
-        ItineraryTable
+        ItineraryTable,
+        draggable
     },
     data() {
         return {
+            itineraryDetail: null,
+            activities: {
+                0: [],
+                1: [],
+                2: []
+            },
+            restaurants: [],
             center: { lat: -6.229728, lng: 106.6894304 },
             markers: [],
             currentPlace: null,
@@ -373,16 +385,12 @@ export default {
         }
     },
 
-    computed: {
-        ...mapState(['restaurants'])
-    },
-
     mounted() {
         this.geolocate();
     },
 
     created () {
-        this.$store.dispatch('fetchRestaurants')
+        this.getItinDetail();
     },
 
     methods:{
@@ -393,12 +401,47 @@ export default {
                 lng: position.coords.longitude
                 };
             });
-        }
+        },
+        getItinDetail() {
+            const id = this.$route.params.id;
+            this.$store.dispatch('fetchItineraryDetail', id)
+                .then(({ data }) => {
+                    this.itineraryDetail = data;
+                    // this.itineraryDetail.activities = {}
+                    // for (let i = 0; i < data.date.total_days.length; i++) {
+                    //     this.itineraryDetail.activities[i] = 'asd'
+                    // }
+                    
+
+                    console.log(this.itineraryDetail.activities)
+
+                    return this.$store.dispatch('fetchRestaurants', data.location.name)
+                })
+                .then(({ data }) => {
+                    this.restaurants = data.results;
+                })
+                .catch(err => {
+                    this.$store.commit('SET_ERROR_MESSAGE', err)
+                })
+        },
     }
 }
 </script>
 
 <style>
+.test {
+overflow: auto;
+    white-space: nowrap;
+}
+.options-images{
+    flex-direction: row;
+    display: inline-block;
+    max-width: 20vw;
+    width: 800px;
+    overflow-x: scroll;
+    margin-top:50px;
+    
+}
 
 #button{
     background: #68C7BD;   
@@ -490,16 +533,6 @@ span.step {
     width: 50vw;
     padding: 100px;
     overflow-y: scroll;
-}
-
-.options-images{
-    flex-direction: row;
-    display: flex;
-    max-width: 40vw;
-    width: 800px;
-    overflow-x: scroll;
-    margin-top:50px;
-
 }
 
 .maps{

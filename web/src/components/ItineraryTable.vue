@@ -1,21 +1,21 @@
 <template>
   <div class="mt-4">
     <ul id="tabs-list">
-      <li v-for="(itin, index) in dayData.activities" :key="itin.date" :id="'li-for-panel-' + Number(index + 1)">
-        <label class="panel-label" @click="selected = itin.date" :id="itin.date == selected ? 'checked' : ''">
-          {{itin.date}}
+      <li v-for="(itin, index) in itinerary.date.total_days" :key="index" :id="'li-for-panel-' + Number(index + 1)">
+        <label class="panel-label" @click="selected = index" :id="index == selected ? 'checked' : ''">
+         Day {{ Number(index + 1) }}
         </label>
       </li>
     </ul>
 
     <article id="panels">
-      <div v-for="itin in dayData.activities" :key="itin.date">
-        <div v-if="itin.date == selected">
-          <draggable v-model="itin.places" group="places" @start="drag=true" @end="drag=false">
-            <div v-for="element in itin.places" :key="element.order" class="row list my-4">
-              <ActivityCard :activity="element" />
-            </div>
-          </draggable>
+      <div v-for="(itin, index) in activities" :key="index">
+        <div v-if="index == selected">
+           <draggable class="test" v-model="activities[index]" group="activities" @change="updateIndex">
+               <div v-for="(element, index2) in activities[index]" :key="element.id" class="row list my-4">
+                  <ActivityCard :activity="element" :index="index2" />
+               </div>
+            </draggable>
         </div>
       </div>
     </article>
@@ -26,200 +26,29 @@
 import draggable from 'vuedraggable';
 import ActivityCard from '@/components/ActiviesCard';
 
-const itinerary = {
-            "id": "akshd8937149askdjk",
-            "location": {
-                "name": "Bali",
-                "lat": -8.3405389,
-                "lng": 115.0919509
-            },
-            "date": {
-                "start": "2020-10-20",
-                "end": "2020-10-22",
-                "total_days": 3 
-            },
-            "activities": [
-                {
-                    "date": "2020-10-20",
-                    "places": [
-                        {
-                            "order": 1,
-                            "formatted_address": "Jl. Pura Dalem Lovina Singaraja, Desa, Anturan, Kec. Buleleng, Kabupaten Buleleng, Bali 81119, Indonesia",
-                            "location": {
-                               "lat": -8.149365,
-                               "lng": 115.0493949
-                            },
-                            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
-                            "id": "69493390994402db96ce08fc41c43abbcf5559f8",
-                            "name": "Secret Garden Restaurant",
-                            "photos": [
-                               {
-                                  "height": 2000,
-                                  "html_attributions": [
-                                     "<a href=\"https://maps.google.com/maps/contrib/107563998304681670218\">Secret Garden Restaurant</a>"
-                                  ],
-                                  "photo_reference": "CmRZAAAAdVXkIMqx0bb0kfvanKqpF4bmhjLgSbjT_fujI2kb7ZfINzA7gQDep30ElJBV3g74yogDIIXwPXJTZ6XXOSPGOe8wetB3r_is-9dZBoc29UV_TPW7knJ6QyaorGyxN3gsEhDkN-lbEofvMx8fYZKg4FivGhSjQ1yIC-3jEHdwX-MWb-QNoRfWHw",
-                                  "width": 3008
-                               }
-                            ],
-                            "place_id": "ChIJu7Db_-Ka0S0RSyHGifETfxs",
-                            "price_level": 2,
-                            "rating": 4.6,
-                            "user_ratings_total": 269
-                        },
-                        {
-                            "order": 2,
-                            "formatted_address": "Jl. Dewisita No.10, Banjar Padang, Tegal, Kabupaten Gianyar, Bali 80571, Indonesia",
-                            "location": {
-                               "lat": -8.5101692,
-                               "lng": 115.2635134
-                            },
-                            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
-                            "id": "dec40100516b3d695ee816b81a7606d74791c9f3",
-                            "name": "Restaurant Locavore",
-                            "photos": [
-                               {
-                                  "height": 3480,
-                                  "html_attributions": [
-                                     "<a href=\"https://maps.google.com/maps/contrib/103927067128008255828\">Bal Kang</a>"
-                                  ],
-                                  "photo_reference": "CmRaAAAAUXhEeW3XGl6ihQVqd2uoIft81JL4HkszdFTM-YrB_OF9J86DR4UT7I61LPEoYfksNBznCIUr9hTomnC8bVl-L42xQH0u_DQ2CcaAs8rs60PRQDi1hgiB9Q_IWz_H87VXEhCySA0_A3sxxuvKgF_1fF26GhRVMiMcy46_6KzEI_pnfClTH7Ft6w",
-                                  "width": 4640
-                               }
-                            ],
-                            "price_level": 4,
-                            "rating": 4.5,
-                            "user_ratings_total": 620
-                         }
-                    ]
-                },
-                {
-                    "date": "2020-10-21",
-                    "places": [
-                        {
-                            "order": 1,
-                            "formatted_address": "Jl. Pura Dalem Lovina Singaraja, Desa, Anturan, Kec. Buleleng, Kabupaten Buleleng, Bali 81119, Indonesia",
-                            "location": {
-                               "lat": -8.149365,
-                               "lng": 115.0493949
-                            },
-                            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
-                            "id": "69493390994402db96ce08fc41c43abbcf5559f8",
-                            "name": "Secret Garden Restaurant",
-                            "photos": [
-                               {
-                                  "height": 2000,
-                                  "html_attributions": [
-                                     "<a href=\"https://maps.google.com/maps/contrib/107563998304681670218\">Secret Garden Restaurant</a>"
-                                  ],
-                                  "photo_reference": "CmRZAAAAdVXkIMqx0bb0kfvanKqpF4bmhjLgSbjT_fujI2kb7ZfINzA7gQDep30ElJBV3g74yogDIIXwPXJTZ6XXOSPGOe8wetB3r_is-9dZBoc29UV_TPW7knJ6QyaorGyxN3gsEhDkN-lbEofvMx8fYZKg4FivGhSjQ1yIC-3jEHdwX-MWb-QNoRfWHw",
-                                  "width": 3008
-                               }
-                            ],
-                            "place_id": "ChIJu7Db_-Ka0S0RSyHGifETfxs",
-                            "price_level": 2,
-                            "rating": 4.6,
-                            "user_ratings_total": 269
-                        },
-                        {
-                            "order": 2,
-                            "formatted_address": "Jl. Dewisita No.10, Banjar Padang, Tegal, Kabupaten Gianyar, Bali 80571, Indonesia",
-                            "location": {
-                               "lat": -8.5101692,
-                               "lng": 115.2635134
-                            },
-                            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
-                            "id": "dec40100516b3d695ee816b81a7606d74791c9f3",
-                            "name": "Restaurant Locavore",
-                            "photos": [
-                               {
-                                  "height": 3480,
-                                  "html_attributions": [
-                                     "<a href=\"https://maps.google.com/maps/contrib/103927067128008255828\">Bal Kang</a>"
-                                  ],
-                                  "photo_reference": "CmRaAAAAUXhEeW3XGl6ihQVqd2uoIft81JL4HkszdFTM-YrB_OF9J86DR4UT7I61LPEoYfksNBznCIUr9hTomnC8bVl-L42xQH0u_DQ2CcaAs8rs60PRQDi1hgiB9Q_IWz_H87VXEhCySA0_A3sxxuvKgF_1fF26GhRVMiMcy46_6KzEI_pnfClTH7Ft6w",
-                                  "width": 4640
-                               }
-                            ],
-                            "price_level": 4,
-                            "rating": 4.5,
-                            "user_ratings_total": 620
-                         }
-                    ]
-                },
-                {
-                    "date": "2020-10-22",
-                    "places": [
-                        {
-                            "order": 1,
-                            "formatted_address": "Jl. Pura Dalem Lovina Singaraja, Desa, Anturan, Kec. Buleleng, Kabupaten Buleleng, Bali 81119, Indonesia",
-                            "location": {
-                               "lat": -8.149365,
-                               "lng": 115.0493949
-                            },
-                            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
-                            "id": "69493390994402db96ce08fc41c43abbcf5559f8",
-                            "name": "Secret Garden Restaurant",
-                            "photos": [
-                               {
-                                  "height": 2000,
-                                  "html_attributions": [
-                                     "<a href=\"https://maps.google.com/maps/contrib/107563998304681670218\">Secret Garden Restaurant</a>"
-                                  ],
-                                  "photo_reference": "CmRZAAAAdVXkIMqx0bb0kfvanKqpF4bmhjLgSbjT_fujI2kb7ZfINzA7gQDep30ElJBV3g74yogDIIXwPXJTZ6XXOSPGOe8wetB3r_is-9dZBoc29UV_TPW7knJ6QyaorGyxN3gsEhDkN-lbEofvMx8fYZKg4FivGhSjQ1yIC-3jEHdwX-MWb-QNoRfWHw",
-                                  "width": 3008
-                               }
-                            ],
-                            "place_id": "ChIJu7Db_-Ka0S0RSyHGifETfxs",
-                            "price_level": 2,
-                            "rating": 4.6,
-                            "user_ratings_total": 269
-                        },
-                        {
-                            "order": 2,
-                            "formatted_address": "Jl. Dewisita No.10, Banjar Padang, Tegal, Kabupaten Gianyar, Bali 80571, Indonesia",
-                            "location": {
-                               "lat": -8.5101692,
-                               "lng": 115.2635134
-                            },
-                            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
-                            "id": "dec40100516b3d695ee816b81a7606d74791c9f3",
-                            "name": "Restaurant Locavore",
-                            "photos": [
-                               {
-                                  "height": 3480,
-                                  "html_attributions": [
-                                     "<a href=\"https://maps.google.com/maps/contrib/103927067128008255828\">Bal Kang</a>"
-                                  ],
-                                  "photo_reference": "CmRaAAAAUXhEeW3XGl6ihQVqd2uoIft81JL4HkszdFTM-YrB_OF9J86DR4UT7I61LPEoYfksNBznCIUr9hTomnC8bVl-L42xQH0u_DQ2CcaAs8rs60PRQDi1hgiB9Q_IWz_H87VXEhCySA0_A3sxxuvKgF_1fF26GhRVMiMcy46_6KzEI_pnfClTH7Ft6w",
-                                  "width": 4640
-                               }
-                            ],
-                            "price_level": 4,
-                            "rating": 4.5,
-                            "user_ratings_total": 620
-                         }
-                    ]
-                }
-            ],
-            "reviews": [
-                {
-                    "score": 4,
-                    "message": "Great itin. Bla bla bla.",
-                    "images": ["asd1.jpg", "asd2.jpg"],
-                    "user": 1
-                }
-            ]
-        }
 export default {
-    data: () => ({
-      dayData: itinerary,
-      selected: itinerary.activities[0].date
-    }),
-    components: {
+   props: ['itinerary', 'activities'],
+   data: () => ({
+      selected: 0,
+   }),
+   components: {
       draggable,
       ActivityCard
-    },
+   },
+   methods: {
+      log: function(evt) {
+         window.console.log(evt);
+      },
+      updateIndex() {
+         console.log(this.activities)
+         for (let act in this.activities) {
+            let places = this.activities[act];
+            for (let i = 0; i < places.length; i++) {
+               places[i].order = i;
+            }
+         }
+      }
+   }
 }
 </script>
 

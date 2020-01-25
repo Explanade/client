@@ -1,13 +1,13 @@
 <template>
   <div class="user-page">
     
-    <form class="create-form" @submit.prevent="submitIten">
+    <form class="create-form" @submit.prevent="submitItem">
       <div class="form-group">
         <label for="exampleInputEmail1">Itinerary Name</label>
         <input 
           type="text" 
           class="form-control"
-          placeholder="insert name.."
+          placeholder="Insert name.."
           v-model="itinName"
         />
       </div>
@@ -48,13 +48,13 @@ export default {
       currentCity : null,
       startDate : null,
       endDate : null,
-      itinName : ''
+      itinName : '',
+      currentPlace: null
     }
   },
   methods : {
     setPlace(place) {
       this.currentPlace = place;
-      console.log(place.name)
     },
     setStartDate(date){
       this.startDate = date
@@ -70,24 +70,21 @@ export default {
       }
       return location
     },
-    submitIten(){
+    submitItem(){
       const data = {
         name : this.itinName,
         start_date : this.startDate,
         end_date : this.endDate,
-        location : getLatLng()
+        location : this.getLatLng()
       }
 
-      axios.post('http://localhost:3000/itineraries/', data, {
-        access_token : localStorage.access_token
-      })
+      this.$store.dispatch('createItinerary')
         .then(({data}) => {
-
+          this.$router.push(`/itinerary/${data[0]._id}`)
         })
         .catch(err => {
-          console.log(err)
+          this.$store.commit('SET_ERROR_MESSAGE', err)
         })
-
     }
   },
   components: {

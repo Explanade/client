@@ -2,7 +2,7 @@
     <div class="card mb-3" style="max-width: auto;max-height:20vh"> 
         <div class="row no-gutters">
             <div class="col-md-4">
-            <span class="step">{{activity.order}}</span>
+            <span class="step">{{Number(index + 1)}}</span>
             <div style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSBKsEDRAzp13nh2mKkIMMeQvxbuBNKbTvpxt0axtB1sOwKgakI');height:20vh;width:11vw; background-size:cover">
             </div>
             </div>
@@ -32,7 +32,7 @@ import StarRating from 'vue-star-rating'
 
 export default {
     StarRating,
-    props: ['activity']
+    props: ['activity', 'index']
 }
 </script>
 

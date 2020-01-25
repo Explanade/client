@@ -5,7 +5,9 @@
         <div class="header-content">
           <h1 class ="title">Create Your</h1>
           <h1 class ="title">Awesome Trip</h1>
-          <button type="button" id="button" class="btn btn-info">Let's do it</button>
+          <router-link to="/create">
+            <button type="button" id="button" class="btn btn-info">Let's do it</button>
+          </router-link>
         </div>
       </div>
 
