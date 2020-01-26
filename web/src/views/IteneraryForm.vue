@@ -406,14 +406,18 @@ export default {
                 .then(({ data }) => {
                     this.itineraryDetail = data;
                     let activities = {};
-                    if (!data.activities) {
+
+                    if (data.activities.length <= 0) {
                         for (let i = 0; i < data.date.total_days; i++) {
                             activities[i] = []
                         }
-                        this.activities = activities;
                     } else {
-                        this.activities = data.activities
+                        for (let i = 0; i < data.activities.length; i++) {
+                            activities[data.activities[i].orderIndex] = data.activities[i].places
+                        }
                     }
+
+                    this.activities = activities;
                     locationName = data.location.name;
                     return this.$store.dispatch('fetchRestaurants', locationName)
                 })
