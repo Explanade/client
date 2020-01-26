@@ -10,13 +10,22 @@ export default new Vuex.Store({
     errorMessage: '',
     successMessage: '',
     itineraryDetail : [],
+    restaurants : [],
+    landmarks : [],
+    events : [],
   },
   mutations: {
-    SET_RESTAURANTS(state, payload) {
-      state.restaurants = payload
-    },
     SET_ITINERARY(state, payload) {
       state.itineraryDetail = payload
+    },
+    SET_RESTAURANT(state, payload) {
+      state.restaurants = payload
+    },
+    SET_LANDMARK(state, payload) {
+      state.landmarks = payload
+    },
+    SET_EVENT(state, payload) {
+      state.events = payload
     },
     SET_ERROR_MESSAGE(state, payload) {
       state.errorMessage = payload
@@ -69,34 +78,40 @@ export default new Vuex.Store({
         }
       })
     },
-    fetchItineraryDetail({ commit }, payload) {
+    fetchItineraryDetail({ commit, dispatch }, payload) {
       serverAPI({
         url: `/itineraries/${payload}`
       })
         .then(({data}) => {
           commit('SET_ITINERARY', data)
+          dispatch('fetchRecommendation', data.location.name)
         })
         .catch(console.log)
     },
-    fetchRestaurants({ commit }, payload) {
-      return serverAPI({
+    fetchRecommendation({ commit }, payload){
+      serverAPI({
         url: '/google/places',
         method: 'get',
         params: {
-          query: `restaurants+in+${payload}`,
+        query: `restaurants+in+${payload}`,
         }
       })
+        .then(({data}) => {
+          commit('SET_RESTAURANT', data.results)
+          return serverAPI({
+            url: '/google/places',
+            method: 'get',
+            params: {
+            query: `point+of+interest+in+${payload}`
+            }
+          })
+        })
+        .then(({data}) => {
+          commit('SET_LANDMARK', data.results)
+        })
+        .catch(console.log)
     },
-    fetchLandmarks({ commit }, payload) {
-      return serverAPI({
-        url: '/google/places',
-        method: 'get',
-        params: {
-          query: `point+of+interest+in+${payload}`
-        }
-      })
-    },
-    updateItinerary({ commit }, payload) {
+    updateItinerary({ commit }, payload) {0
       return serverAPI({
         url: `/itineraries/${payload._id}`,
         method: 'put',

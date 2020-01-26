@@ -21,24 +21,16 @@
                 <gmap-marker
                     :position="m"
                     :animation="Number(4)"
-                    v-for="(m, index) in this.$store.state.itineraryDetail.activities[selectedDay].places" :key="index"
+                    v-for="(m, index) in places" :key="index"
                     @click="center=m"
                     :icon="{url : require('../assets/icon-pin-poin.png')}"
                 >
                 </gmap-marker>
-                <gmap-polyline :path.sync="this.$store.state.itineraryDetail.activities[selectedDay].places" 
+                <gmap-polyline :path.sync="places" 
                     :options="{
-                    strokeColor:'red',
+                    strokeColor:'#ffa31a',
                     geodesic: true,
-                    icons:  [{
-                        icon: {
-                        path: 'M 0,-1 0,1',
-                        strokeOpacity:5,
-                        scale: 7
-                        },
-                        offset: '100%',
-                        repeat: '10px'
-                    }], 
+                    strokeWeight: 8
                     }"
                     >
                 </gmap-polyline>
@@ -47,34 +39,14 @@
     </div>
     <div class="input">
         <div class="options" style="display:flex">
-            <div class="listCategory" style="width:22vw;">
-               <div class="form-group">
-                    <h2 style="color:black">Select Attractions</h2>
-                    <br>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                    <option>Landmarks</option>
-                    <option>Restaurants</option>
-                    <option>Events</option>
-                    </select>
-                </div>
-                <div class="options-images">
-                    <ActivityCard />
-                    <ActivityCard />
-                    <ActivityCard />
-                    <ActivityCard />
-                    <ActivityCard />
-                    <ActivityCard />
-                </div>
-            </div>
+            <Recommendation />
 
             <div class="listCategory" style="width:22vw;margin-left:100px;">
                <div class="form-group">
                     <h2 style="color:black">Select Days</h2>
                     <br>
                     <select class="form-control" id="exampleFormControlSelect1" v-model="selectedDay">
-                        <option value=0>Day 1 : 16/07/202</option>
-                        <option value=1>Day 2 : 17/07/202</option>
-                        <option value=2>Day 3 : 18/07/202</option>
+                        <option v-for="(day, i) in days" :key="i" :value="i">Day {{i + 1}}</option>
                     </select>
                 </div>
                 <div class="options-images">
@@ -96,17 +68,18 @@
 
 import StarRating from 'vue-star-rating'
 import ActivityCard from '../components/ActiviesCard'
+import Recommendation from '../components/Recommend'
 
 export default {
     components :{
         StarRating,
-        ActivityCard
+        ActivityCard,
+        Recommendation
     },
     data() {
         return {
             itineraryDetail: null,
             selectedDay: 0,
-            activities: {},
             restaurants: [],
             landmarks: [],
             center: { lat: -6.229728, lng: 106.6894304 },
@@ -351,8 +324,20 @@ export default {
     },
     computed:{
         places(){
-            if(this.$store.itineraryDetail){
+            if(this.$store.state.itineraryDetail){
                 return this.$store.state.itineraryDetail.activities[this.selectedDay].places
+            }
+        },
+        days(){
+            if(this.$store.state.itineraryDetail){
+                return this.$store.state.itineraryDetail.activities
+            }else{
+                return 
+            }
+        },
+        activities(){
+            if(this.$store.state.itineraryDetail){
+                return this.$store.state.itineraryDetail.activities[this.selectedDay]
             }else{
                 return 
             }
