@@ -3,14 +3,14 @@
             <div class="row no-gutters">
                 <div class="col-md-4">
                     
-                <div :style="`background-image: url('https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0].photo_reference}');height:15vh;width:7vw; background-size:cover`">
+                <div :style="`background-image: url('https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0].photo_reference}&key=${key}');height:15vh;width:7vw; background-size:cover`">
                 </div>
                 </div>
                 <div class="col-md-8">
                 <div class="card-body" style="display:flex;justify-content:center;align-self:center;flex-direction:column;padding:30px;">
                     <h6 style="margin-top:-10px; margin-bottom:10px" class="card-title">{{place.name}}</h6>
                     {{place.photo_reference}}
-                    <p style="font-size:12px;" class="card-text">{{ place.photos[0].photo_reference}}{{place.formatted_address}}</p>
+                    <p style="font-size:12px;" class="card-text">{{place.formatted_address}}</p>
                 </div>
                 </div>
             </div>
@@ -19,6 +19,7 @@
 <script>
 
 import StarRating from 'vue-star-rating'
+import key from '../config/key'
 
 export default {
     components:{
@@ -26,7 +27,7 @@ export default {
     },
     data(){
         return{
-
+            key : key
         }
     },
     props:['place']

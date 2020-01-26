@@ -50,12 +50,12 @@
                     </select>
                 </div>
                 <div class="options-images">
+                    <!-- <ActivityCard />
                     <ActivityCard />
                     <ActivityCard />
                     <ActivityCard />
                     <ActivityCard />
-                    <ActivityCard />
-                    <ActivityCard />
+                    <ActivityCard /> -->
                 </div>
             </div>
         </div>
