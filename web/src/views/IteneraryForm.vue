@@ -55,7 +55,6 @@
                             :key="element.name"
                         >
                         {{element.name}}
-                        <!-- {{element.photo}} -->
                         <div 
                             id='highlight-options' 
                             :style="{backgroundImage: 'url(' + element.photo + ')'}"
