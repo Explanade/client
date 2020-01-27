@@ -10,6 +10,7 @@
         </select>
     </div>
     <div class="options-images">
+        <span v-if="restaurants.length == 0 || landmarks.length == 0">-loading-</span>
         <draggable v-model="places" :list="places" group="activities">
             <ActivityCard v-for="(place, i) in places" :key="i" :place="place"/>
         </draggable>
