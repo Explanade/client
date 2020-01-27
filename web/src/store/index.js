@@ -138,6 +138,11 @@ export default new Vuex.Store({
         }
       })
     },
+    fetchEvents({ commit }, payload) {
+      return serverAPI({
+        url: `/events/${payload}`
+      })
+    },
     updateItinerary({ commit }, payload) {
       return serverAPI({
         url: `/itineraries/${payload._id}`,

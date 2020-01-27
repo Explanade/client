@@ -40,13 +40,13 @@
     </div>
     <div class="input">
         <div class="options" style="display:flex">
-            <Recommendation :restaurants="restaurants" :landmarks="landmarks" />
+            <Recommendation :restaurants="restaurants" :landmarks="landmarks" :events="events" />
 
             <div class="listCategory" style="width:22vw;margin-left:100px;">
                <div class="form-group">
                    <div style="display:flex">
                     <h2 style="color:black">Select Days</h2>
-                    <button type="button" id="button-optimized" class="btn btn-primary">Optimize</button>
+                    <button type="button" id="button-optimized" class="btn btn-primary" @click="sortPlaces">Optimize</button>
                    </div>
                     <br>
                 
@@ -92,6 +92,7 @@ export default {
             selectedDay: 0,
             restaurants: [],
             landmarks: [],
+            events: [],
             center: { lat: 35.5817149, lng: 139.4148582 },
             markers: [],
             currentPlace: null,
@@ -336,28 +337,46 @@ export default {
         places(){
             if (this.activities) return this.activities.selectedDay;
         },
-        // activities(){
-        //     if(this.$store.state.itineraryDetail){
-        //         return this.$store.state.itineraryDetail.activities[this.selectedDay]
-        //     }else{
-        //         return 
-        //     }
-        // }
     },
     mounted() {
         this.geolocate();
         this.getItinDetail()
     },
     methods:{
+        calculateDistance(lat1, lon1, lat2, lon2, unit) {
+            var radlat1 = Math.PI * lat1/180
+            var radlat2 = Math.PI * lat2/180
+            var radlon1 = Math.PI * lon1/180
+            var radlon2 = Math.PI * lon2/180
+            var theta = lon1-lon2
+            var radtheta = Math.PI * theta/180
+            var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+            dist = Math.acos(dist)
+            dist = dist * 180/Math.PI
+            dist = dist * 60 * 1.1515
+            if (unit=="K") { dist = dist * 1.609344 }
+            if (unit=="N") { dist = dist * 0.8684 }
+            return dist
+        },
+        sortPlaces(){
+            const uniqueNodes = this.activities[this.selectedDay].slice(0)
+            for ( let i = 0; i < uniqueNodes.length; i++) {
+                uniqueNodes[i]["distance"] = this.calculateDistance(uniqueNodes[0]["lat"],uniqueNodes[0]["lng"],uniqueNodes[i]["lat"],uniqueNodes[i]["lng"],"K");
+            }
+            uniqueNodes.sort(function(a, b) { 
+                return a.distance - b.distance;
+            });
+            this.activities[this.selectedDay] = uniqueNodes
+        },
         updateIndex() {
             this.center = this.activities[this.selectedDay][this.activities[this.selectedDay].length - 1]
-         for (let act in this.activities) {
-            let places = this.activities[act];
-            for (let i = 0; i < places.length; i++) {
-               places[i].order = i;
+            for (let act in this.activities) {
+                let places = this.activities[act];
+                for (let i = 0; i < places.length; i++) {
+                places[i].order = i;
+                }
             }
-         }
-      },
+        },
         geolocate: function() {
             navigator.geolocation.getCurrentPosition(position => {
                 this.center = {
@@ -384,19 +403,17 @@ export default {
                         }
                     }
 
+                    
                     this.activities = activities;
                     locationName = data.location.name;
-                    return this.$store.dispatch('fetchRestaurants', locationName)
-                })
-                .then(({ data }) => {
-                    for (let i = 0; i < data.results.length; i++) {
-                        data.results[i].lat = data.results[i].geometry.location.lat;
-                        data.results[i].lng = data.results[i].geometry.location.lng;
-                    }
 
-                    this.restaurants = data.results;
-                    return this.$store.dispatch('fetchLandmarks', locationName)
+                    this.fetchLandmarks(locationName)
+                    this.fetchRestaurants(locationName)
+                    this.fetchEvents(locationName)
                 })
+        },
+        fetchLandmarks(locationName) {
+            this.$store.dispatch('fetchLandmarks', locationName)
                 .then(({ data }) => {
                     for (let i = 0; i < data.results.length; i++) {
                         data.results[i].lat = data.results[i].geometry.location.lat;
@@ -409,10 +426,36 @@ export default {
                     this.$store.commit('SET_ERROR_MESSAGE', err)
                 })
         },
+        fetchRestaurants(locationName) {
+            this.$store.dispatch('fetchRestaurants', locationName)
+                .then(({ data }) => {
+                    for (let i = 0; i < data.results.length; i++) {
+                        data.results[i].lat = data.results[i].geometry.location.lat;
+                        data.results[i].lng = data.results[i].geometry.location.lng;
+                    }
+
+                    this.restaurants = data.results;
+                    return this.$store.dispatch('fetchEvents', this.itineraryDetail.location.name)
+                })
+                .catch(err => {
+                    this.$store.commit('SET_ERROR_MESSAGE', err)
+                })
+        },
+        fetchEvents(locationName) {
+            this.$store.dispatch('fetchEvents', locationName)
+                .then(({ data }) => {
+                    this.events = data;
+                    console.log('======',data)
+                })
+                .catch(err => {
+                    this.$store.commit('SET_ERROR_MESSAGE', err)
+                })
+        },
         submitItinerary() {
             this.itineraryDetail.activities = this.activities;
             this.$store.dispatch('updateItinerary', this.itineraryDetail)
                 .then(({ data }) => {
+                    console.log(this.itineraryDetail)
                     this.itineraryDetail = data;
                     this.$router.push(`/summary/${data._id}`)
                 })
