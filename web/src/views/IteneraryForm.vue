@@ -386,7 +386,7 @@ export default {
             });
         },
         getItinDetail() {
-            const id = this.$route.params.id;
+            const id = this.$store.state.idItinerary;
             let locationName;
             this.$store.dispatch('fetchItineraryDetail', id)
                 .then(({ data }) => {

@@ -2,8 +2,7 @@
   <div id="app">
     
     <NavBar style="z-index:0"/>
-      <!-- <transition name="router-anim" enter-active-class="animated fadeIn" leave-active-class="fadeOut"> -->
-      <transition>
+      <transition name="router-anim" enter-active-class="animated fadeIn" leave-active-class="fadeOut">
         <router-view/>
       </transition>
     <Footer style="z-index:1" />
