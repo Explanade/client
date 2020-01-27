@@ -16,6 +16,7 @@ export default new Vuex.Store({
     restaurants : [],
     landmarks : [],
     events : [],
+    highlight : [] 
   },
   
   mutations: {
@@ -37,6 +38,10 @@ export default new Vuex.Store({
     },
     SET_ISLOGIN(state, payload){
       state.isLogin = payload
+    },
+    SET_HIGHLIGHT(state,payload){
+      console.log(payload)
+      state.highlight = payload
     }
   },
   actions: {
@@ -167,11 +172,20 @@ export default new Vuex.Store({
 
       context.commit('SET_ISLOGIN',payload)
       localStorage.removeItem('token')
+    },
+    fetchHighlightItinerary(context,payload){
+      serverAPI({
+        method: 'get',
+        url:'/itineraries/',
+      })
+      .then(({data})=>{
+      
+        this.commit('SET_HIGHLIGHT',data.slice(0,2))
+        // console.log(data.slice(0,2))
+      })
     }
   },
-
   
-
 
   modules: {
   }

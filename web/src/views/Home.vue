@@ -152,20 +152,26 @@
       <div class="ideasSections">
         <div class="blueContainer" style="width:20vw; height:50vh; background-color:#19459b"></div>
         <div class="ideasList">
-          <div class="set1"  style="max-width:80vw; height:40vh; display:flex; flex-wrap:wrap; margin-top:-50px;">
-            
-            <div class="idea">
+          <div class="set1" v-for="(top,i) in highlight" :key="i" style="max-width:80vw; height:40vh; display:flex; flex-wrap:wrap; margin-top:-50px;">
+            <div v-for="(hero,j) in top.activities" :key="j">
+              <div v-if="hero.orderIndex == 0" class="idea">
               
-              <div class="images" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover; display:flex;justify-content:center;">
+              <div class="images"
+              :style="`background-image: url('${hero.places[0].photo}');
+              background-size:cover;
+              display:flex;
+              justify-content:center;`">
               </div>
               <div class="captions" style="height:30%;max-width:100%;padding:15px;">
-                <h1 style="color:black; font-weight:600;margin-top:20px;">3days 2night in Bali</h1>              
-                <p style="color:black; font-size:15px;color:grey  "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
-                <p style="color:black; font-size:15px; margin-top:-10px;color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>Bali</p>
+                <h1 style="color:black; font-weight:600;margin-top:20px;">{{top.name}}</h1>              
+                <p style="color:black; font-size:15px;color:grey  "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by {{top.user_id.name}}</p>
+                <p style="color:black; font-size:15px; margin-top:-10px;color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>{{top.location.name}}</p>
               </div>
+              </div>
+
             </div>
 
-            <div class="idea">
+            <!-- <div class="idea">
               <div class="images" style=" background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ9eKIRE27oUSKzAodD3qqtKboeLSLBRsnQ6sNLiOnKMa4HOKn5'); background-size:cover"></div>
               <div class="captions" style="height:30%;max-width:100%;padding:15px;">
                 <h1 style="color:black; font-weight:600;margin-top:20px;">3days 2night in Bali</h1>              
@@ -182,7 +188,7 @@
                 <p style="color:black; font-size:15px; margin-top:-10px; color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>Bali</p>
               </div>
             </div>
-
+ -->
 
             <div class="button3" @click="listPage">
                   <h1 style="color:black; text-align: left; font-weight:600; margin-bottom:0px; margin-left:50px ">SHOW</h1>
@@ -208,6 +214,8 @@ import Background from '../components/BackgroundParallax'
 import HotelDatePicker from 'vue-hotel-datepicker'
 import Lottie from 'vue-lottie';
 import * as animationData from '../assets/animation/explanade-home-1.json';
+import { mapState } from 'vuex'
+
 
 export default {
   name: 'home',
@@ -224,7 +232,6 @@ export default {
   },
    methods: {
       handleAnimation: function (anim) {
-        console.log('test')
         this.anim = anim;
       },
   
@@ -237,7 +244,11 @@ export default {
       createItinerary(){
         this.$router.push('/create')
       }
-   }
+   },
+   created(){
+     this.$store.dispatch('fetchHighlightItinerary')
+   },
+   computed : mapState(['highlight']),
 }
 </script>
 
