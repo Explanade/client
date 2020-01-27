@@ -40,7 +40,7 @@
     </div>
     <div class="input">
         <div class="options" style="display:flex">
-            <Recommendation :restaurants="restaurants" :landmarks="landmarks" />
+            <Recommendation :restaurants="restaurants" :landmarks="landmarks" :events="events" />
 
             <div class="listCategory" style="width:22vw;margin-left:100px;">
                <div class="form-group">
@@ -92,6 +92,7 @@ export default {
             selectedDay: 0,
             restaurants: [],
             landmarks: [],
+            events: [],
             center: { lat: 35.5817149, lng: 139.4148582 },
             markers: [],
             currentPlace: null,
@@ -402,19 +403,17 @@ export default {
                         }
                     }
 
+                    
                     this.activities = activities;
                     locationName = data.location.name;
-                    return this.$store.dispatch('fetchRestaurants', locationName)
-                })
-                .then(({ data }) => {
-                    for (let i = 0; i < data.results.length; i++) {
-                        data.results[i].lat = data.results[i].geometry.location.lat;
-                        data.results[i].lng = data.results[i].geometry.location.lng;
-                    }
 
-                    this.restaurants = data.results;
-                    return this.$store.dispatch('fetchLandmarks', locationName)
+                    this.fetchLandmarks(locationName)
+                    this.fetchRestaurants(locationName)
+                    this.fetchEvents(locationName)
                 })
+        },
+        fetchLandmarks(locationName) {
+            this.$store.dispatch('fetchLandmarks', locationName)
                 .then(({ data }) => {
                     for (let i = 0; i < data.results.length; i++) {
                         data.results[i].lat = data.results[i].geometry.location.lat;
@@ -427,10 +426,36 @@ export default {
                     this.$store.commit('SET_ERROR_MESSAGE', err)
                 })
         },
+        fetchRestaurants(locationName) {
+            this.$store.dispatch('fetchRestaurants', locationName)
+                .then(({ data }) => {
+                    for (let i = 0; i < data.results.length; i++) {
+                        data.results[i].lat = data.results[i].geometry.location.lat;
+                        data.results[i].lng = data.results[i].geometry.location.lng;
+                    }
+
+                    this.restaurants = data.results;
+                    return this.$store.dispatch('fetchEvents', this.itineraryDetail.location.name)
+                })
+                .catch(err => {
+                    this.$store.commit('SET_ERROR_MESSAGE', err)
+                })
+        },
+        fetchEvents(locationName) {
+            this.$store.dispatch('fetchEvents', locationName)
+                .then(({ data }) => {
+                    this.events = data;
+                    console.log('======',data)
+                })
+                .catch(err => {
+                    this.$store.commit('SET_ERROR_MESSAGE', err)
+                })
+        },
         submitItinerary() {
             this.itineraryDetail.activities = this.activities;
             this.$store.dispatch('updateItinerary', this.itineraryDetail)
                 .then(({ data }) => {
+                    console.log(this.itineraryDetail)
                     this.itineraryDetail = data;
                     this.$router.push(`/summary/${data._id}`)
                 })
