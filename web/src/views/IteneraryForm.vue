@@ -7,52 +7,55 @@
         <h5>BACK</h5>
     </div>
     <div class="left">
-            <div class="titleContent">
-                <h2>START YOUR</h2>
-                <h2>AWESOME PLAN</h2>
-            </div>
-            <div class="maps">
-            </div>
+        <div class="titleContent">
+            <h2>START YOUR</h2>
+            <h2>AWESOME PLAN</h2>
+        </div>
+        <div class="maps">
+            <gmap-map
+                :center="this.$store.state.itineraryDetail.activities[this.selectedDay].places[0]"
+                :zoom="12"
+                style="width: auto; height:100%;;"
+                :options="mapStyle"
+                >
+                <gmap-marker
+                    :position="m"
+                    :animation="Number(4)"
+                    v-for="(m, index) in places" :key="index"
+                    @click="center=m"
+                    :icon="{url : require('../assets/icon-pin-poin.png')}"
+                >
+                </gmap-marker>
+                <gmap-polyline :path.sync="places" 
+                    :options="{
+                    strokeColor:'#ffa31a',
+                    geodesic: true,
+                    strokeWeight: 8
+                    }"
+                    >
+                </gmap-polyline>
+            </gmap-map>
+        </div>
     </div>
     <div class="input">
         <div class="options" style="display:flex">
-            <div class="listCategory" style="width:22vw;">
-               <div class="form-group">
-                    <h2 style="color:black">Select Attractions</h2>
-                    <br>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                    <option>Landmarks</option>
-                    <option>Restaurants</option>
-                    <option>Events</option>
-                    </select>
-                </div>
-                <div class="options-images">
-                    <ActivityCard />
-                    <ActivityCard />
-                    <ActivityCard />
-                    <ActivityCard />
-                    <ActivityCard />
-                    <ActivityCard />
-                </div>
-            </div>
+            <Recommendation />
 
             <div class="listCategory" style="width:22vw;margin-left:100px;">
                <div class="form-group">
                     <h2 style="color:black">Select Days</h2>
                     <br>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                    <option>Day 1 : 16/07/202</option>
-                    <option>Day 2 : 17/07/202</option>
-                    <option>Day 3 : 18/07/202</option>
+                    <select class="form-control" id="exampleFormControlSelect1" v-model="selectedDay">
+                        <option v-for="(day, i) in days" :key="i" :value="i">Day {{i + 1}}</option>
                     </select>
                 </div>
                 <div class="options-images">
+                    <!-- <ActivityCard />
                     <ActivityCard />
                     <ActivityCard />
                     <ActivityCard />
                     <ActivityCard />
-                    <ActivityCard />
-                    <ActivityCard />
+                    <ActivityCard /> -->
                 </div>
             </div>
         </div>
@@ -65,15 +68,298 @@
 
 import StarRating from 'vue-star-rating'
 import ActivityCard from '../components/ActiviesCard'
+import Recommendation from '../components/Recommend'
 
 export default {
     components :{
         StarRating,
-        ActivityCard
+        ActivityCard,
+        Recommendation
     },
     data() {
         return {
-           
+            itineraryDetail: null,
+            selectedDay: 0,
+            restaurants: [],
+            landmarks: [],
+            center: { lat: -6.229728, lng: 106.6894304 },
+            markers: [],
+            currentPlace: null,
+            mapStyle: {
+                styles: [
+                {
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#ebe3cd"
+                    }
+                    ]
+                },
+                {
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#523735"
+                    }
+                    ]
+                },
+                {
+                    "elementType": "labels.text.stroke",
+                    "stylers": [
+                    {
+                        "color": "#f5f1e6"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "administrative",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                    {
+                        "color": "#c9b2a6"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "administrative.land_parcel",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                    {
+                        "color": "#dcd2be"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "administrative.land_parcel",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#ae9e90"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "landscape.natural",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#dfd2ae"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#dfd2ae"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#93817c"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                    {
+                        "color": "#a5b076"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#447530"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#f5f1e6"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.arterial",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#fdfcf8"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#f8c967"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                    {
+                        "color": "#92ddc8"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                    {
+                        "color": "#92ddc8"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway.controlled_access",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#e98d58"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway.controlled_access",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                    {
+                        "color": "#357b63"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway.controlled_access",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                    {
+                        "color": "#357b63"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.local",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#806b63"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "transit.line",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#dfd2ae"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "transit.line",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#8f7d77"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "transit.line",
+                    "elementType": "labels.text.stroke",
+                    "stylers": [
+                    {
+                        "color": "#ebe3cd"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "transit.station",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#dfd2ae"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                    {
+                        "color": "#b9d3c2"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#92998d"
+                    }
+                    ]
+                }
+                ]
+            }
+        }
+    },
+    computed:{
+        places(){
+            if(this.$store.state.itineraryDetail){
+                return this.$store.state.itineraryDetail.activities[this.selectedDay].places
+            }
+        },
+        days(){
+            if(this.$store.state.itineraryDetail){
+                return this.$store.state.itineraryDetail.activities
+            }else{
+                return 
+            }
+        },
+        activities(){
+            if(this.$store.state.itineraryDetail){
+                return this.$store.state.itineraryDetail.activities[this.selectedDay]
+            }else{
+                return 
+            }
+        }
+    },
+    mounted() {
+        this.geolocate();
+        this.getItinDetail()
+    },
+    methods:{
+        geolocate: function() {
+            navigator.geolocation.getCurrentPosition(position => {
+                this.center = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+                };
+            });
+        },
+        getItinDetail(){
+            const id = this.$route.params.id;
+            let locationName;
+            this.$store.dispatch('fetchItineraryDetail', id)
         }
     }
 }
