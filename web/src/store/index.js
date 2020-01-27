@@ -8,7 +8,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-
+    idItinerary : '',
     isLogin : false,
     errorMessage: '',
     successMessage: '',
@@ -21,6 +21,9 @@ export default new Vuex.Store({
   mutations: {
     SET_ITINERARY(state, payload) {
       state.itineraryDetail = payload
+    },
+    SET_ID_ITINERARY(state, payload) {
+      state.idItinerary = payload
     },
     SET_RESTAURANT(state, payload) {
       state.restaurants = payload
@@ -79,7 +82,6 @@ export default new Vuex.Store({
       })
     },
     register(context,payload){
-      // console.log(payload)
       serverAPI({
         method: 'post',
         url:'/user/register',

@@ -80,7 +80,9 @@ export default {
 
       this.$store.dispatch('createItinerary', datas)
         .then(({data}) => {
-          this.$router.push(`/itinerary/${data._id}`)
+          console.log('sini')
+          this.$store.commit('SET_ID_ITINERARY', data._id)
+          this.$router.push(`/itinerary/make`)
         })
         .catch(err => {
           this.$store.commit('SET_ERROR_MESSAGE', err)

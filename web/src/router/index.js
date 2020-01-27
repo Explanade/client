@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -35,20 +36,20 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/CreateForm.vue')
   },
   {
+    path: '/itinerary/make',
+    name: 'itinerary',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/IteneraryForm.vue')
+  },
+  {
     path: '/itinerary',
     name: 'itineraryList',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/ItineraryList.vue')
-  },
-  {
-    path: '/itinerary/:id',
-    name: 'itinerary',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/IteneraryForm.vue')
   },
   {
     path: '/summary/:id',
@@ -64,6 +65,21 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, before, next) => {
+  console.log(store.state.idItinerary !== '', to.path)
+  if(to.path == '/itinerary/make'){
+    if(store.state.idItinerary == ''){
+      next('/create/form')
+    }else{
+      next()
+    }
+  }
+  else{
+    next()
+  }
+  next()
 })
 
 export default router
