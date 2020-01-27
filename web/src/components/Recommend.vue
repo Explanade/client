@@ -10,7 +10,7 @@
         </select>
     </div>
     <div class="options-images">
-        <draggable v-model="places" :list="places">
+        <draggable v-model="places" :list="places" group="activities">
             <ActivityCard v-for="(place, i) in places" :key="i" :place="place"/>
         </draggable>
     </div>
@@ -23,6 +23,7 @@ import serverAPI from '../apis/server'
 import draggable from 'vuedraggable';
 
 export default {
+    props: ['restaurants', 'landmarks'],
     data(){
         return{
             recommendation : {},
@@ -35,9 +36,10 @@ export default {
     },
     computed:{
         places(){
-            if(this.$store.state.restaurants && this.$store.state.landmarks){
-                return this.$store.state[this.selectedCate]
-            }
+            return this.selectedCate == 'landmarks' ? this.landmarks : this.restaurants;
+            // if(this.$store.state.restaurants && this.$store.state.landmarks){
+            //     return this.$store.state[this.selectedCate]
+            // }
         }
     }
 }

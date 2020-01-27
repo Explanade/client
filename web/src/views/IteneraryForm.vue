@@ -1,6 +1,6 @@
 <template>
   <div class="mainContainer">
-    <div class="button">
+    <div class="button" @click="submitItinerary">
         <h5>SUBMIT</h5>
     </div>
     <div class="button2">
@@ -12,8 +12,9 @@
             <h2>AWESOME PLAN</h2>
         </div>
         <div class="maps">
+                <!-- :center="this.$store.state.itineraryDetail.activities[this.selectedDay].places[0]" -->
             <gmap-map
-                :center="this.$store.state.itineraryDetail.activities[this.selectedDay].places[0]"
+                :center="center"
                 :zoom="12"
                 style="width: auto; height:100%;;"
                 :options="mapStyle"
@@ -21,17 +22,17 @@
                 <gmap-marker
                     :position="m"
                     :animation="Number(4)"
-                    v-for="(m, index) in places" :key="index"
-                    @click="center=m"
+                    v-for="(m, index) in activities[selectedDay]" :key="index"
+                    @click="center=m.geometry.location"
                     :icon="{url : require('../assets/icon-pin-poin.png')}"
                 >
                 </gmap-marker>
-                <gmap-polyline :path.sync="places" 
+                <gmap-polyline :path.sync="activities[selectedDay]" 
                     :options="{
-                    strokeColor:'#ffa31a',
-                    geodesic: true,
-                    strokeWeight: 8
-                    }"
+                        strokeColor:'#ffa31a',
+                        geodesic: true,
+                        strokeWeight: 8
+                        }"
                     >
                 </gmap-polyline>
             </gmap-map>
@@ -39,23 +40,30 @@
     </div>
     <div class="input">
         <div class="options" style="display:flex">
-            <Recommendation />
+            <Recommendation :restaurants="restaurants" :landmarks="landmarks" />
 
             <div class="listCategory" style="width:22vw;margin-left:100px;">
                <div class="form-group">
+                   <div style="display:flex">
                     <h2 style="color:black">Select Days</h2>
+                    <button type="button" id="button-optimized" class="btn btn-primary">Optimize</button>
+                   </div>
                     <br>
+                
                     <select class="form-control" id="exampleFormControlSelect1" v-model="selectedDay">
-                        <option v-for="(day, i) in days" :key="i" :value="i">Day {{i + 1}}</option>
+                        <option v-for="(day, i) in itineraryDetail.date.total_days" :key="i" :value="i">Day {{i + 1}}</option>
                     </select>
                 </div>
                 <div class="options-images">
-                    <!-- <ActivityCard />
-                    <ActivityCard />
-                    <ActivityCard />
-                    <ActivityCard />
-                    <ActivityCard />
-                    <ActivityCard /> -->
+                        <div v-for="(itin, index) in activities" :key="index">
+                            <div v-if="index == selectedDay">
+                                <draggable v-model="activities[index]" group="activities" @change="updateIndex()" style="min-height:50px;min-width:5vw;background-color:red">
+                                    <div v-for="(element, index2) in activities[index]" :key="element.id" class="row list my-4">
+                                        <ActivityCard :place="element" :index="index2" />
+                                    </div>
+                                </draggable>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
@@ -65,7 +73,7 @@
 </template>
 
 <script>
-
+import draggable from 'vuedraggable';
 import StarRating from 'vue-star-rating'
 import ActivityCard from '../components/ActiviesCard'
 import Recommendation from '../components/Recommend'
@@ -74,15 +82,17 @@ export default {
     components :{
         StarRating,
         ActivityCard,
+        draggable,
         Recommendation
     },
     data() {
         return {
             itineraryDetail: null,
+            activities: {},
             selectedDay: 0,
             restaurants: [],
             landmarks: [],
-            center: { lat: -6.229728, lng: 106.6894304 },
+            center: { lat: 35.5817149, lng: 139.4148582 },
             markers: [],
             currentPlace: null,
             mapStyle: {
@@ -324,48 +334,129 @@ export default {
     },
     computed:{
         places(){
-            if(this.$store.state.itineraryDetail){
-                return this.$store.state.itineraryDetail.activities[this.selectedDay].places
-            }
+            if (this.activities) return this.activities.selectedDay;
         },
-        days(){
-            if(this.$store.state.itineraryDetail){
-                return this.$store.state.itineraryDetail.activities
-            }else{
-                return 
-            }
-        },
-        activities(){
-            if(this.$store.state.itineraryDetail){
-                return this.$store.state.itineraryDetail.activities[this.selectedDay]
-            }else{
-                return 
-            }
-        }
+        // activities(){
+        //     if(this.$store.state.itineraryDetail){
+        //         return this.$store.state.itineraryDetail.activities[this.selectedDay]
+        //     }else{
+        //         return 
+        //     }
+        // }
     },
     mounted() {
         this.geolocate();
         this.getItinDetail()
     },
     methods:{
+        updateIndex() {
+            this.center = this.activities[this.selectedDay][this.activities[this.selectedDay].length - 1]
+         for (let act in this.activities) {
+            let places = this.activities[act];
+            for (let i = 0; i < places.length; i++) {
+               places[i].order = i;
+            }
+         }
+      },
         geolocate: function() {
             navigator.geolocation.getCurrentPosition(position => {
                 this.center = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
                 };
             });
         },
-        getItinDetail(){
+        getItinDetail() {
             const id = this.$route.params.id;
             let locationName;
             this.$store.dispatch('fetchItineraryDetail', id)
+                .then(({ data }) => {
+                    this.itineraryDetail = data;
+                    let activities = {};
+
+                    if (data.activities.length <= 0) {
+                        for (let i = 0; i < data.date.total_days; i++) {
+                            activities[i] = []
+                        }
+                    } else {
+                        for (let i = 0; i < data.activities.length; i++) {
+                            activities[data.activities[i].orderIndex] = data.activities[i].places
+                        }
+                    }
+
+                    this.activities = activities;
+                    locationName = data.location.name;
+                    return this.$store.dispatch('fetchRestaurants', locationName)
+                })
+                .then(({ data }) => {
+                    for (let i = 0; i < data.results.length; i++) {
+                        data.results[i].lat = data.results[i].geometry.location.lat;
+                        data.results[i].lng = data.results[i].geometry.location.lng;
+                    }
+
+                    this.restaurants = data.results;
+                    return this.$store.dispatch('fetchLandmarks', locationName)
+                })
+                .then(({ data }) => {
+                    for (let i = 0; i < data.results.length; i++) {
+                        data.results[i].lat = data.results[i].geometry.location.lat;
+                        data.results[i].lng = data.results[i].geometry.location.lng;
+                    }
+
+                    this.landmarks = data.results;
+                })
+                .catch(err => {
+                    this.$store.commit('SET_ERROR_MESSAGE', err)
+                })
+        },
+        submitItinerary() {
+            this.itineraryDetail.activities = this.activities;
+            this.$store.dispatch('updateItinerary', this.itineraryDetail)
+                .then(({ data }) => {
+                    this.itineraryDetail = data;
+                    this.$router.push(`/summary/${data._id}`)
+                })
+                .catch(err => {
+                    this.$store.commit('SET_ERROR_MESSAGE')
+                })
         }
     }
 }
 </script>
 
 <style>
+
+#button-optimized{
+    margin-left:30px;
+    background-color: #19459b;
+    border-color: #19459b;
+    transition: all .2s ease-in-out;
+  
+}
+
+#button-optimized:hover{
+    margin-left:30px;
+    background-color: #ffda69;
+    border-color: #ffda69;
+    color:black;
+    box-shadow: 10px 10px 22px -5px rgba(0,0,0,0.22);
+    transform: scale(1.1);
+}
+
+
+.test {
+overflow: auto;
+    white-space: nowrap;
+}
+.options-images{
+    flex-direction: row;
+    display: inline-block;
+    max-width: 20vw;
+    width: 800px;
+    overflow-x: scroll;
+    margin-top:50px;
+    
+}
 
 .button{
     background-color: #ffda69;

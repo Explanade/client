@@ -1,5 +1,5 @@
 <template>
-  <div class="user-page">
+  <div class="create-page">
     
       <form class="create-form" @submit.prevent="submitItem">
         <div class="form-group">
@@ -23,6 +23,8 @@
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Pick dates</label>
+          <div>
+          </div>
           <HotelDatePicker
             @check-in-changed="setStartDate"
             @check-out-changed="setEndDate"
@@ -32,7 +34,7 @@
         <button type="submit" id="button" class="btn btn-primary">Submit</button>
       </form>
 
-    </div>
+  </div>
 </template>
 
 <script>
@@ -164,7 +166,7 @@ h1{
   margin-left: 200px;
   color: white;
 }
-.user-page{
+.create-page{
   height: 100vh;
   background-color: black;
   display: flex;
