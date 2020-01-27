@@ -37,6 +37,82 @@
       </div>
       <!-- </div> -->
     </div>
+
+    <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+
+     <div class="my-itinerary">
+
+      <div class="header3">
+        <h2 style="color:black">MY </h2>
+        <h2 style="color:black">ITINERARIES</h2>
+      </div>
+        <div class="myItinerary" style="height:70vh;margin-top:15vh; display:flex;padding:5%;overflow-y:scroll;width:70vw;margin-right:500px;margin-left:300px">
+          <div class="ideas" style="min-width:20vw; height:45vh; margin:30px">
+              <div class="images" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover; display:flex;justify-content:center;">
+              </div>
+              <div class="captions" style="height:30%;max-width:100%;padding:15px;">
+                <h1 style="color:black; font-weight:600;margin-top:20px;">Damai Sejahtera di Ubud</h1>              
+                <p style="color:black; font-size:15px; color:grey "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
+                <p style="color:black; font-size:15px; margin-top:-10px; color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>Bali</p>
+              </div>
+
+          </div>
+          <div class="ideas" style="min-width:20vw; height:45vh; margin:30px">
+              <div class="images" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover; display:flex;justify-content:center;">
+              </div>
+               <div class="captions" style="height:30%;max-width:100%;padding:15px;">
+                <h1 style="color:black; font-weight:600;margin-top:20px;">Damai Sejahtera di Ubud</h1>              
+                <p style="color:black; font-size:15px; color:grey "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
+                <p style="color:black; font-size:15px; margin-top:-10px; color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>Bali</p>
+              </div>
+          </div>
+          <div class="ideas" style="min-width:20vw; height:45vh; margin:30px">
+            <div class="images" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover; display:flex;justify-content:center;">
+            </div>
+             <div class="captions" style="height:30%;max-width:100%;padding:15px;">
+                <h1 style="color:black; font-weight:600;margin-top:20px;">Damai Sejahtera di Ubud</h1>              
+                <p style="color:black; font-size:15px; color:grey "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
+                <p style="color:black; font-size:15px; margin-top:-10px; color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>Bali</p>
+              </div>
+          </div>
+          <div class="ideas" style="min-width:20vw; height:45vh; margin:30px">
+            <div class="images" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover; display:flex;justify-content:center;">
+            </div>
+             <div class="captions" style="height:30%;max-width:100%;padding:15px;">
+                <h1 style="color:black; font-weight:600;margin-top:20px;">Damai Sejahtera di Ubud</h1>              
+                <p style="color:black; font-size:15px; color:grey "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
+                <p style="color:black; font-size:15px; margin-top:-10px; color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>Bali</p>
+              </div>
+          </div>
+          <div class="ideas" style="min-width:20vw; height:45vh; margin:30px">
+            <div class="images" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover; display:flex;justify-content:center;">
+            </div>
+             <div class="captions" style="height:30%;max-width:100%;padding:15px;">
+                <h1 style="color:black; font-weight:600;margin-top:20px;">Damai Sejahtera di Ubud</h1>              
+                <p style="color:black; font-size:15px; color:grey "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
+                <p style="color:black; font-size:15px; margin-top:-10px; color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>Bali</p>
+              </div>
+          </div>
+          <div class="ideas" style="min-width:20vw; height:45vh; margin:30px">
+            <div class="images" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover; display:flex;justify-content:center;">
+            </div>
+             <div class="captions" style="height:30%;max-width:100%;padding:15px;">
+                <h1 style="color:black; font-weight:600;margin-top:20px;">Damai Sejahtera di Ubud</h1>              
+                <p style="color:black; font-size:15px; color:grey "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
+                <p style="color:black; font-size:15px; margin-top:-10px; color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>Bali</p>
+              </div>
+          </div>
+          <div class="ideas" style="min-width:20vw; height:45vh; margin:30px">
+            <div class="images" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover; display:flex;justify-content:center;">
+            </div>
+             <div class="captions" style="height:30%;max-width:100%;padding:15px;">
+                <h1 style="color:black; font-weight:600;margin-top:20px;">Damai Sejahtera di Ubud</h1>              
+                <p style="color:black; font-size:15px; color:grey "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
+                <p style="color:black; font-size:15px; margin-top:-10px; color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>Bali</p>
+              </div>
+          </div>
+        </div>
+      </div>
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
     <div class="planner">
       <div class="backgroundPlanner">
@@ -107,19 +183,19 @@
               </div>
             </div>
 
+
             <div class="button3" @click="listPage">
                   <h1 style="color:black; text-align: left; font-weight:600; margin-bottom:0px; margin-left:50px ">SHOW</h1>
                   <h1 style="color:black; text-align: left; font-weight:600; margin-bottom:0px; margin-left:50px ">MORE</h1>      
               </div>
             </div>
-
-          
           </div>
-
         </div>
-        
-
       </div>
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+
 
      
     </div>
@@ -167,9 +243,16 @@ export default {
 
 <style scoped>
 
+.myItin{
+  width: 80vw;
+  display:flex;
+  margin-top:-50px;
+  overflow-x: scroll;
+}
+
 .images{
-  height:70%;
-  width:100%;
+  min-height:70%;
+  min-width:100%;
   transition: all .2s ease-in-out;
 }
 
@@ -229,6 +312,11 @@ export default {
 .ideas{
   height: 120vh;
 }
+
+.my-itinereary{
+  height: 50vh;
+}
+
 
 .ideasSections{
   margin-top:15rem;

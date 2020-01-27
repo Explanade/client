@@ -33,7 +33,7 @@
                         geodesic: true,
                         strokeWeight: 8
                         }"
-                    >
+                >
                 </gmap-polyline>
             </gmap-map>
         </div>
