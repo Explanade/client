@@ -26,7 +26,6 @@ export default {
   },
   methods : {
     changeLogin(value){
-      // console.log(value)
       this.isLoginPage = value
     }
   }
@@ -47,7 +46,6 @@ export default {
   height: 100vh;
   display: flex;
   flex-direction: row;
-
 }
 
 .content{

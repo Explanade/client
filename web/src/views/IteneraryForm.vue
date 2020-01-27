@@ -13,7 +13,7 @@
         </div>
         <div class="maps">
             <gmap-map
-                :center="this.$store.state.itineraryDetail.activities[this.selectedDay].places[0]"
+                :center="center"
                 :zoom="12"
                 style="width: auto; height:100%;;"
                 :options="mapStyle"
@@ -43,7 +43,10 @@
 
             <div class="listCategory" style="width:22vw;margin-left:100px;">
                <div class="form-group">
-                    <h2 style="color:black">Select Days</h2>
+                   <div style="display:flex">
+                        <h2 style="color:black">Select Days</h2>
+                        <button id="button-optimized" type="button" class="btn btn-primary">Optimize Itinerary</button>
+                   </div>
                     <br>
                     <select class="form-control" id="exampleFormControlSelect1" v-model="selectedDay">
                         <option v-for="(day, i) in days" :key="i" :value="i">Day {{i + 1}}</option>
@@ -325,7 +328,7 @@ export default {
     computed:{
         places(){
             if(this.$store.state.itineraryDetail){
-                return this.$store.state.itineraryDetail.activities[this.selectedDay].places
+                // return this.$store.state.itineraryDetail.activities[this.selectedDay].places
             }
         },
         days(){
@@ -367,6 +370,24 @@ export default {
 
 <style>
 
+#button-optimized{
+    margin-left:30px;
+    background-color: #19459b;
+    border-color: #19459b;
+    transition: all .2s ease-in-out;
+  
+}
+
+#button-optimized:hover{
+    margin-left:30px;
+    background-color: #ffda69;
+    border-color: #ffda69;
+    color:black;
+    box-shadow: 10px 10px 22px -5px rgba(0,0,0,0.22);
+    transform: scale(1.1);
+}
+
+
 .button{
     background-color: #ffda69;
     height: 7%;
@@ -379,6 +400,7 @@ export default {
     justify-content: center;
     align-items: center;
     transition: all .2s ease-in-out;
+    cursor: pointer;
 }
 
 .button:hover{
@@ -409,6 +431,7 @@ export default {
     justify-content: center;
     align-items: center;
     transition: all .2s ease-in-out;
+    cursor: pointer;
 }
 
 .button2:hover{

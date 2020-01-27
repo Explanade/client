@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import serverAPI from '../apis/server'
+import Swal from 'sweetalert2'
+import router from '../router/index'
 
 Vue.use(Vuex)
 
@@ -14,6 +16,7 @@ export default new Vuex.Store({
     landmarks : [],
     events : [],
   },
+  
   mutations: {
     SET_ITINERARY(state, payload) {
       state.itineraryDetail = payload
@@ -30,6 +33,9 @@ export default new Vuex.Store({
     SET_ERROR_MESSAGE(state, payload) {
       state.errorMessage = payload
       setTimeout(state.errorMessage = null, 2000);
+    },
+    SET_ISLOGIN(state, payload){
+      state.isLogin = payload
     }
   },
   actions: {
@@ -43,11 +49,32 @@ export default new Vuex.Store({
         }
       })
       .then(({data}) => {
+        this.commit('SET_ISLOGIN', true)
         localStorage.setItem('token',data.token)
-        this.$route.push('/')
+        Swal.fire({
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 1500,
+          width: 200,
+          height: 50,
+          padding: '2em',
+          background: '#fff url("/success-notification.jpg")',
+        })
+        router.push({
+          name:'home'
+        })
       })
+
       .catch(({err}) => {
-        console.log(err)
+        Swal.fire({
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 1500,
+          width: 200,
+          height: 50,
+          padding: '2em',
+          background: '#fff url("/failed-notification.png")',
+        })
       })
     },
     register(context,payload){
@@ -62,10 +89,19 @@ export default new Vuex.Store({
       })
       .then(({data}) => {
         localStorage.setItem('token',data.token)
-        this.$route.push('/')
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your work has been saved',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        router.push({
+          name:'home'
+        })
       })
       .catch(({err}) => {
-        // console.log(err)
+        console.log(err)
       })
     },
     createItinerary({ commit }, payload) {
@@ -111,7 +147,7 @@ export default new Vuex.Store({
         })
         .catch(console.log)
     },
-    updateItinerary({ commit }, payload) {0
+    updateItinerary({ commit }, payload) {
       return serverAPI({
         url: `/itineraries/${payload._id}`,
         method: 'put',
@@ -120,6 +156,21 @@ export default new Vuex.Store({
           token: localStorage.getItem('token')
         }
       })
+    },
+    logout(context,payload){
+      Swal.fire({
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 1500,
+        width: 200,
+        height: 50,
+        padding: '2em',
+        marginTop:'50px',
+        background: 'url("/logout-notification.jpg")',
+      })
+
+      context.commit('SET_ISLOGIN',payload)
+      localStorage.removeItem('token')
     }
   },
 

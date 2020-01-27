@@ -23,6 +23,8 @@
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Pick dates</label>
+          <div>
+          </div>
           <HotelDatePicker
             @check-in-changed="setStartDate"
             @check-out-changed="setEndDate"

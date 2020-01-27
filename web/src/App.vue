@@ -2,7 +2,8 @@
   <div id="app">
     
     <NavBar style="z-index:0"/>
-      <transition name="router-anim" enter-active-class="animated fadeIn" leave-active-class="fadeOut">
+      <!-- <transition name="router-anim" enter-active-class="animated fadeIn" leave-active-class="fadeOut"> -->
+      <transition>
         <router-view/>
       </transition>
     <Footer style="z-index:1" />
@@ -20,6 +21,13 @@ export default {
   components:{
     NavBar,
     Footer
+  },
+  created(){
+    if(localStorage.getItem('token')){
+      this.$store.commit('SET_ISLOGIN',true)
+    }else{
+      this.$store.commit('SET_ISLOGIN',false)
+    }
   }
 }
 </script>

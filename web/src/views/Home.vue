@@ -53,7 +53,7 @@
         <h6>We help you to manage and let you know interesting places near your destination</h6>
       </div>
 
-        <div class="button2">
+        <div class="button2" @click="createItinerary" >
           <h1 style="color:black; text-align: left; font-weight:600; margin-bottom:0px; margin-left:50px ">SEE</h1>
           <h1 style="color:black; text-align: left; font-weight:600; margin-bottom:0px; margin-left:50px ">HOW IT</h1>
           <h1 style="color:black; text-align: left; font-weight:600; margin-bottom:0px; margin-left:50px ">WORKS</h1>
@@ -80,8 +80,7 @@
             
             <div class="idea">
               
-              <div class="images" style=" background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover; display:flex;justify-content:center;">
-                <div style="background-color:red;width:100px;height:100px;align-self:center"></div>
+              <div class="images" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover; display:flex;justify-content:center;">
               </div>
               <div class="captions" style="height:30%;max-width:100%;padding:15px;">
                 <h1 style="color:black; font-weight:600;margin-top:20px;">3days 2night in Bali</h1>              
@@ -108,7 +107,7 @@
               </div>
             </div>
 
-            <div class="button3">
+            <div class="button3" @click="listPage">
                   <h1 style="color:black; text-align: left; font-weight:600; margin-bottom:0px; margin-left:50px ">SHOW</h1>
                   <h1 style="color:black; text-align: left; font-weight:600; margin-bottom:0px; margin-left:50px ">MORE</h1>      
               </div>
@@ -155,6 +154,12 @@ export default {
   
       onSpeedChange: function () {
         this.anim.setSpeed(this.animationSpeed);
+      },
+      listPage(){
+        this.$router.push('/itinerary')
+      },
+      createItinerary(){
+        this.$router.push('/create')
       }
    }
 }
@@ -411,6 +416,7 @@ h4{
   left:7vw;
   width:70vw;
   height: 20vh;
+  flex-direction: row;
 }
 
 .content{

@@ -9,8 +9,8 @@
             <h5><a style="color:white;text-decoration: none;  color:white; font-weight: 100; margin:60px;" href="#" @click.prevent="plannerPage()">PLANNER </a></h5>
             <h5><a style="color:white;text-decoration: none;  color:white; font-weight: 100; margin:60px;" href="#" @click="itineraryPage()" >ITINERARIES </a></h5>
             <h5><a style="color:white;text-decoration: none;  color:white; font-weight: 100; margin:60px;" href="#">ABOUT US </a></h5>
-            <h5><a style="color:white;text-decoration: none;  color:white; font-weight: 100; margin:60px;" href="#" @click="userPage()" >LOGOUT </a></h5>
-
+            <h5><a style="color:white;text-decoration: none;  color:white; font-weight: 100; margin:60px;" v-if="this.$store.state.isLogin" href="#" @click="logout()" >LOGOUT </a></h5>
+            <h5><a style="color:white;text-decoration: none;  color:white; font-weight: 100; margin:60px;" v-if="!this.$store.state.isLogin"  href="#" @click="userPage()" >LOGIN </a></h5>
             </b-navbar-nav>
             </b-collapse>
         </b-navbar>
@@ -21,7 +21,7 @@
 export default {
     data(){
         return {
-            
+            isLogin : false
         }
     },
     methods : {
@@ -36,9 +36,11 @@ export default {
         },
         userPage(){
             this.$router.push('/user')
-        }
+        },
+        logout(){
+            this.$store.dispatch('logout',false)
+        },
     },
-
 }
 </script>
 

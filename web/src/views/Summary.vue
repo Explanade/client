@@ -39,16 +39,7 @@
                 <h6 style="margin-bottom:0px; color:black; font-size:35px;">Bali, Indonesia</h6>
             </div>
             </div>
-        </div>
-        <div class="hotel">
-            <div class="hotel-images"></div>
-            <div class="hotel-details">
-                <h6 style="margin-bottom:0px; color:gray">Hotel and Accomodations</h6>
-                <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
-                <h1>Rimba Jimbara Bali</h1>
-                <p style="margin-bottom:0px; color:gray"><strong>Total days : </strong> 3 days 2 nights </p>
-            </div>
-        </div>
+        </div>    
         <div class="day">
             <h1>Day 1</h1>
             <div class="activities">
@@ -72,7 +63,6 @@
                     <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
                     <p>Jungle retreat camping in Bali </p>
                 </div>
-                
             </div>
         </div>
          <div class="day">
