@@ -2,7 +2,9 @@
   <div id="app">
     
     <NavBar style="z-index:0"/>
-    <router-view/>
+      <transition name="router-anim" enter-active-class="animated fadeIn" leave-active-class="fadeOut">
+        <router-view/>
+      </transition>
     <Footer style="z-index:1" />
     
   </div>
@@ -22,5 +24,7 @@ export default {
 </script>
 
 <style>
+  
+  @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
 </style>

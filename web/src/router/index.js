@@ -35,6 +35,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/CreateForm.vue')
   },
   {
+    path: '/itinerary',
+    name: 'itineraryList',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/ItineraryList.vue')
+  },
+  {
     path: '/itinerary/:id',
     name: 'itinerary',
     // route level code-splitting

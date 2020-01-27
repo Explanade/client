@@ -1,38 +1,35 @@
 <template>
   <div class="user-page">
-    
-    <form class="create-form" @submit.prevent="submitItem">
-      <div class="form-group">
-        <label for="exampleInputEmail1">Itinerary Name</label>
-        <input 
-          type="text" 
-          class="form-control"
-          placeholder="Insert name.."
-          v-model="itinName"
-        />
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Destination</label>
-        <gmap-autocomplete
-          @place_changed="setPlace"
-          class="form-control"
-          id="input"
-          placeholder="Insert city.."
-        >
-        </gmap-autocomplete>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Pick dates</label>
-        <HotelDatePicker
-          @check-in-changed="setStartDate"
-          @check-out-changed="setEndDate"
-        />
-        <!-- <input type="password" class="form-control" id="input" placeholder="Insert password.."> -->
-      </div>
-      <div>
-        <button type="submit" id="button" class="btn btn-info">Submit</button>
-      </div>
-    </form>
+      <form class="create-form" @submit.prevent="submitItem">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Itinerary Name</label>
+          <input 
+            type="text" 
+            class="form-control"
+            placeholder="Insert your itinerary name.."
+            v-model="itinName"
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Destination</label>
+          <gmap-autocomplete
+            @place_changed="setPlace"
+            class="form-control"
+            id="input"
+            placeholder="Insert city.."
+          >
+          </gmap-autocomplete>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Pick dates</label>
+          <HotelDatePicker
+            @check-in-changed="setStartDate"
+            @check-out-changed="setEndDate"
+          />
+          <!-- <input type="password" class="form-control" id="input" placeholder="Insert password.."> -->
+        </div>
+        <button type="submit" id="button" class="btn btn-primary">Submit</button>
+      </form>
 
   </div>
 </template>
@@ -71,13 +68,14 @@ export default {
       return location
     },
     submitItem(){
-      const data = {
+      const datas = {
         name : this.itinName,
         start_date : this.startDate,
         end_date : this.endDate,
         location : this.getLatLng()
       }
-      this.$store.dispatch('createItinerary', data)
+
+      this.$store.dispatch('createItinerary', datas)
         .then(({data}) => {
           this.$router.push(`/itinerary/${data._id}`)
         })
@@ -93,7 +91,46 @@ export default {
 </script>
 
 
+
 <style>
+.form-group{
+  width: 25vw;
+}
+h1{
+  color:white;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+
+#button{
+  background-color: #19459b;
+  border-color: #19459b;
+  height: 50px;
+  width: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0px;
+  transition: all .2s ease-in-out;
+}
+
+
+#button:hover{
+  background-color: #eec925;
+  border-color: #eec925;
+  color:black;
+  height: 50px;
+  width: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0px;
+  box-shadow: 10px 10px 22px -5px rgba(0,0,0,0.22);
+  transform: scale(1.1);
+}
+
+
 
 .btn-info {
   color: #fff;
@@ -110,7 +147,8 @@ export default {
   background-color: white;
   padding: 25px;
   font-size: 20px;
-  width:20vw;
+  width:25vw;
+  border-radius: 0px;
 }
 
 .create-form{
@@ -130,6 +168,9 @@ export default {
   background-color: black;
   display: flex;
   justify-content: center;
-  align-items: center
+  align-items: center;
+  background-image: url('../assets/photoAssets/explanade-create2.jpg');
+  background-size:cover;
+  
 }
 </style>

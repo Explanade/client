@@ -3,7 +3,7 @@
   <div class="summaryContainer">
         <div class="profile">
             <div class="left">
-                <img class="logoBrand" src="../assets/explanade-logo-1.png" alt="" style="height:100px;width:160px;margin-top:-50px;margin-left:-20px">
+                <img class="logoBrand" src="../assets/explanade-logo-1.png" alt="" style="height:130px;width:220px;margin-top:-50px;margin-left:-20px">
                 <div class="name">
                     <h6 style="margin-bottom:0px; color:gray">Planner</h6>
                     <h1>Anya Geraldine</h1>
@@ -27,7 +27,18 @@
             </div>
         </div>
         <div class="destinations">
+            <div style="display:flex;padding:100px;width:50vw;">
             <div class="maps"></div>
+            <div class="name" style="width:20vw;padding:50px;">
+                <p style="margin-bottom:0px; color:gray; font-size:25px;">From</p>
+                <h6 style="margin-bottom:0px; color:black; font-size:35px;">Jakarta, Indonesia</h6>
+                <br>
+                <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
+                <br>
+                <p style="margin-bottom:0px; color:gray; font-size:25px;">Destination</p>
+                <h6 style="margin-bottom:0px; color:black; font-size:35px;">Bali, Indonesia</h6>
+            </div>
+            </div>
         </div>
         <div class="hotel">
             <div class="hotel-images"></div>
@@ -124,6 +135,7 @@
             <hr align= "left" style="border: 0.5px solid #6D6D6D; width:100%;">
             <br>
             <button type="button" id="button" class="btn btn-info">Send Emails</button>
+            <button type="button" id="button2" class="btn btn-dark">Edit</button>
         </div>
   </div>
 </div>
@@ -141,6 +153,20 @@ export default {
 
 <style scoped>
 
+#button{
+    background-color:#19459b;
+    border-color: #19459b;
+    margin-top:10px;
+    border-radius: 0px;
+}
+
+#button2{
+    background-color:#282828;
+    border-color: #282828;
+    margin-top:10px;
+    border-radius: 0px;
+}
+
 h6{
     font-size:18px;
 }
@@ -155,9 +181,9 @@ p{
     align-content: center;
     flex-direction: column;
     justify-content: space-around;
-    background-color:rgb(255, 255, 255);
+    background: linear-gradient(0deg, rgba(242,242,242,1) 0%, rgba(252,252,252,1) 7%, rgba(250,250,250,1) 93%, rgba(246,246,246,1) 100%);
     box-shadow: 10px 10px 33px -23px rgba(0,0,0,0.75);
-    border-radius: 20px;
+    border-radius: 25px;
     margin-left:50px;
     margin-right:50px;
     padding:50px;
@@ -182,7 +208,7 @@ p{
     align-content: center;
     flex-direction: column;
     justify-content: space-around;
-    background-color:rgb(255, 255, 255);
+    background: linear-gradient(0deg, rgba(242,242,242,1) 0%, rgba(252,252,252,1) 7%, rgba(250,250,250,1) 93%, rgba(246,246,246,1) 100%);
     box-shadow: 10px 10px 33px -23px rgba(0,0,0,0.75);
     border-radius: 20px;
     margin-left:50px;
@@ -202,7 +228,7 @@ p{
     justify-content: space-around;
     align-items: center;
     height:30vh;
-    background-color:rgb(255, 255, 255);
+    background: linear-gradient(0deg, rgba(242,242,242,1) 0%, rgba(252,252,252,1) 7%, rgba(250,250,250,1) 93%, rgba(246,246,246,1) 100%);
     box-shadow: 10px 10px 33px -23px rgba(0,0,0,0.75);
     border-radius: 20px;
     margin-left:50px;
@@ -226,7 +252,7 @@ p{
 }
 .destinations{
     height:50vh;
-    background-color:rgb(255, 255, 255);
+    background: linear-gradient(0deg, rgba(242,242,242,1) 0%, rgba(252,252,252,1) 7%, rgba(250,250,250,1) 93%, rgba(246,246,246,1) 100%);
     box-shadow: 10px 10px 33px -23px rgba(0,0,0,0.75);
     border-radius: 20px;
     margin-left:50px;
@@ -239,9 +265,9 @@ p{
 }
 .profile{
     height:30vh;
-    background-color:rgb(255, 255, 255);
+    background: linear-gradient(0deg, rgba(242,242,242,1) 0%, rgba(252,252,252,1) 7%, rgba(250,250,250,1) 93%, rgba(246,246,246,1) 100%);
     box-shadow: 10px 10px 33px -23px rgba(0,0,0,0.75);
-    border-radius: 20px;
+    border-radius: 25px;
     margin:50px;
     padding:50px;
     display: flex;
@@ -249,11 +275,10 @@ p{
 }
 .maps{
     background-image: url('../assets/map-template.png');
-    height:50vh;
-    width:100%;
+    height:30vh;
+    width:50%;
     background-size: cover;
     background-position: center;
-    border-radius: 20px;
 
 }
 .days{
@@ -276,7 +301,6 @@ p{
     margin-right: 15%;
     width:70%;
     height: auto;
-    overflow-x: scroll;
     
 }
 

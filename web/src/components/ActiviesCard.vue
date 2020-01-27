@@ -1,38 +1,37 @@
 <template>
-    <div class="card mb-3" style="max-width: auto;max-height:20vh"> 
-        <div class="row no-gutters">
-            <div class="col-md-4">
-            <span class="step">{{Number(index + 1)}}</span>
-            <div style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSBKsEDRAzp13nh2mKkIMMeQvxbuBNKbTvpxt0axtB1sOwKgakI');height:20vh;width:11vw; background-size:cover">
-            </div>
-            </div>
-            <div class="col-md-8">
-            <div class="card-body">
-                <h6 class="card-title">{{activity.name}}</h6>
-                <p class="card-text">{{activity.formatted_address}}</p>
-                <div class="review">
-                    <star-rating    v-bind:increment="0.5"
-                                    v-bind:max-rating="5"
-                                    active-color="#ed8a19"
-                                    inactive-color="#737373"
-                                    v-bind:star-size="50"
-                                    v-bind:rating="3"
-                                    style="heigth:100px, background-color:yellow"
-                                    >
-                    </star-rating>
+        <div class="card mb-3" style="max-width: auto;max-height:15vh;margin:10px"> 
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    
+                <div :style="`background-image: url('${place.photo}');height:15vh;width:7vw; background-size:cover`">
+                </div>
+                </div>
+                <div class="col-md-8">
+                <div class="card-body" style="display:flex;justify-content:center;align-self:center;flex-direction:column;padding:30px;">
+                    <h6 style="margin-top:-10px; margin-bottom:10px" class="card-title">{{place.name}}</h6>
+                    {{place.photo_reference}}
+                    <p style="font-size:12px;" class="card-text">{{place.formatted_address}}</p>
+                </div>
                 </div>
             </div>
-            </div>
         </div>
-    </div>
 </template>
 <script>
 
 import StarRating from 'vue-star-rating'
+import key from '../config/key'
 
 export default {
     StarRating,
-    props: ['activity', 'index']
+    props: ['index', 'place'],
+    components:{
+        StarRating
+    },
+    data(){
+        return{
+            key : key
+        }
+    },
 }
 </script>
 

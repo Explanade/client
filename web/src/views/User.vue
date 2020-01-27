@@ -1,68 +1,128 @@
 <template>
-  <div class="user-page">
-    
-      <form class="login-form">
-        <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input type="email" class="form-control" id="input" aria-describedby="emailHelp" placeholder="insert email..">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input type="password" class="form-control" id="input" placeholder="insert password..">
-        </div>
-        <div>
-          <button type="button" id="button" class="btn btn-info">Login</button>
-          <button type="button" id="button" class="btn btn-info">Register</button>
-        </div>
-      </form>
-
-    </div>
+  <div class="home">
+     <div class="content"></div>
+      <div class="user-page">
+        <LoginForm v-if="this.isLoginPage === true" @isLoginPage='changeLogin' />
+        <RegisterForm v-else @isLoginPage='changeLogin' />
+      </div>
+  </div>
 </template>
 
 <script>
-export default {
 
+import LoginForm from '../components/LoginCard'
+import RegisterForm from '../components/RegisterCard'
+
+export default {
+  name:'user',
+  components:{
+    LoginForm,
+    RegisterForm
+  },
+  data(){
+    return{
+      isLoginPage : true
+    }
+  },
+  methods : {
+    changeLogin(value){
+      // console.log(value)
+      this.isLoginPage = value
+    }
+  }
 }
 </script>
 
 <style>
 
-.btn-info {
-  color: #fff;
-  background-color:transparent;
-  border:3px solid #fff;
-  border-radius: 40px;
-  margin:20px;
-  height: 50px;
-  width: 150px;
-}
-
 #input{
-  border-radius: 50px;
-  height: 50px;
-  border: 3px solid white;
-  background-color: transparent;
-  padding: 30px;
-  font-size: 22px;
-  width:20vw;
+  width:100%;
 }
 
-.login-form{
+.input{
+  margin: 20px;
+}
+
+.home{
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.content{
+  background-color: #19459b;
+  width: 40vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.form{
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 25px;
-  font-weight: 600;
-  color: white
+  justify-content: space-between;
+  background-color:white;
+  position: absolute;
+  left:7vw;
+  width:40vw;
+  height: 50vh;
+  padding:50px;
 }
-.user-page{
+
+.content{
+  background-color: #19459b;
+  width: 40vw;
   height: 100vh;
-  background-color: #68C7BD;
-  display: flex;
-  justify-content: center;
-  align-items: center
 }
+
+.user-page{
+  display: flex;
+  align-items: center;
+  background-image: url('../assets/photoAssets/explanade-login.jpg');
+  height: 100vh;
+  width: 60vw;
+  background-size: cover;
+  justify-content: center;
+}
+.home{
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
+p{
+  font-weight: 100;
+  font-size:12px;
+}
+
+h5{
+  font-size: 20px;
+  font-weight: 200;
+  margin-bottom: -0px;
+  letter-spacing:0.2ch;
+
+}
+
+h2{
+  color: white;
+  font-size: 55px;
+  font-weight: 300;
+  margin-bottom: -0px;
+}
+
+h1{
+  color:white;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+h4{
+  font-weight: 600;
+  font-size:15px;
+}
+
+
 </style>

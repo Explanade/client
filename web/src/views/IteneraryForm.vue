@@ -1,121 +1,71 @@
 <template>
   <div class="mainContainer">
-    <div class="maps">
-      <gmap-map
-        :center="center"
-        :zoom="12"
-        style="width: auto; height:100%;;"
-        :options="mapStyle"
-        >
-        <gmap-marker
-            :position="m"
-            v-transition
-            v-for="(m, index) in markers" :key="index"
-            @click="center=m"
-            :icon="{url : require('../assets/icon-pin-poin.png')}"
-        >
-        </gmap-marker>
-        <gmap-polyline :path.sync="markers" 
-            :options="{
-            strokeColor:'red',
-            geodesic: true,
-            icons:  [{
-                icon: {
-                path: 'M 0,-1 0,1',
-                strokeOpacity:5,
-                scale: 7
-                },
-                offset: '100%',
-                repeat: '10px'
-            }], 
-            }"
-            >
-        </gmap-polyline>
-     </gmap-map>
+    <div class="button" @click="submitItinerary">
+        <h5>SUBMIT</h5>
+    </div>
+    <div class="button2">
+        <h5>BACK</h5>
+    </div>
+    <div class="left">
+        <div class="titleContent">
+            <h2>START YOUR</h2>
+            <h2>AWESOME PLAN</h2>
+        </div>
+        <div class="maps">
+                <!-- :center="this.$store.state.itineraryDetail.activities[this.selectedDay].places[0]" -->
+            <gmap-map
+                :center="center"
+                :zoom="12"
+                style="width: auto; height:100%;;"
+                :options="mapStyle"
+                >
+                <gmap-marker
+                    :position="m"
+                    :animation="Number(4)"
+                    v-for="(m, index) in places" :key="index"
+                    @click="center=m.geometry.location"
+                    :icon="{url : require('../assets/icon-pin-poin.png')}"
+                >
+                </gmap-marker>
+                <gmap-polyline :path.sync="places" 
+                    :options="{
+                        strokeColor:'#ffa31a',
+                        geodesic: true,
+                        strokeWeight: 8
+                        }"
+                    >
+                </gmap-polyline>
+            </gmap-map>
+        </div>
     </div>
     <div class="input">
+        <div class="options" style="display:flex">
+            <Recommendation :restaurants="restaurants" :landmarks="landmarks" />
 
-        <div class="options">
+            <div class="listCategory" style="width:22vw;margin-left:100px;">
                <div class="form-group">
-                   
-                    <h3>Select Options</h3>
-                   
+                    <h2 style="color:black">Select Days</h2>
                     <br>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option>Landmarks</option>
-                        <option>Restaurants</option>
-                        <option>Events</option>
+                
+                    <select class="form-control" id="exampleFormControlSelect1" v-model="selectedDay">
+                        <option v-for="(day, i) in itineraryDetail.date.total_days" :key="i" :value="i">Day {{i + 1}}</option>
                     </select>
+
+
+
                 </div>
-
-                <draggable class="test" v-model="restaurants" group="activities">
-                    <div
-                        class="options-images"
-                        v-for="element in restaurants"
-                            :key="element.name"
-                        >
-                        {{element.name}}
-                        <div 
-                            id='highlight-options' 
-                            :style="{backgroundImage: 'url(' + element.photo + ')'}"
-                        >
-                    </div>
-                    </div>
-                </draggable>
-
-                <ItineraryTable :itinerary="itineraryDetail" :activities="activities" />
-                
-                <!-- <div class="day-list">
-                    <div class="days">
-                        <h5>Day 1</h5>
-                    </div>
-                     <div class="days">
-                        <h5>Day 2</h5>
-                    </div>
-                     <div class="days">
-                        <h5>Day 3</h5>
-                    </div>
-                </div> -->
-                
-                <!-- <div class="days-detail"> -->
-                    <!-- <button type="submit" class="btn btn-primary" id="button-sort">
-                        <i class="fas fa-sort-amount-down" style="font-size:20px;margin-right:10px"></i> Sort by distance
-                    </button>                   -->
-                    <!-- <div class="list">
-                        <ActivityCard />
-                        <ActivityCard />
-                        <ActivityCard />
-                        <ActivityCard />
-                        <ActivityCard />
-                    </div> -->
-                    <!-- <div class="card mb-3" style="max-width: auto;max-height:20vh"> 
-                        <div class="row no-gutters">
-                            <div class="col-md-4">
-                            <span class="step">1</span>
-                            <div style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSBKsEDRAzp13nh2mKkIMMeQvxbuBNKbTvpxt0axtB1sOwKgakI');height:20vh;width:11vw; background-size:cover">
-                            </div>
-                            </div>
-                            <div class="col-md-8">
-                            <div class="card-body">
-                                <h6 class="card-title">Destination Name</h6>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <div class="review">
-                                    <star-rating    v-bind:increment="0.5"
-                                                    v-bind:max-rating="5"
-                                                    active-color="#ed8a19"
-                                                    inactive-color="#737373"
-                                                    v-bind:star-size="15"
-                                                    v-bind:rating="3"
-                                                    >
-                                    </star-rating>
-                                </div>
-                            </div>
+                <div class="options-images">
+                        <div v-for="(itin, index) in activities" :key="index">
+                            <div v-if="index == selectedDay">
+                                <draggable v-model="activities[index]" group="activities" @change="updateIndex()">
+                                    <div v-for="(element, index2) in activities[index]" :key="element.id" class="row list my-4">
+                                        <ActivityCard :place="element" :index="index2" />
+                                    </div>
+                                </draggable>
                             </div>
                         </div>
-                    </div> -->
-                <!-- </div> -->
-                <button type="button" id="button" class="btn btn-info" @click="submitItinerary">Create</button>
-                <button type="button" id="button" style="background:gray" class="btn btn-info">Back</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -126,22 +76,23 @@
 import draggable from 'vuedraggable';
 import StarRating from 'vue-star-rating'
 import ActivityCard from '../components/ActiviesCard'
-import ItineraryTable from '../components/ItineraryTable'
+import Recommendation from '../components/Recommend'
 
 export default {
     components :{
         StarRating,
         ActivityCard,
-        ItineraryTable,
-        draggable
+        draggable,
+        Recommendation
     },
     data() {
         return {
             itineraryDetail: null,
             activities: {},
+            selectedDay: 0,
             restaurants: [],
             landmarks: [],
-            center: { lat: -6.229728, lng: 106.6894304 },
+            center: { lat: 35.5817149, lng: 139.4148582 },
             markers: [],
             currentPlace: null,
             mapStyle: {
@@ -381,21 +332,36 @@ export default {
             }
         }
     },
-
+    computed:{
+        places(){
+            if (this.activities) return this.activities.selectedDay;
+        },
+        // activities(){
+        //     if(this.$store.state.itineraryDetail){
+        //         return this.$store.state.itineraryDetail.activities[this.selectedDay]
+        //     }else{
+        //         return 
+        //     }
+        // }
+    },
     mounted() {
         this.geolocate();
+        this.getItinDetail()
     },
-
-    created () {
-        this.getItinDetail();
-    },
-
     methods:{
+              updateIndex() {
+         for (let act in this.activities) {
+            let places = this.activities[act];
+            for (let i = 0; i < places.length; i++) {
+               places[i].order = i;
+            }
+         }
+      },
         geolocate: function() {
             navigator.geolocation.getCurrentPosition(position => {
                 this.center = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
                 };
             });
         },
@@ -422,11 +388,20 @@ export default {
                     return this.$store.dispatch('fetchRestaurants', locationName)
                 })
                 .then(({ data }) => {
+                    for (let i = 0; i < data.results.length; i++) {
+                        data.results[i].lat = data.results[i].geometry.location.lat;
+                        data.results[i].lng = data.results[i].geometry.location.lng;
+                    }
+
                     this.restaurants = data.results;
-                    
                     return this.$store.dispatch('fetchLandmarks', locationName)
                 })
                 .then(({ data }) => {
+                    for (let i = 0; i < data.results.length; i++) {
+                        data.results[i].lat = data.results[i].geometry.location.lat;
+                        data.results[i].lng = data.results[i].geometry.location.lng;
+                    }
+
                     this.landmarks = data.results;
                 })
                 .catch(err => {
@@ -463,59 +438,109 @@ overflow: auto;
     
 }
 
-#button{
-    background: #68C7BD;   
-    border: #68C7BD;
-    font-size: 25px;
-    margin-top:50px;
-    margin-left:20px
-}
-
-#button-sort{
-    margin-top:-30px;
-    margin-bottom:50px;
-    background: #007D62;   
-    border: #68C7BD;
-}
-
-.review{
-    margin-top:-10px;
-}
-
-span.step {
-  background: #68C7BD;
-  color: white;
-  display: inline-block;
-  font-weight: bold;
-  line-height: 3em;
-  left: 10px;
-  top:-10px;
-  text-align: center;
-  font-size: 20px;
-  width: 3em;
-  height: 3em;
-  position: absolute;
-}
-
-.days-detail{
-    width: 40vw;
-    margin-top:-4vh;
-    background-color: rgb(239, 239, 239);
-    padding:30px;
-    padding-top:100px;
-}
-
-.days{
-    background-color:#68C7BD;
-    width: 100px;
-    height: 60px;
+.button{
+    background-color: #ffda69;
+    height: 7%;
+    width: 7%;
     display: flex;
-    margin:5px;
+    bottom:0vh;
+    right:14vw;
+    position: absolute;
+    z-index: 1;
     justify-content: center;
     align-items: center;
-    color: white;
-
+    transition: all .2s ease-in-out;
 }
+
+.button:hover{
+    background-color: #f3b806;
+    height: 7%;
+    width: 7%;
+    display: flex;
+    bottom:0vh;
+    right:14vw;
+    position: absolute;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 10px 10px 22px -5px rgba(0,0,0,0.22);
+    transform: scale(1.1);
+}
+
+.button2{
+    background-color: #545454;
+    color:white;
+    height: 7%;
+    width: 7%;
+    display: flex;
+    bottom:0vh;
+    right:6vw;
+    position: absolute;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    transition: all .2s ease-in-out;
+}
+
+.button2:hover{
+    background-color: #353535;
+    color:white;
+    height: 7%;
+    width: 7%;
+    display: flex;
+    bottom:0vh;
+    right:6vw;
+    position: absolute;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    transform: scale(1.1);
+    box-shadow: 10px 10px 22px -5px rgba(0,0,0,0.22);
+}
+
+
+.options-images::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.3);
+	background-color: #F5F5F5;
+}
+
+.options-images::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+.options-images::-webkit-scrollbar-thumb
+{
+	background-color: #cecece;
+}
+
+h2{
+  color: white;
+  font-size: 30px;
+  font-weight: 300;
+  margin-bottom: -0px;
+}
+
+
+.titleContent{
+  position: absolute;
+  top:25vh;
+  left:20vw;
+  color:white;
+  z-index: 1;
+  text-align: right;
+}
+
+.left{
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 .day-list{
     margin-top: 50px;
@@ -525,42 +550,62 @@ span.step {
    
 }
 
-#highlight-options{
-    min-height:100px;
-    min-width:100px; 
-    background-size: cover;
-    background-position: center;
-    border-radius:100%;
-    margin:10px
- 
-}
+
 
 .mainContainer{
-    height: 100vh;
+    height: 120vh;
     background-color: white;
     display: flex;
+    width:100%;
     flex-direction: row;
-}
-
-.maps-images{
+    background-image: url('../assets/photoAssets/explanade-itinerary.jpg');
     background-size:cover;
-    width: 50vw;
-    height:100%;
+    justify-content: center;
+    align-items: center;
 }
 
 .input{
-    height: 100vh;
-    width: 50vw;
-    padding: 100px;
-    overflow-y: scroll;
+    height: 70vh;
+    width: 80vw;
+    padding-left: 200px;
+    padding-top:70px;
+    padding-bottom:70px;
+    background-color: white;
+}
+
+.options-images{
+    flex-direction: row;
+    display: flex;
+    width: 22vw;
+    margin-top:50px;
+    flex-wrap: wrap;
+    overflow-y:auto;
+    height: 40vh;
+    padding-bottom: 50px;
 }
 
 .maps{
-    height: 100vh;
-    width: 50vw;
+    margin-top: 20px;
+    height: 50vh;
+    width: 40vw;
+    position: absolute;
+    left:0px;
     background-image: url('../assets/map-template.png');
     background-size: cover;
+    transition: all .2s ease-in-out;
+    
+}
 
+.maps:hover{
+    margin-top: 20px;
+    height: 50vh;
+    width: 40vw;
+    position: absolute;
+    left:0px;
+    background-image: url('../assets/map-template.png');
+    background-size: cover;
+    transform: scale(1.05);
+    box-shadow: 10px 10px 22px -5px rgba(0,0,0,0.22);
 }
 
 </style>
