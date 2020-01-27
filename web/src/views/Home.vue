@@ -13,19 +13,28 @@
         <div class="input">
           <h4>ITENERARY NAME</h4>
           <p>Name your awesome itenerary before you gonna share it to others</p>
-          <input id="input" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Itenerary Name">
+          <input id="input" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Itenerary Name">
         </div>
         <div class="input">
           <h4>DESTINATION</h4>
           <p>Looking for holiday? Do you have any ideas or places in your mind?</p>
-          <input id="input" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Destination">
+          <gmap-autocomplete
+            @place_changed="setPlace"
+            class="form-control"
+            id="input"
+            placeholder="Enter Destination"
+          >
+          </gmap-autocomplete>
         </div>
         <div class="input" style="width:400px">
           <h4>DATES</h4>
           <p>Choose your days so you can prepare and ready for your awesome trip!</p>
-          <HotelDatePicker/>
+          <HotelDatePicker 
+            @check-in-changed="setStartDate"
+            @check-out-changed="setEndDate"
+          />
         </div>
-          <div class="button"  style="cursor: pointer;">
+          <div class="button"  style="cursor: pointer;" @click="submitItem">
                 <h1>SUBMIT</h1>
           </div>
       </div>
@@ -243,6 +252,45 @@ export default {
       },
       createItinerary(){
         this.$router.push('/create')
+      },
+      setPlace(place) {
+        this.currentPlace = place;
+      },
+      setStartDate(date){
+        this.startDate = date
+      },
+      setEndDate(date){
+        this.endDate = date
+      },
+      getLatLng(){
+        const location = {
+            name : this.currentPlace.name,
+            lat: this.currentPlace.geometry.location.lat(),
+            lng: this.currentPlace.geometry.location.lng()
+        }
+        return location
+      },
+      submitItem(){
+        if(localStorage.token){
+          const datas = {
+            name : this.itinName,
+            start_date : this.startDate,
+            end_date : this.endDate,
+            location : this.getLatLng()
+          }
+  
+          this.$store.dispatch('createItinerary', datas)
+            .then(({data}) => {
+              console.log('sini')
+              this.$store.commit('SET_ID_ITINERARY', data._id)
+              this.$router.push(`/itinerary/make`)
+            })
+            .catch(err => {
+              this.$store.commit('SET_ERROR_MESSAGE', err)
+            })
+        }else{
+          this.$router.push('/user')
+        }
       }
    },
    created(){
