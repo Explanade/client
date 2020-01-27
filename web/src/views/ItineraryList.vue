@@ -1,5 +1,9 @@
 <template>
+<<<<<<< HEAD
   <div class="itineraryList">
+=======
+  <div class='itineraryList'>
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
       <div class="list">
           <div style="height:200px;width:99%;display:flex;justify-content:center;align-items:center">
             <div class="input">
@@ -153,6 +157,16 @@ p{
   font-size:12px;
 }
 
+<<<<<<< HEAD
+=======
+h5{
+  font-size: 20px;
+  font-weight: 200;
+  margin-bottom: -0px;
+  letter-spacing:0.2ch;
+
+}
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
 
 h2{
   color: white;

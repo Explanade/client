@@ -2,15 +2,18 @@
   <div id="app">
     
     <NavBar style="z-index:0"/>
+<<<<<<< HEAD
       <!-- <transition name="router-anim" enter-active-class="animated fadeIn" leave-active-class="fadeOut"> -->
       <transition>
+=======
+      <transition name="router-anim" enter-active-class="animated fadeIn" leave-active-class="fadeOut">
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
         <router-view/>
       </transition>
     <Footer style="z-index:1" />
     
   </div>
 </template>
-
 
 <script>
 

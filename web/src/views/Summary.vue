@@ -33,6 +33,20 @@
                 <p style="margin-bottom:0px; color:gray; font-size:25px;">From</p>
                 <h6 style="margin-bottom:0px; color:black; font-size:35px;">Jakarta, Indonesia</h6>
                 <br>
+<<<<<<< HEAD
+=======
+                <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
+                <br>
+                <p style="margin-bottom:0px; color:gray; font-size:25px;">Destination</p>
+                <h6 style="margin-bottom:0px; color:black; font-size:35px;">Bali, Indonesia</h6>
+            </div>
+            </div>
+        </div>
+        <div class="hotel">
+            <div class="hotel-images"></div>
+            <div class="hotel-details">
+                <h6 style="margin-bottom:0px; color:gray">Hotel and Accomodations</h6>
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
                 <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
                 <br>
                 <p style="margin-bottom:0px; color:gray; font-size:25px;">Destination</p>

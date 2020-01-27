@@ -1,6 +1,9 @@
 <template>
   <div>
+<<<<<<< HEAD
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+=======
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
     <div class="home">
       <div class="content">
       <div class="header">
@@ -8,6 +11,33 @@
         <h2>PLAN</h2>
         <h2>&</h2>
         <h2>ENJOY</h2>
+<<<<<<< HEAD
+=======
+      </div>
+      <div class="form">
+        <div class="input">
+          <h4>ITENERARY NAME</h4>
+          <p>Name your awesome itenerary before you gonna share it to others</p>
+          <input id="input" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Itenerary Name">
+        </div>
+        <div class="input">
+          <h4>DESTINATION</h4>
+          <p>Looking for holiday? Do you have any ideas or places in your mind?</p>
+          <input id="input" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Destination">
+        </div>
+        <div class="input" style="width:400px">
+          <h4>DATES</h4>
+          <p>Choose your days so you can prepare and ready for your awesome trip!</p>
+          <HotelDatePicker/>
+        </div>
+          <div class="button"  style="cursor: pointer;">
+                <h1>SUBMIT</h1>
+          </div>
+      </div>
+
+      </div>
+      <div class="background">
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
       </div>
       <div class="form" style="z-index:0">
         <div class="input">
@@ -37,10 +67,15 @@
       </div>
       <!-- </div> -->
     </div>
+<<<<<<< HEAD
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
     <div class="planner">
       <div class="backgroundPlanner">
       <lottie style="position:absolute;z-index:0;left:-5vw;top:-10vh;height:110%;width:110%" :options="defaultOptions" v-on:animCreated="handleAnimation"/>
+=======
+    <div class="planner">
+      <div class="backgroundPlanner">
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
       </div>
 
       <div class="header2">
@@ -50,10 +85,17 @@
       </div>
 
        <div class="subheader">
+<<<<<<< HEAD
         <h6>We help you to manage and let you know interesting places near your destination</h6>
       </div>
 
         <div class="button2" @click="createItinerary" >
+=======
+        <h5>We help you to manage and let you know interesting places near your destination</h5>
+      </div>
+
+        <div class="button2">
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
           <h1 style="color:black; text-align: left; font-weight:600; margin-bottom:0px; margin-left:50px ">SEE</h1>
           <h1 style="color:black; text-align: left; font-weight:600; margin-bottom:0px; margin-left:50px ">HOW IT</h1>
           <h1 style="color:black; text-align: left; font-weight:600; margin-bottom:0px; margin-left:50px ">WORKS</h1>
@@ -70,7 +112,11 @@
       </div>
 
        <div class="subheader3">
+<<<<<<< HEAD
         <h6>We not just share the wonder of the earth, but also share how we enjoy the moments. Let's inspiring and be inspired together</h6>
+=======
+        <h5>We not just share the wonder of the earth, but also share how we enjoy the moments. Let's inspiring and be inspired together</h5>
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
       </div>
 
       <div class="ideasSections">
@@ -79,9 +125,13 @@
           <div class="set1"  style="max-width:80vw; height:40vh; display:flex; flex-wrap:wrap; margin-top:-50px;">
             
             <div class="idea">
+<<<<<<< HEAD
               
               <div class="images" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover; display:flex;justify-content:center;">
               </div>
+=======
+              <div class="images" style=" background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover"></div>
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
               <div class="captions" style="height:30%;max-width:100%;padding:15px;">
                 <h1 style="color:black; font-weight:600;margin-top:20px;">3days 2night in Bali</h1>              
                 <p style="color:black; font-size:15px;color:grey  "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
@@ -107,7 +157,11 @@
               </div>
             </div>
 
+<<<<<<< HEAD
             <div class="button3" @click="listPage">
+=======
+            <div class="button3">
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
                   <h1 style="color:black; text-align: left; font-weight:600; margin-bottom:0px; margin-left:50px ">SHOW</h1>
                   <h1 style="color:black; text-align: left; font-weight:600; margin-bottom:0px; margin-left:50px ">MORE</h1>      
               </div>
@@ -128,14 +182,19 @@
 
 <script>
 
+<<<<<<< HEAD
 import Background from '../components/BackgroundParallax'
 import HotelDatePicker from 'vue-hotel-datepicker'
 import Lottie from 'vue-lottie';
 import * as animationData from '../assets/animation/explanade-home-1.json';
+=======
+import HotelDatePicker from 'vue-hotel-datepicker'
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
 
 export default {
   name: 'home',
   components: {
+<<<<<<< HEAD
     HotelDatePicker,
     Lottie,
     Background
@@ -162,6 +221,10 @@ export default {
         this.$router.push('/create')
       }
    }
+=======
+    HotelDatePicker
+  }
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
 }
 </script>
 
@@ -179,6 +242,10 @@ export default {
   transform: scale(1.05);
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
 .datepicker__dummy-wrapper {
     border: 1px solid #d7d9e2;
     cursor: pointer;
@@ -236,6 +303,7 @@ export default {
   flex-direction: row;
   height: 80vh;
   width: 100vw;
+<<<<<<< HEAD
 }
 
 
@@ -246,6 +314,18 @@ export default {
   position: relative;
 }
 
+=======
+}
+
+
+.header3{
+  /* left:20vw; */
+  margin-left:20vw;
+  top:10vh;
+  position: relative;
+}
+
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
 .subheader3{
   left:26vw;
   top:15vh;
@@ -291,6 +371,7 @@ export default {
   position: absolute;
   top:22vh;
   left: 7vw;
+<<<<<<< HEAD
 }
 
 .header2{
@@ -306,6 +387,23 @@ export default {
   width: 10vw;
 }
 
+=======
+}
+
+.header2{
+  margin-left:57vw;
+  top:20vh;
+  position: relative;
+}
+
+.subheader{
+  left:63vw;
+  top:23vh;
+  position: relative;
+  width: 10vw;
+}
+
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
 .backgroundPlanner{
   background-image: url('../assets/photoAssets/explande-planner.jpg');
   position: absolute;
@@ -321,7 +419,10 @@ export default {
 .planner{
   height: 100vh;
   widows: 100vw;
+<<<<<<< HEAD
   z-index: -1;
+=======
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
 }
 .input{
   padding: 30px;
@@ -335,6 +436,7 @@ export default {
 p{
   font-weight: 100;
   font-size:12px;
+<<<<<<< HEAD
 }
 
 h6{
@@ -352,11 +454,24 @@ h5{
 }
 
 
+=======
+}
+
+h5{
+  font-size: 20px;
+  font-weight: 200;
+  margin-bottom: -0px;
+  letter-spacing:0.2ch;
+
+}
+
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
 h2{
   color: white;
   font-size: 55px;
   font-weight: 300;
   margin-bottom: -0px;
+<<<<<<< HEAD
 }
 
 h1{
@@ -365,6 +480,16 @@ h1{
   font-weight: 300;
 }
 
+=======
+}
+
+h1{
+  color:white;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
 h4{
   font-weight: 300;
   font-size:24px;
@@ -416,13 +541,17 @@ h4{
   left:7vw;
   width:70vw;
   height: 20vh;
+<<<<<<< HEAD
   flex-direction: row;
+=======
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
 }
 
 .content{
   background-color: #19459b;
   width: 40vw;
   height: 100vh;
+<<<<<<< HEAD
   margin-right:-100px;
   position: absolute;
 }
@@ -435,12 +564,25 @@ h4{
   background-position: left;
 }
 
+=======
+}
+
+.background{
+  background-image: url('../assets/photoAssets/explande-home.jpg');
+  height: 100vh;
+  width: 60vw;
+  background-size: cover;
+}
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
 .home{
   height: 100vh;
   display: flex;
   flex-direction: row;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
 }
 
 

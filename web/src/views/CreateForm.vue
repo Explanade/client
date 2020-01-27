@@ -1,6 +1,9 @@
 <template>
   <div class="user-page">
+<<<<<<< HEAD
     
+=======
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
       <form class="create-form" @submit.prevent="submitItem">
         <div class="form-group">
           <label for="exampleInputEmail1">Itinerary Name</label>
@@ -23,8 +26,11 @@
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Pick dates</label>
+<<<<<<< HEAD
           <div>
           </div>
+=======
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
           <HotelDatePicker
             @check-in-changed="setStartDate"
             @check-out-changed="setEndDate"
@@ -34,7 +40,7 @@
         <button type="submit" id="button" class="btn btn-primary">Submit</button>
       </form>
 
-    </div>
+  </div>
 </template>
 
 <script>

@@ -106,6 +106,16 @@ p{
   font-size:24px;
 }
 
+<<<<<<< HEAD
+=======
+h5{
+  font-size: 20px;
+  font-weight: 200;
+  margin-bottom: -0px;
+  letter-spacing:0.2ch;
+
+}
+>>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
 
 h2{
   color: white;
