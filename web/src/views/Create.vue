@@ -33,16 +33,12 @@
                 </p>
             </div>
             <div class="section-1">
-<<<<<<< HEAD
                <!-- <img class="icon" src="../assets/icon2.png" alt=""> -->
                <lottie style="height:400px;width:400px;margin-left:-5vw;z-index:1;z-index:0" :options="defaultOptions3" v-on:animCreated="handleAnimation"/>
-=======
-               <img class="icon" src="../assets/icon2.png" alt="">
->>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
             </div>
             <div class="section-1" style="z-index:1">
                 <h1 class ="description"> YOU CAN ALSO CREATED YOUR OWN AND SHARE YOUR ITINERARY!</h1>
-                <button type="button" id="button" class="btn btn-info" @click="goToForm">Create Yours!</button>
+                <button type="button" id="buttonCreate" class="btn btn-info" @click="goToForm">Create Yours!</button>
             </div>
         </div>
         
@@ -50,7 +46,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 
 import Lottie from 'vue-lottie';
 import * as animationData from '../assets/animation/data-create-plane.json';
@@ -80,10 +75,6 @@ export default {
         onSpeedChange: function () {
             this.anim.setSpeed(this.animationSpeed);
         },
-=======
-export default {
-    methods: {
->>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
         goToForm(){
             this.$router.push('/create/form')
         }
@@ -93,7 +84,7 @@ export default {
 
 <style scoped>
 
-#button{
+#buttonCreate{
 font-size: 25px;
 background-color: #19459b;
 border-color: #19459b;
@@ -102,7 +93,7 @@ border-radius:0px;
 transition: all .2s ease-in-out;
 }
 
-#button:hover{
+#buttonCreate:hover{
 font-size: 25px;
 background-color: #eec925;
 border-color: #eec925;
@@ -164,10 +155,7 @@ p{
     flex-direction: row;
     height: auto;
     background-color:black;
-<<<<<<< HEAD
     background-size:cover;
-=======
->>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
     background-image: url('../assets/photoAssets/explanade-create.jpg')
 }
 

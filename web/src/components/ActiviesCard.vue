@@ -3,11 +3,7 @@
             <div class="row no-gutters">
                 <div class="col-md-4">
                     
-<<<<<<< HEAD
-                <div :style="`background-image: url('https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0].photo_reference}&key=${key}');height:15vh;width:7vw; background-size:cover`">
-=======
                 <div :style="`background-image: url('${place.photo}');height:15vh;width:7vw; background-size:cover`">
->>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
                 </div>
                 </div>
                 <div class="col-md-8">
@@ -26,11 +22,8 @@ import StarRating from 'vue-star-rating'
 import key from '../config/key'
 
 export default {
-<<<<<<< HEAD
-=======
     StarRating,
     props: ['index', 'place'],
->>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
     components:{
         StarRating
     },
@@ -39,10 +32,7 @@ export default {
             key : key
         }
     },
-<<<<<<< HEAD
     props:['place']
-=======
->>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
 }
 </script>
 

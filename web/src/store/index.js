@@ -1,22 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-<<<<<<< HEAD
 import serverAPI from '../apis/server'
 import Swal from 'sweetalert2'
 import router from '../router/index'
-=======
-import serverAPI from '@/config/serverAPI';
->>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-<<<<<<< HEAD
-=======
-    errorMessage: '',
-    successMessage: '',
->>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
+
     isLogin : false,
     errorMessage: '',
     successMessage: '',
@@ -27,14 +19,6 @@ export default new Vuex.Store({
   },
   
   mutations: {
-<<<<<<< HEAD
-=======
-    SET_RESTAURANTS(state, payload) {
-      state.restaurants = payload
-    },
-  },
-  mutations: {
->>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
     SET_ITINERARY(state, payload) {
       state.itineraryDetail = payload
     },
@@ -50,12 +34,9 @@ export default new Vuex.Store({
     SET_ERROR_MESSAGE(state, payload) {
       state.errorMessage = payload
       setTimeout(state.errorMessage = null, 2000);
-<<<<<<< HEAD
     },
     SET_ISLOGIN(state, payload){
       state.isLogin = payload
-=======
->>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
     }
   },
   actions: {
@@ -69,7 +50,6 @@ export default new Vuex.Store({
         }
       })
       .then(({data}) => {
-<<<<<<< HEAD
         this.commit('SET_ISLOGIN', true)
         localStorage.setItem('token',data.token)
         Swal.fire({
@@ -96,13 +76,6 @@ export default new Vuex.Store({
           padding: '2em',
           background: '#fff url("/failed-notification.png")',
         })
-=======
-        localStorage.setItem('token',data.token)
-        this.$route.push('/')
-      })
-      .catch(({err}) => {
-        console.log(err)
->>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
       })
     },
     register(context,payload){
@@ -117,7 +90,6 @@ export default new Vuex.Store({
       })
       .then(({data}) => {
         localStorage.setItem('token',data.token)
-<<<<<<< HEAD
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -131,12 +103,6 @@ export default new Vuex.Store({
       })
       .catch(({err}) => {
         console.log(err)
-=======
-        this.$route.push('/')
-      })
-      .catch(({err}) => {
-        // console.log(err)
->>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
       })
     },
     createItinerary({ commit }, payload) {
@@ -145,27 +111,11 @@ export default new Vuex.Store({
         method: 'post',
         data: payload,
         headers: {
-<<<<<<< HEAD
           token: localStorage.getItem('token')
         }
       })
     },
     fetchItineraryDetail({ commit, dispatch }, payload) {
-      serverAPI({
-        url: `/itineraries/${payload}`
-      })
-        .then(({data}) => {
-          commit('SET_ITINERARY', data)
-          dispatch('fetchRecommendation', data.location.name)
-        })
-        .catch(console.log)
-    },
-=======
-          token: localStorage.getItem('access_token')
-        }
-      })
-    },
-    fetchItineraryDetail({ commit }, payload) {
       return serverAPI({
         url: `/itineraries/${payload}`
       })
@@ -188,66 +138,12 @@ export default new Vuex.Store({
         }
       })
     },
-    // fetchItineraryDetail({ commit, dispatch }, payload) {
-    //   serverAPI({
-    //     url: `/itineraries/${payload}`
-    //   })
-    //     .then(({data}) => {
-    //       commit('SET_ITINERARY', data)
-    //       dispatch('fetchRecommendation', data.location.name)
-    //     })
-    //     .catch(console.log)
-    // },
->>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
-    fetchRecommendation({ commit }, payload){
-      serverAPI({
-        url: '/google/places',
-        method: 'get',
-        params: {
-        query: `restaurants+in+${payload}`,
-        }
-      })
-<<<<<<< HEAD
-        .then(({data}) => {
-          commit('SET_RESTAURANT', data.results)
-          return serverAPI({
-            url: '/google/places',
-            method: 'get',
-            params: {
-            query: `point+of+interest+in+${payload}`
-            }
-          })
-        })
-        .then(({data}) => {
-          commit('SET_LANDMARK', data.results)
-        })
-        .catch(console.log)
-    },
     updateItinerary({ commit }, payload) {
-=======
-      .then(({data}) => {
-        commit('SET_RESTAURANT', data.results)
-        return serverAPI({
-          url: '/google/places',
-          method: 'get',
-          params: {
-          query: `point+of+interest+in+${payload}`
-          }
-        })
-      })
-      .then(({data}) => {
-        commit('SET_LANDMARK', data.results)
-      })
-      .catch(console.log)
-    },
-    updateItinerary({ commit }, payload) {0
->>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
       return serverAPI({
         url: `/itineraries/${payload._id}`,
         method: 'put',
         data: { itinerary: payload },
         headers: {
-<<<<<<< HEAD
           token: localStorage.getItem('token')
         }
       })
@@ -266,11 +162,6 @@ export default new Vuex.Store({
 
       context.commit('SET_ISLOGIN',payload)
       localStorage.removeItem('token')
-=======
-          token: localStorage.getItem('access_token')
-        }
-      })
->>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
     }
   },
 

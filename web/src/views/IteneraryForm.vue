@@ -22,12 +22,12 @@
                 <gmap-marker
                     :position="m"
                     :animation="Number(4)"
-                    v-for="(m, index) in places" :key="index"
+                    v-for="(m, index) in activities[selectedDay]" :key="index"
                     @click="center=m.geometry.location"
                     :icon="{url : require('../assets/icon-pin-poin.png')}"
                 >
                 </gmap-marker>
-                <gmap-polyline :path.sync="places" 
+                <gmap-polyline :path.sync="activities[selectedDay]" 
                     :options="{
                         strokeColor:'#ffa31a',
                         geodesic: true,
@@ -44,20 +44,20 @@
 
             <div class="listCategory" style="width:22vw;margin-left:100px;">
                <div class="form-group">
+                   <div style="display:flex">
                     <h2 style="color:black">Select Days</h2>
+                    <button type="button" id="button-optimized" class="btn btn-primary">Optimize</button>
+                   </div>
                     <br>
                 
                     <select class="form-control" id="exampleFormControlSelect1" v-model="selectedDay">
                         <option v-for="(day, i) in itineraryDetail.date.total_days" :key="i" :value="i">Day {{i + 1}}</option>
                     </select>
-
-
-
                 </div>
                 <div class="options-images">
                         <div v-for="(itin, index) in activities" :key="index">
                             <div v-if="index == selectedDay">
-                                <draggable v-model="activities[index]" group="activities" @change="updateIndex()">
+                                <draggable v-model="activities[index]" group="activities" @change="updateIndex()" style="min-height:50px;min-width:5vw;background-color:red">
                                     <div v-for="(element, index2) in activities[index]" :key="element.id" class="row list my-4">
                                         <ActivityCard :place="element" :index="index2" />
                                     </div>
@@ -350,6 +350,7 @@ export default {
     },
     methods:{
         updateIndex() {
+            this.center = this.activities[this.selectedDay][this.activities[this.selectedDay].length - 1]
          for (let act in this.activities) {
             let places = this.activities[act];
             for (let i = 0; i < places.length; i++) {

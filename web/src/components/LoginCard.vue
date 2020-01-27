@@ -1,12 +1,12 @@
 <template>
-  <div class="form">
+  <div class="formLogin">
         <form style="display:flex;flex-direction:row; justify-content:space-between" action="">
                 <div style="width:100%;">
-                    <div class="input">
+                    <div class="inputLogin">
                       <h4>EMAIL</h4>
                       <input v-model="email" id="input" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Destination" required>
                     </div>
-                    <div class="input">
+                    <div class="inputLogin">
                       <h4>PASSWORD</h4>
                       <input v-model="password" id="input" type="password" class="form-control" aria-describedby="emailHelp" placeholder="Enter Destination" required>
                     </div>
@@ -61,7 +61,20 @@ export default {
   width:100%;
 }
 
-.input{
+.formLogin{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color:white;
+  position: absolute;
+  left:7vw;
+  width:40vw;
+  height: 50vh;
+  padding:50px;
+}
+
+
+.inputLogin{
   margin: 20px;
 }
 
@@ -106,16 +119,6 @@ p{
   font-size:24px;
 }
 
-<<<<<<< HEAD
-=======
-h5{
-  font-size: 20px;
-  font-weight: 200;
-  margin-bottom: -0px;
-  letter-spacing:0.2ch;
-
-}
->>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
 
 h2{
   color: white;

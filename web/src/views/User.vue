@@ -26,10 +26,6 @@ export default {
   },
   methods : {
     changeLogin(value){
-<<<<<<< HEAD
-=======
-      // console.log(value)
->>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
       this.isLoginPage = value
     }
   }
@@ -44,7 +40,6 @@ export default {
 
 .input{
   margin: 20px;
-<<<<<<< HEAD
 }
 
 .home{
@@ -60,39 +55,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-=======
-}
-
-.home{
-  height: 100vh;
-  display: flex;
-  flex-direction: row;
-
-}
-
-.content{
-  background-color: #19459b;
-  width: 40vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
->>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
-
-.form{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color:white;
-  position: absolute;
-  left:7vw;
-  width:40vw;
-  height: 50vh;
-  padding:50px;
 }
 
 .content{
@@ -114,7 +76,6 @@ export default {
   height: 100vh;
   display: flex;
   flex-direction: row;
-<<<<<<< HEAD
 }
 
 p{
@@ -122,22 +83,6 @@ p{
   font-size:12px;
 }
 
-=======
-}
-
-p{
-  font-weight: 100;
-  font-size:12px;
-}
-
-h5{
-  font-size: 20px;
-  font-weight: 200;
-  margin-bottom: -0px;
-  letter-spacing:0.2ch;
-
-}
->>>>>>> 3e84681e55adf96a3fd2ed3e6d52254382ffdaff
 
 h2{
   color: white;
