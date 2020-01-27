@@ -1,11 +1,13 @@
 <template>
     <div class="containerCreate" style="z-index:-3">
         <div class="white-line">
-            <img style="height:251vh" src="../assets/white-line-with-plane.png" alt="">
+            <lottie style="position:absolute;height:251vh;width:100vw;top:-50px;left:0vw;" :options="defaultOptions" v-on:animCreated="handleAnimation"/>
+            <!-- <img style="height:251vh" src="../assets/white-line-with-plane.png" alt=""> -->
         </div>
          <div class="animation">
             <div class="section-1">
-                <img class="icon" src="../assets/icon1.png" style="z-index:0" alt="">
+                <!-- <img class="icon" src="../assets/icon1.png" style="z-index:0" alt=""> -->
+                <lottie style="height:400px;width:400px;margin-left:13vw;z-index:1;z-index:0" :options="defaultOptions2" v-on:animCreated="handleAnimation"/>
             </div>
             <div class="section-1" style="z-index:1">
                 <h1 class ="description"> LOOK FOR AVAILABLE ITINERARIES </h1>
@@ -17,7 +19,8 @@
                 
             </div>
             <div class="section-1" style="z-index:0">
-                <img class="icon" src="../assets/icon3.png" alt="">
+                <!-- <img class="icon" src="../assets/icon3.png" alt=""> -->
+                <lottie style="height:400px;width:400px;margin-left:10vw;z-index:1;z-index:0" :options="defaultOptions4" v-on:animCreated="handleAnimation"/>
             </div>
         </div>
          <div class="textContent">
@@ -30,7 +33,8 @@
                 </p>
             </div>
             <div class="section-1">
-               <img class="icon" src="../assets/icon2.png" alt="">
+               <!-- <img class="icon" src="../assets/icon2.png" alt=""> -->
+               <lottie style="height:400px;width:400px;margin-left:-5vw;z-index:1;z-index:0" :options="defaultOptions3" v-on:animCreated="handleAnimation"/>
             </div>
             <div class="section-1" style="z-index:1">
                 <h1 class ="description"> YOU CAN ALSO CREATED YOUR OWN AND SHARE YOUR ITINERARY!</h1>
@@ -42,8 +46,36 @@
 </template>
 
 <script>
-export default {
 
+import Lottie from 'vue-lottie';
+import * as animationData from '../assets/animation/data-create-plane.json';
+import * as animationData2 from '../assets/animation/explanade-holiday-time.json';
+import * as animationData3 from '../assets/animation/explanade-icon-2.json';
+import * as animationData4 from '../assets/animation/explanade-icon3.json';
+
+export default {
+    name:'create',
+    data(){
+        return{
+            defaultOptions: {animationData: animationData.default},
+            defaultOptions2: {animationData: animationData2.default},
+            defaultOptions3: {animationData: animationData3.default},
+            defaultOptions4: {animationData: animationData4.default},
+            animationSpeed: 1
+        }
+    },
+    components : {
+        Lottie
+    },
+    methods: {
+        handleAnimation: function (anim) {
+            this.anim = anim;
+        },
+
+        onSpeedChange: function () {
+            this.anim.setSpeed(this.animationSpeed);
+        }
+    }
 }
 </script>
 
@@ -73,7 +105,6 @@ transform: scale(1.1);
   position: absolute;
   display: flex;
   justify-content: center;
-  margin-left: 15vw;
   z-index:0;
 }
 
@@ -85,7 +116,10 @@ h1{
 
 p{
     text-align: center;
-    color:white
+    color:white;
+    font-size:20px;
+    font-weight: 300;
+    letter-spacing: 1px;
 }
 
 .description{
@@ -118,10 +152,9 @@ p{
     flex-direction: row;
     height: auto;
     background-color:black;
+    background-size:cover;
     background-image: url('../assets/photoAssets/explanade-create.jpg')
 }
-
-
 
 .textContent{
     display: flex;

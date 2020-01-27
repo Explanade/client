@@ -1,5 +1,5 @@
 <template>
-  <div class='itineraryList'>
+  <div class="itineraryList">
       <div class="list">
           <div style="height:200px;width:99%;display:flex;justify-content:center;align-items:center">
             <div class="input">
@@ -153,13 +153,6 @@ p{
   font-size:12px;
 }
 
-h5{
-  font-size: 20px;
-  font-weight: 200;
-  margin-bottom: -0px;
-  letter-spacing:0.2ch;
-
-}
 
 h2{
   color: white;

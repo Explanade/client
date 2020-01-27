@@ -145,13 +145,6 @@ p{
   font-size:12px;
 }
 
-h5{
-  font-size: 20px;
-  font-weight: 200;
-  margin-bottom: -0px;
-  letter-spacing:0.2ch;
-
-}
 
 h2{
   color: white;

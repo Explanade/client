@@ -1,5 +1,5 @@
 <template>
-  <div class="footerPage" >
+  <div class="footerPage" style="z-index:1" >
         <!-- Site footer -->
     <footer class="site-footer">
         <div class="container">
@@ -51,7 +51,8 @@ export default {
 .site-footer hr
 {
   border-top-color:#bbb;
-  opacity:0.5
+  opacity:0.5;
+  z-index: 1;
 }
 .site-footer hr.small
 {

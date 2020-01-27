@@ -9,7 +9,7 @@
         <h2>&</h2>
         <h2>ENJOY</h2>
       </div>
-      <div class="form">
+      <div class="form" style="z-index:0">
         <div class="input">
           <h4>ITENERARY NAME</h4>
           <p>Name your awesome itenerary before you gonna share it to others</p>
@@ -31,12 +31,16 @@
       </div>
 
       </div>
-      <div class="background">
+      <!-- <div class="background"> -->
+      <div style="z-index:-1;max-width:100vw;">
+        <Background />
       </div>
+      <!-- </div> -->
     </div>
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
     <div class="planner">
       <div class="backgroundPlanner">
+      <lottie style="position:absolute;z-index:0;left:-5vw;top:-10vh;height:110%;width:110%" :options="defaultOptions" v-on:animCreated="handleAnimation"/>
       </div>
 
       <div class="header2">
@@ -46,7 +50,7 @@
       </div>
 
        <div class="subheader">
-        <h5>We help you to manage and let you know interesting places near your destination</h5>
+        <h6>We help you to manage and let you know interesting places near your destination</h6>
       </div>
 
         <div class="button2">
@@ -66,7 +70,7 @@
       </div>
 
        <div class="subheader3">
-        <h5>We not just share the wonder of the earth, but also share how we enjoy the moments. Let's inspiring and be inspired together</h5>
+        <h6>We not just share the wonder of the earth, but also share how we enjoy the moments. Let's inspiring and be inspired together</h6>
       </div>
 
       <div class="ideasSections">
@@ -75,7 +79,10 @@
           <div class="set1"  style="max-width:80vw; height:40vh; display:flex; flex-wrap:wrap; margin-top:-50px;">
             
             <div class="idea">
-              <div class="images" style=" background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover"></div>
+              
+              <div class="images" style=" background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover; display:flex;justify-content:center;">
+                <div style="background-color:red;width:100px;height:100px;align-self:center"></div>
+              </div>
               <div class="captions" style="height:30%;max-width:100%;padding:15px;">
                 <h1 style="color:black; font-weight:600;margin-top:20px;">3days 2night in Bali</h1>              
                 <p style="color:black; font-size:15px;color:grey  "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
@@ -122,13 +129,34 @@
 
 <script>
 
+import Background from '../components/BackgroundParallax'
 import HotelDatePicker from 'vue-hotel-datepicker'
+import Lottie from 'vue-lottie';
+import * as animationData from '../assets/animation/explanade-home-1.json';
 
 export default {
   name: 'home',
   components: {
-    HotelDatePicker
-  }
+    HotelDatePicker,
+    Lottie,
+    Background
+  },
+  data(){
+    return{
+      defaultOptions: {animationData: animationData.default},
+      animationSpeed: 1
+    }
+  },
+   methods: {
+      handleAnimation: function (anim) {
+        console.log('test')
+        this.anim = anim;
+      },
+  
+      onSpeedChange: function () {
+        this.anim.setSpeed(this.animationSpeed);
+      }
+   }
 }
 </script>
 
@@ -145,7 +173,6 @@ export default {
   box-shadow: 10px 10px 22px -5px rgba(0,0,0,0.22);
   transform: scale(1.05);
 }
-
 
 .datepicker__dummy-wrapper {
     border: 1px solid #d7d9e2;
@@ -289,6 +316,7 @@ export default {
 .planner{
   height: 100vh;
   widows: 100vw;
+  z-index: -1;
 }
 .input{
   padding: 30px;
@@ -304,13 +332,20 @@ p{
   font-size:12px;
 }
 
-h5{
+h6{
   font-size: 20px;
   font-weight: 200;
   margin-bottom: -0px;
   letter-spacing:0.2ch;
+  color:black
 
 }
+h5{
+    color:white;
+    font-weight: 100;
+    margin:60px;
+}
+
 
 h2{
   color: white;
@@ -382,18 +417,23 @@ h4{
   background-color: #19459b;
   width: 40vw;
   height: 100vh;
+  margin-right:-100px;
+  position: absolute;
 }
 
 .background{
-  background-image: url('../assets/photoAssets/explande-home.jpg');
+  /* background-image: url('../assets/photoAssets/explande-home.jpg'); */
   height: 100vh;
   width: 60vw;
   background-size: cover;
+  background-position: left;
 }
+
 .home{
   height: 100vh;
   display: flex;
   flex-direction: row;
+
 
 }
 
