@@ -16,7 +16,8 @@ export default new Vuex.Store({
     restaurants : [],
     landmarks : [],
     events : [],
-    highlight : [] 
+    highlight : [],
+    myItin : []
   },
   
   mutations: {
@@ -43,8 +44,11 @@ export default new Vuex.Store({
       state.isLogin = payload
     },
     SET_HIGHLIGHT(state,payload){
-      console.log(payload)
       state.highlight = payload
+    },
+    SET_MY_ITIN(state,payload){
+      state.myItin = payload
+      console.log(payload)
     }
   },
   actions: {
@@ -58,6 +62,7 @@ export default new Vuex.Store({
         }
       })
       .then(({data}) => {
+        console.log(data)
         this.commit('SET_ISLOGIN', true)
         localStorage.setItem('token',data.token)
         Swal.fire({
@@ -182,8 +187,26 @@ export default new Vuex.Store({
       })
       .then(({data})=>{
       
-        this.commit('SET_HIGHLIGHT',data.slice(0,2))
+        this.commit('SET_HIGHLIGHT',data.slice(0,3))
         // console.log(data.slice(0,2))
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    fetchMyItinerary(context, payload){
+      serverAPI({
+        method: 'get',
+        url:'/itineraries/my-itineraries',
+        headers:{
+          token : localStorage.getItem('token')
+        }
+      })
+      .then(({data}) => {
+        this.commit('SET_MY_ITIN',data)
+      })
+      .catch(err => {
+        console.log(err)
       })
     }
   },

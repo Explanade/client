@@ -35,7 +35,7 @@ export default {
   background-repeat: no-repeat;
   background-position:bottom;
   background-position-x: 40vw;
-  background-position-y: 35vw;
+  background-position-y: 30vw;
   background-image: url('../assets/parallaxAssets/explande-home-4.jpg');
   z-index: 0;
 }
@@ -48,8 +48,8 @@ export default {
   background-size: 50%;
   background-repeat: no-repeat;
   background-position:bottom;
-  background-position-x:20vw;
-  background-position-y: 40vw;
+  background-position-x:35vw;
+  background-position-y: 35vw;
   background-image: url('../assets/parallaxAssets/explande-home-3.jpg');
   z-index: 0;
 }
@@ -85,6 +85,7 @@ export default {
   border:1px solid red;
   display:inline-block;
   clip-path: inset(0% 0% 0% 0%);
+  overflow: hidden;
 }
 
 .item {

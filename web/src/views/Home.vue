@@ -9,7 +9,7 @@
         <h2>&</h2>
         <h2>ENJOY</h2>
       </div>
-      <div class="form" style="z-index:0">
+      <div class="form" style="z-index:1">
         <div class="input">
           <h4>ITENERARY NAME</h4>
           <p>Name your awesome itenerary before you gonna share it to others</p>
@@ -49,75 +49,32 @@
 
     <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
 
-     <div class="my-itinerary">
+     <div v-if="isLogin === true" class="my-itinerary">
 
       <div class="header3">
         <h2 style="color:black">MY </h2>
         <h2 style="color:black">ITINERARIES</h2>
       </div>
-        <div class="myItinerary" style="height:70vh;margin-top:15vh; display:flex;padding:5%;overflow-y:scroll;width:70vw;margin-right:500px;margin-left:300px">
-          <div class="ideas" style="min-width:20vw; height:45vh; margin:30px">
-              <div class="images" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover; display:flex;justify-content:center;">
-              </div>
-              <div class="captions" style="height:30%;max-width:100%;padding:15px;">
-                <h1 style="color:black; font-weight:600;margin-top:20px;">Damai Sejahtera di Ubud</h1>              
-                <p style="color:black; font-size:15px; color:grey "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
-                <p style="color:black; font-size:15px; margin-top:-10px; color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>Bali</p>
-              </div>
+        <div class="myItinerary"  style="height:60vh;margin-top:15vh; display:flex;overflow-y:scroll;width:70vw;margin-right:500px;margin-left:300px;margin-bottom:-10vh">
+          <div class="ideas" v-for="(itinerary,i) in myItin" :key="i" style="height:auto" >
+              <div v-for="(hero,j) in itinerary.activities" :key="j">
+                <div v-if="hero.orderIndex == 0" style="min-width:20vw; height:45vh; margin:30px;">
 
-          </div>
-          <div class="ideas" style="min-width:20vw; height:45vh; margin:30px">
-              <div class="images" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover; display:flex;justify-content:center;">
-              </div>
-               <div class="captions" style="height:30%;max-width:100%;padding:15px;">
-                <h1 style="color:black; font-weight:600;margin-top:20px;">Damai Sejahtera di Ubud</h1>              
-                <p style="color:black; font-size:15px; color:grey "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
-                <p style="color:black; font-size:15px; margin-top:-10px; color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>Bali</p>
-              </div>
-          </div>
-          <div class="ideas" style="min-width:20vw; height:45vh; margin:30px">
-            <div class="images" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover; display:flex;justify-content:center;">
-            </div>
-             <div class="captions" style="height:30%;max-width:100%;padding:15px;">
-                <h1 style="color:black; font-weight:600;margin-top:20px;">Damai Sejahtera di Ubud</h1>              
-                <p style="color:black; font-size:15px; color:grey "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
-                <p style="color:black; font-size:15px; margin-top:-10px; color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>Bali</p>
-              </div>
-          </div>
-          <div class="ideas" style="min-width:20vw; height:45vh; margin:30px">
-            <div class="images" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover; display:flex;justify-content:center;">
-            </div>
-             <div class="captions" style="height:30%;max-width:100%;padding:15px;">
-                <h1 style="color:black; font-weight:600;margin-top:20px;">Damai Sejahtera di Ubud</h1>              
-                <p style="color:black; font-size:15px; color:grey "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
-                <p style="color:black; font-size:15px; margin-top:-10px; color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>Bali</p>
-              </div>
-          </div>
-          <div class="ideas" style="min-width:20vw; height:45vh; margin:30px">
-            <div class="images" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover; display:flex;justify-content:center;">
-            </div>
-             <div class="captions" style="height:30%;max-width:100%;padding:15px;">
-                <h1 style="color:black; font-weight:600;margin-top:20px;">Damai Sejahtera di Ubud</h1>              
-                <p style="color:black; font-size:15px; color:grey "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
-                <p style="color:black; font-size:15px; margin-top:-10px; color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>Bali</p>
-              </div>
-          </div>
-          <div class="ideas" style="min-width:20vw; height:45vh; margin:30px">
-            <div class="images" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover; display:flex;justify-content:center;">
-            </div>
-             <div class="captions" style="height:30%;max-width:100%;padding:15px;">
-                <h1 style="color:black; font-weight:600;margin-top:20px;">Damai Sejahtera di Ubud</h1>              
-                <p style="color:black; font-size:15px; color:grey "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
-                <p style="color:black; font-size:15px; margin-top:-10px; color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>Bali</p>
-              </div>
-          </div>
-          <div class="ideas" style="min-width:20vw; height:45vh; margin:30px">
-            <div class="images" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover; display:flex;justify-content:center;">
-            </div>
-             <div class="captions" style="height:30%;max-width:100%;padding:15px;">
-                <h1 style="color:black; font-weight:600;margin-top:20px;">Damai Sejahtera di Ubud</h1>              
-                <p style="color:black; font-size:15px; color:grey "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
-                <p style="color:black; font-size:15px; margin-top:-10px; color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>Bali</p>
+                  <div class="images"
+                  :style="`background-image: url('${hero.places[0].photo}');
+                  background-size:cover;
+                  display:flex;
+                  justify-content:center;`">
+                  
+                </div>
+                  <div class="captions" style="height:30%;max-width:100%;padding:15px;">
+                    <h1 style="color:black; font-weight:600;margin-top:20px;">{{itinerary.name}}</h1>  
+                    <p style="color:black; font-size:15px;color:grey  "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by {{itinerary.user_id.name}}</p>
+                    <p style="color:black; font-size:15px; margin-top:-10px;color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>{{itinerary.location.name}}</p>
+                     <button type="button" id="button-edit" class="btn btn-primary">Edit</button>
+                    <button type="button" id="button-delete" style="margin-left:10px;" class="btn btn-primary">Delete</button>
+                  </div>
+                </div>
               </div>
           </div>
         </div>
@@ -160,7 +117,7 @@
 
       <div class="ideasSections">
         <div class="blueContainer" style="width:20vw; height:50vh; background-color:#19459b"></div>
-        <div class="ideasList">
+        <div class="ideasList" style="display:flex;">
           <div class="set1" v-for="(top,i) in highlight" :key="i" style="max-width:80vw; height:40vh; display:flex; flex-wrap:wrap; margin-top:-50px;">
             <div v-for="(hero,j) in top.activities" :key="j">
               <div v-if="hero.orderIndex == 0" class="idea">
@@ -179,31 +136,11 @@
               </div>
 
             </div>
-
-            <!-- <div class="idea">
-              <div class="images" style=" background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ9eKIRE27oUSKzAodD3qqtKboeLSLBRsnQ6sNLiOnKMa4HOKn5'); background-size:cover"></div>
-              <div class="captions" style="height:30%;max-width:100%;padding:15px;">
-                <h1 style="color:black; font-weight:600;margin-top:20px;">3days 2night in Bali</h1>              
-                <p style="color:black; font-size:15px;color:grey  "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
-                <p style="color:black; font-size:15px; margin-top:-10px;color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>Bali</p>
-              </div>
             </div>
-
-            <div class="idea">
-              <div class="images" style=" background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQwY_4fOndGpRSuxe_1MxYjFsDPc0gYLWtAc4ghT0AMrPglY2yu'); background-size:cover"></div>
-              <div class="captions" style="height:30%;max-width:100%;padding:15px;">
-                <h1 style="color:black; font-weight:600;margin-top:20px;">Damai Sejahtera di Ubud</h1>              
-                <p style="color:black; font-size:15px; color:grey "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
-                <p style="color:black; font-size:15px; margin-top:-10px; color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>Bali</p>
-              </div>
-            </div>
- -->
-
             <div class="button3" @click="listPage">
                   <h1 style="color:black; text-align: left; font-weight:600; margin-bottom:0px; margin-left:50px ">SHOW</h1>
                   <h1 style="color:black; text-align: left; font-weight:600; margin-bottom:0px; margin-left:50px ">MORE</h1>      
               </div>
-            </div>
           </div>
         </div>
       </div>
@@ -295,12 +232,42 @@ export default {
    },
    created(){
      this.$store.dispatch('fetchHighlightItinerary')
+     if(localStorage.getItem('token')){
+       this.$store.dispatch('fetchMyItinerary')
+     }
    },
-   computed : mapState(['highlight']),
+   computed : mapState(['highlight','isLogin','myItin']),
 }
 </script>
 
 <style scoped>
+
+#button-delete{
+  border-radius: 0px;
+  background-color: #303030;
+  border-color: #303030;
+}
+
+#button-delete:hover{
+  border-radius: 0px;
+  background-color: #ffda69;
+  border-color:#ffda69;
+  color:black
+}
+
+
+#button-edit{
+  border-radius: 0px;
+  background-color: #19459b;
+  border-color:#19459b;
+}
+
+#button-edit:hover{
+  border-radius: 0px;
+  background-color: #ffda69;
+  border-color:#ffda69;
+  color:black
+}
 
 .myItin{
   width: 80vw;
