@@ -10,12 +10,9 @@
         </select>
     </div>
     <div class="options-images">
-        <ActivityCard v-for="(place, i) in places" :key="i" :place="place"/>
-        <ActivityCard />
-        <ActivityCard />
-        <ActivityCard />
-        <ActivityCard />
-        <ActivityCard />
+        <draggable v-model="places" :list="places">
+            <ActivityCard v-for="(place, i) in places" :key="i" :place="place"/>
+        </draggable>
     </div>
 </div>
 </template>
@@ -23,6 +20,7 @@
 <script>
 import ActivityCard from '../components/ActiviesCard'
 import serverAPI from '../apis/server'
+import draggable from 'vuedraggable';
 
 export default {
     data(){
@@ -32,7 +30,8 @@ export default {
         }
     },
     components:{
-        ActivityCard
+        ActivityCard,
+        draggable
     },
     computed:{
         places(){
