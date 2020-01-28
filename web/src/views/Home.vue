@@ -61,10 +61,12 @@
                 <div v-if="hero.orderIndex == 0" style="min-width:20vw; height:45vh; margin:30px;">
 
                   <div class="images"
-                  :style="`background-image: url('${hero.places[0].photo}');
-                  background-size:cover;
-                  display:flex;
-                  justify-content:center;`">
+                    :style="`background-image: url('${hero.places[0].photo}');
+                    background-size:cover;
+                    display:flex;
+                    justify-content:center;`"
+                    @click="summaryItin(itinerary._id)"
+                  >
                   
                 </div>
                   <div class="captions" style="height:30%;max-width:100%;padding:15px;">
@@ -204,6 +206,9 @@ export default {
       },
       setEndDate(date){
         this.endDate = date
+      },
+      summaryItin(id){
+        this.$router.push(`/summary/${id}`)
       },
       editItin(id){
         this.$store.commit('SET_ID_ITINERARY', id)

@@ -405,8 +405,7 @@ export default {
                             activities[data.activities[i].orderIndex] = data.activities[i].places
                         }
                     }
-
-                    
+                    this.center = data.location
                     this.activities = activities;
                     locationName = data.location.name;
 
@@ -448,7 +447,6 @@ export default {
             this.$store.dispatch('fetchEvents', locationName)
                 .then(({ data }) => {
                     this.events = data;
-                    console.log('======',data)
                 })
                 .catch(err => {
                     this.$store.commit('SET_ERROR_MESSAGE', err)
@@ -458,7 +456,6 @@ export default {
             this.itineraryDetail.activities = this.activities;
             this.$store.dispatch('updateItinerary', this.itineraryDetail)
                 .then(({ data }) => {
-                    console.log(this.itineraryDetail)
                     this.itineraryDetail = data;
                     this.$router.push(`/summary/${data._id}`)
                 })
