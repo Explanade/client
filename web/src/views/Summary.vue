@@ -34,6 +34,7 @@
                     :zoom="12"
                     style="width: auto; height:100%;"
                     :options="mapStyle"
+                    :streetView="false"
                     >
                     <gmap-marker
                         :position="center"

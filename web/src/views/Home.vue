@@ -74,7 +74,7 @@
                     <p style="color:black; font-size:15px;color:grey  "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by {{itinerary.user_id.name}}</p>
                     <p style="color:black; font-size:15px; margin-top:-10px;color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>{{itinerary.location.name}}</p>
                     <button type="button" id="button-edit" class="btn btn-primary" @click="editItin(itinerary._id)">Edit</button>
-                    <button type="button" id="button-delete" style="margin-left:10px;" class="btn btn-primary">Delete</button>
+                    <button type="button" id="button-delete" style="margin-left:10px;" class="btn btn-primary" @click="deleteItin(itinerary._id, itinerary.name)">Delete</button>
                   </div>
                 </div>
               </div>
@@ -163,7 +163,7 @@ import HotelDatePicker from 'vue-hotel-datepicker'
 import Lottie from 'vue-lottie';
 import * as animationData from '../assets/animation/explanade-home-1.json';
 import { mapState } from 'vuex'
-
+import swal from 'sweetalert2';
 
 export default {
   name: 'home',
@@ -187,7 +187,25 @@ export default {
       handleAnimation: function (anim) {
         this.anim = anim;
       },
-  
+      deleteItin(id, name){
+        swal.fire({
+          title: `Are you sure want to delete ${name}?`,
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.value) {
+            Swal.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            )
+          }
+        })
+      },
       onSpeedChange: function () {
         this.anim.setSpeed(this.animationSpeed);
       },
