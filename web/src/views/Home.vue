@@ -9,7 +9,7 @@
         <h2>&</h2>
         <h2>ENJOY</h2>
       </div>
-      <div class="form" style="z-index:1">
+      <div class="formCreateHome" style="z-index:1;">
         <div class="input">
           <h4>ITENERARY NAME</h4>
           <p>Name your awesome itenerary before you gonna share it to others</p>
@@ -34,7 +34,7 @@
             @check-out-changed="setEndDate"
           />
         </div>
-          <div class="button"  style="cursor: pointer;" @click="submitItem">
+          <div class="buttonSubmit"  style="cursor: pointer;" @click="submitItem">
                 <h1>SUBMIT</h1>
           </div>
       </div>
@@ -507,7 +507,7 @@ h4{
 }
 
 
-.button{
+.buttonSubmit{
   background-color: #19459b;
   height: 100%;
   width: 15%;
@@ -520,7 +520,7 @@ h4{
   transition: all .2s ease-in-out;
 }
 
-.button:hover{
+.buttonSubmit:hover{
   background-color: #0a152b;
   height: 100%;
   width: 15%;
@@ -531,10 +531,10 @@ h4{
   transform: scale(1.1);
 }
 
-.form{
+.formCreateHome{
   display: flex;
   /* justify-content: space-between; */
-  /* background-color:white; */
+  background-color:white;
   position: absolute;
   bottom: 20vh;
   left:7vw;

@@ -38,7 +38,7 @@
             </div>
             <div class="section-1" style="z-index:1">
                 <h1 class ="description"> YOU CAN ALSO CREATED YOUR OWN AND SHARE YOUR ITINERARY!</h1>
-                <button type="button" id="buttonCreate" class="btn btn-info" @click="goToForm">Create Yours!</button>
+                <button type="button" id="buttonCreateItin" class="btn btn-info" @click="goToForm">Create Yours!</button>
             </div>
         </div>
         
@@ -84,7 +84,7 @@ export default {
 
 <style scoped>
 
-#buttonCreate{
+#buttonCreateItin{
 font-size: 25px;
 background-color: #19459b;
 border-color: #19459b;
@@ -93,7 +93,7 @@ border-radius:0px;
 transition: all .2s ease-in-out;
 }
 
-#buttonCreate:hover{
+#buttonCreateItin:hover{
 font-size: 25px;
 background-color: #eec925;
 border-color: #eec925;

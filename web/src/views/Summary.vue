@@ -2,14 +2,14 @@
 <div class="background">
   <div class="summaryContainer">
         <div class="profile">
-            <div class="left">
+            <div class="leftSummary">
                 <img class="logoBrand" src="../assets/explanade-logo-1.png" alt="" style="height:130px;width:220px;margin-top:-50px;margin-left:-20px">
                 <div class="name">
                     <h6 style="margin-bottom:0px; color:gray">Planner</h6>
                     <h1>Anya Geraldine</h1>
                 </div>
             </div>
-            <div class="right">
+            <div class="rightSummary">
                 <div class="name">
                     <p style="margin-bottom:0px; color:gray">Booking ID</p>
                     <h6>A1358013BASD5322</h6>
