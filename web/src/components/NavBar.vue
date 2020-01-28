@@ -1,7 +1,7 @@
 <template>
     <div>
          <b-navbar class="header" toggleable="lg" type="light" variant="faded">
-         <a @click="homePage()" href=""> <img class="logoBrand" src="../assets/explanade-logo-white.png" alt=""></a>
+         <a @click="homePage()" href="#"> <img class="logoBrand" src="../assets/explanade-logo-white.png" alt=""></a>
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
             <b-collapse id="nav-collapse" is-nav>
