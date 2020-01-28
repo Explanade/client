@@ -5,8 +5,8 @@
             <div class="leftSummary">
                 <img class="logoBrand" src="../assets/explanade-logo-1.png" alt="" style="height:130px;width:220px;margin-top:-50px;margin-left:-20px">
                 <div class="name">
-                    <h6 style="margin-bottom:0px; color:gray">Planner</h6>
-                    <h1>{{itineraryDetail.user_id.name}}</h1>
+                    <h6 style="margin-bottom:0px; color:gray; font-weight:200">Planner</h6>
+                    <h1 style="color:#151515; font-size:35px;font-weight:500">{{itineraryDetail.user_id.name}}</h1>
                 </div>
             </div>
             <div class="rightSummary">
@@ -50,17 +50,20 @@
                 <!-- <p style="margin-bottom:0px; color:gray; font-size:25px;">From</p>
                 <h6 style="margin-bottom:0px; color:black; font-size:35px;">Jakarta, Indonesia</h6>
                 <br> -->
-                <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
                 <br>
-                <p style="margin-bottom:0px; color:gray; font-size:25px;">Destination</p>
+                <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
+                <p style="margin-bottom:0px; color:gray; font-size:25px;font-weight:200">Awesome trip itinerary to</p>
                 <h6 style="margin-bottom:0px; color:black; font-size:35px;">{{center.name}}</h6>
+                <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
             </div>
             </div>
         </div>    
         <div class="day" v-for="(activity,i) in activities" :key="i">
-            <h1>Day {{Number(i) + 1}} <span v-if="activity.length == 0"> - no activity -</span></h1>
+            <h1 style="color:black"> Day {{Number(i) + 1}} <span v-if="activity.length == 0"> - no activity -</span></h1>            
+            <hr align= "left" style="border: 0.5px solid #6D6D6D; width:100%;">
+            <br>
             <div class="activities">
-                <div class="activity" v-for="(place, j) in activity" :key="j">
+                <div class="activity" style="width:25vw;" v-for="(place, j) in activity" :key="j">
                     <h6>{{place.name}}</h6>
                     <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
                     <p>{{place.formatted_address}}</p>

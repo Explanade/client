@@ -5,7 +5,7 @@
             <div class="input">
                 <h3 style="text-align:center">SEARCH FOR SOME PLACES</h3>
                 <br>
-                <input v-model="searchCity" id="input" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter City Name..">
+                <input v-model="searchCity" id="inputSearch" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter City Name..">
             </div>
           </div>
           <div class="itineraries">
@@ -81,6 +81,10 @@ export default {
 </script>
 
 <style>
+
+#inputSearch{
+
+}
 
 .list::-webkit-scrollbar-track
 {

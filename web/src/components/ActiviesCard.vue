@@ -10,6 +10,7 @@
                     <h6 style="margin-top:-10px; margin-bottom:10px; font-size:12px" class="card-title">{{place.name}}</h6>
                     {{place.photo_reference}}
                     <p style="font-size:10px;" class="card-text">{{place.formatted_address}}</p>
+                    <p><i class="fas fa-star" style="margin-right:5px;color:#f2cf0d"></i>{{place.rating}}</p>
                 </div>
                 </div>
             </div>
