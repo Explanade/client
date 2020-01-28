@@ -1,14 +1,14 @@
 <template>
   <div class="itineraryList">
       <div class="list">
-          <div style="height:200px;width:99%;display:flex;justify-content:center;align-items:center">
+          <div style="height:200px;width:100%;display:flex;justify-content:center;align-items:center">
             <div class="input">
-                <h3>SEARCH FOR SOME PLACES</h3>
+                <h3 style="text-align:center">SEARCH FOR SOME PLACES</h3>
                 <br>
                 <input id="input" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Itenerary Name">
             </div>
           </div>
-          <div class="list2">
+          <div class="itineraries">
               <div class="idea">
               <div class="images" style="height:70%;width:100%; background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover"></div>
               <div class="captions" style="height:30%;max-width:100%;padding:15px;">
@@ -119,25 +119,25 @@ export default {
   
 }
 
-.list2{
+.itineraries{
     height: 20vh;
     background-color: white;
     position:absolute;
     top:20vh;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .list{
     height: 80vh;
-    width: 70vw;
+    width: 75vw;
     background-color: white;
     position:absolute;
     margin-left:15%;
     top:30vh;
     display: flex;
     flex-wrap: wrap;
-    padding-left:100px;
     overflow-x: auto;
 }
 .itineraryList{
