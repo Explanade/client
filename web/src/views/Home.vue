@@ -129,7 +129,9 @@
               :style="`background-image: url('${hero.places[0].photo}');
               background-size:cover;
               display:flex;
-              justify-content:center;`">
+              justify-content:center;`"
+              @click="summaryItin(top._id)"
+              >
               </div>
               <div class="captions" style="height:30%;max-width:100%;padding:15px;">
                 <h1 style="color:black; font-weight:600;margin-top:20px;">{{top.name}}</h1>              
@@ -188,7 +190,6 @@ export default {
       handleAnimation: function (anim) {
         this.anim = anim;
       },
-  
       onSpeedChange: function () {
         this.anim.setSpeed(this.animationSpeed);
       },
@@ -233,7 +234,6 @@ export default {
   
           this.$store.dispatch('createItinerary', datas)
             .then(({data}) => {
-              console.log('sini')
               this.$store.commit('SET_ID_ITINERARY', data._id)
               this.$router.push(`/itinerary/make`)
             })

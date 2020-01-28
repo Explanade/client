@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="inputItinInfo">
-        <div class="optionsCreateItin" style="display:flex; padding:50px;background-color:white">
+        <div class="optionsCreateItin" style="display:flex; padding-left:10vw;padding-top:50px;padding-bottom:50px;padding-right:50px;background-color:white;width:60vw;margin-right:5vw;">
             <Recommendation :restaurants="restaurants" :landmarks="landmarks" :events="events"/>
 
             <div class="listCategory" style="width:22vw;margin-left:40px">
@@ -640,8 +640,9 @@ h2{
 
 .mapsCreate{
     margin-top: 20px;
+    margin-left:5vw;
     height: 50vh;
-    width: 40vw;
+    width: 35vw;
     position: absolute;
     left:0px;
     background-image: url('../assets/map-template.png');
@@ -652,13 +653,15 @@ h2{
 
 .mapsCreate:hover{
     margin-top: 20px;
+    margin-left:5vw;
     height: 50vh;
-    width: 40vw;
+    width: 35vw;
     position: absolute;
     left:0px;
     background-image: url('../assets/map-template.png');
     background-size: cover;
-    transform: scale(1.05);
+    transition: all .2s ease-in-out;
+    transform: scale(1.02);
     box-shadow: 10px 10px 22px -5px rgba(0,0,0,0.22);
 }
 
