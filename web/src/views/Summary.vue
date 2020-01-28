@@ -6,115 +6,64 @@
                 <img class="logoBrand" src="../assets/explanade-logo-1.png" alt="" style="height:130px;width:220px;margin-top:-50px;margin-left:-20px">
                 <div class="name">
                     <h6 style="margin-bottom:0px; color:gray">Planner</h6>
-                    <h1>Anya Geraldine</h1>
+                    <h1>{{itineraryDetail.user_id.name}}</h1>
                 </div>
             </div>
             <div class="right">
                 <div class="name">
                     <p style="margin-bottom:0px; color:gray">Booking ID</p>
-                    <h6>A1358013BASD5322</h6>
+                    <h6>{{this.$route.params.id.toUpperCase()}}</h6>
                     <hr align= "left" style="border: 0.5px solid #6D6D6D; width:100%;">
                 </div>
                 <div class="name">
-                    <p style="margin-bottom:0px; color:gray">Booking Date</p>
-                    <h6>Saturday, 16 Jan 2020</h6>
+                    <p style="margin-bottom:0px; color:gray">Start Date</p>
+                    <h6>{{ itineraryDetail.date.start.slice(0, 10) }}</h6>
                     <hr align= "left" style="border: 0.5px solid #6D6D6D; width:100%;">
                 </div>
                 <div class="name">
-                    <p style="margin-bottom:0px; color:gray">Date</p>
-                    <h6>Anya Geraldine</h6>
+                    <p style="margin-bottom:0px; color:gray">End Date</p>
+                    <h6>{{ itineraryDetail.date.end.slice(0, 10) }}</h6>
                 </div>
             </div>
         </div>
         <div class="destinations">
             <div style="display:flex;padding:100px;width:50vw;">
-            <div class="maps"></div>
+            <div class="maps">
+                <gmap-map
+                    :center="center"
+                    :zoom="12"
+                    style="width: auto; height:100%;"
+                    :options="mapStyle"
+                    >
+                    <gmap-marker
+                        :position="center"
+                        :animation="Number(4)"
+                        v-for="(m, index) in activities[selectedDay]" :key="index"
+                        @click="center=m.geometry.location"
+                        :icon="{url : require('../assets/icon-pin-poin.png')}"
+                    >
+                    </gmap-marker>
+                </gmap-map>
+            </div>
             <div class="name" style="width:20vw;padding:50px;">
-                <p style="margin-bottom:0px; color:gray; font-size:25px;">From</p>
+                <!-- <p style="margin-bottom:0px; color:gray; font-size:25px;">From</p>
                 <h6 style="margin-bottom:0px; color:black; font-size:35px;">Jakarta, Indonesia</h6>
-                <br>
+                <br> -->
                 <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
                 <br>
                 <p style="margin-bottom:0px; color:gray; font-size:25px;">Destination</p>
-                <h6 style="margin-bottom:0px; color:black; font-size:35px;">Bali, Indonesia</h6>
+                <h6 style="margin-bottom:0px; color:black; font-size:35px;">{{center.name}}</h6>
             </div>
             </div>
         </div>    
-        <div class="day">
-            <h1>Day 1</h1>
+        <div class="day" v-for="(activity,i) in activities" :key="i">
+            <h1>Day {{Number(i) + 1}} <span v-if="activity.length == 0"> - no activity -</span></h1>
             <div class="activities">
-                <div class="activity">
-                    <h6>1. Jungle retreat camping in Bali </h6>
+                <div class="activity" v-for="(place, j) in activity" :key="j">
+                    <h6>{{place.name}}</h6>
                     <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
-                    <p>Jungle retreat camping in Bali </p>
+                    <p>{{place.formatted_address}}</p>
                 </div>
-                <div class="activity">
-                    <h6>2. Jungle retreat camping in Bali </h6>
-                    <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
-                    <p>Jungle retreat camping in Bali </p>
-                </div>
-                <div class="activity">
-                    <h6>3. Jungle retreat camping in Bali </h6>
-                    <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
-                    <p>Jungle retreat camping in Bali </p>
-                </div>
-                <div class="activity">
-                    <h6>4. Jungle retreat camping in Bali </h6>
-                    <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
-                    <p>Jungle retreat camping in Bali </p>
-                </div>
-            </div>
-        </div>
-         <div class="day">
-            <h1>Day 2</h1>
-            <div class="activities">
-                <div class="activity">
-                    <h6>1. Jungle retreat camping in Bali </h6>
-                    <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
-                    <p>Jungle retreat camping in Bali </p>
-                </div>
-                <div class="activity">
-                    <h6>2. Jungle retreat camping in Bali </h6>
-                    <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
-                    <p>Jungle retreat camping in Bali </p>
-                </div>
-                <div class="activity">
-                    <h6>3. Jungle retreat camping in Bali </h6>
-                    <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
-                    <p>Jungle retreat camping in Bali </p>
-                </div>
-                <div class="activity">
-                    <h6>4. Jungle retreat camping in Bali </h6>
-                    <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
-                    <p>Jungle retreat camping in Bali </p>
-                </div>
-                
-            </div>
-        </div>
-         <div class="day">
-            <h1>Day 3</h1>
-            <div class="activities">
-                <div class="activity">
-                    <h6>1. Jungle retreat camping in Bali </h6>
-                    <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
-                    <p>Jungle retreat camping in Bali </p>
-                </div>
-                <div class="activity">
-                    <h6>2. Jungle retreat camping in Bali </h6>
-                    <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
-                    <p>Jungle retreat camping in Bali </p>
-                </div>
-                <div class="activity">
-                    <h6>3. Jungle retreat camping in Bali </h6>
-                    <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
-                    <p>Jungle retreat camping in Bali </p>
-                </div>
-                <div class="activity">
-                    <h6>4. Jungle retreat camping in Bali </h6>
-                    <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
-                    <p>Jungle retreat camping in Bali </p>
-                </div>
-                
             </div>
         </div>
          <div class="terms-condition">
@@ -137,6 +86,297 @@ import ActiviesCard from '../components/ActiviesCard'
 export default {
     components:{
         ActiviesCard
+    },
+    data(){
+        return{
+            itineraryDetail: null,
+            activities: {},
+            selectedDay: 0,
+            center: { lat: 35.5817149, lng: 139.4148582 },
+            markers: [],
+            currentPlace: null,
+            mapStyle: {
+                styles: [
+                {
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#ebe3cd"
+                    }
+                    ]
+                },
+                {
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#523735"
+                    }
+                    ]
+                },
+                {
+                    "elementType": "labels.text.stroke",
+                    "stylers": [
+                    {
+                        "color": "#f5f1e6"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "administrative",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                    {
+                        "color": "#c9b2a6"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "administrative.land_parcel",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                    {
+                        "color": "#dcd2be"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "administrative.land_parcel",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#ae9e90"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "landscape.natural",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#dfd2ae"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#dfd2ae"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#93817c"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                    {
+                        "color": "#a5b076"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#447530"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#f5f1e6"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.arterial",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#fdfcf8"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#f8c967"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                    {
+                        "color": "#92ddc8"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                    {
+                        "color": "#92ddc8"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway.controlled_access",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#e98d58"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway.controlled_access",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                    {
+                        "color": "#357b63"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.highway.controlled_access",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                    {
+                        "color": "#357b63"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "road.local",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#806b63"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "transit.line",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#dfd2ae"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "transit.line",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#8f7d77"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "transit.line",
+                    "elementType": "labels.text.stroke",
+                    "stylers": [
+                    {
+                        "color": "#ebe3cd"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "transit.station",
+                    "elementType": "geometry",
+                    "stylers": [
+                    {
+                        "color": "#dfd2ae"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                    {
+                        "color": "#b9d3c2"
+                    }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                    {
+                        "color": "#92998d"
+                    }
+                    ]
+                }
+                ]
+            }
+        }
+    },
+    mounted() {
+        this.geolocate();
+        this.getItinDetail()
+    },
+    methods:{
+        updateIndex() {
+            this.center = this.activities[this.selectedDay][this.activities[this.selectedDay].length - 1]
+            for (let act in this.activities) {
+                let places = this.activities[act];
+                for (let i = 0; i < places.length; i++) {
+                places[i].order = i;
+                }
+            }
+        },
+        geolocate: function() {
+            navigator.geolocation.getCurrentPosition(position => {
+                this.center = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+            });
+        },
+        getItinDetail() {
+            const id = this.$route.params.id;
+            let locationName;
+            this.$store.dispatch('fetchItineraryDetail', id)
+                .then(({ data }) => {
+                    this.itineraryDetail = data;
+                    let activities = {};
+
+                    if (data.activities.length <= 0) {
+                        for (let i = 0; i < data.date.total_days; i++) {
+                            activities[i] = []
+                        }
+                    } else {
+                        for (let i = 0; i < data.activities.length; i++) {
+                            activities[data.activities[i].orderIndex] = data.activities[i].places
+                        }
+                    }
+
+                    this.center = data.location
+                    this.activities = activities;
+                    locationName = data.location.name;
+                })
+        },
     }
 }
 </script>
