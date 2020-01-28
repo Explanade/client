@@ -6,10 +6,10 @@
             <div class="row">
             <div class="col-sm-12 col-md-6">
                 <h2 style="color:white">Hello, Explamate!</h2>
-                <p class="text-justify">We believe that the excitement of a trip has been started since we start to plans the trip. We are a trip planner apps that will help you to plan your awesome trip.
-                    There are groups of people who loved to create the plan, while the others just want to enjoy the trips.
-                    Explanade try to helps those who loved to plan and bring together all the adventurers so they can give each other ideas.
-                    Enjoy your neatly arranged travel plan so you can focus more on the joy not the stress!
+                <p class="text-justify">We believe that the excitement of a trip starts when we about to plan the trip. We are a trip planner app that will help you plan your awesome trip.
+                    There are groups of people who love designing trip plans, while the others just want to enjoy the trip.
+                    Explanade main goal is to help those who love organizing and bring all the adventurers together so they can give each other ideas.
+                    Enjoy your neatly arranged travel plan so you can focus more on the joy and excitement not the stress!
 
                 </p>
             </div>
