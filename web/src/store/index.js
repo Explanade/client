@@ -17,7 +17,8 @@ export default new Vuex.Store({
     landmarks : [],
     events : [],
     highlight : [],
-    myItin : []
+    myItin : [],
+    itineraries : []
   },
   
   mutations: {
@@ -48,7 +49,10 @@ export default new Vuex.Store({
     },
     SET_MY_ITIN(state,payload){
       state.myItin = payload
+    },
+    SET_ITINERARIES(state, payload){
       console.log(payload)
+      state.itineraries = payload
     }
   },
   actions: {
@@ -101,6 +105,7 @@ export default new Vuex.Store({
         }
       })
       .then(({data}) => {
+        this.commit('SET_ISLOGIN', true)
         localStorage.setItem('token',data.token)
         Swal.fire({
           position: 'top-end',
@@ -186,7 +191,7 @@ export default new Vuex.Store({
         url:'/itineraries/',
       })
       .then(({data})=>{
-      
+        this.commit('SET_ITINERARIES', data)
         this.commit('SET_HIGHLIGHT',data.slice(0,3))
         // console.log(data.slice(0,2))
       })
