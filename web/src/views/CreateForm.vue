@@ -29,7 +29,6 @@
             @check-in-changed="setStartDate"
             @check-out-changed="setEndDate"
           />
-          <!-- <input type="password" class="form-control" id="input" placeholder="Insert password.."> -->
         </div>
         <button type="submit" id="button" class="btn btn-primary">Submit</button>
       </form>

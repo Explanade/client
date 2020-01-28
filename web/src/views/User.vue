@@ -1,9 +1,9 @@
 <template>
-  <div class="home">
-     <div class="content"></div>
-      <div class="user-page">
-        <LoginForm v-if="this.isLoginPage === true" @isLoginPage='changeLogin' />
-        <RegisterForm v-else @isLoginPage='changeLogin' />
+  <div class="user">
+      <div class="blueBackground"></div>
+        <div class="user-page">
+          <LoginForm v-if="this.isLoginPage === true" @isLoginPage='changeLogin' />
+          <RegisterForm v-else @isLoginPage='changeLogin' />
       </div>
   </div>
 </template>
@@ -42,25 +42,19 @@ export default {
   margin: 20px;
 }
 
-.home{
+.user{
   height: 100vh;
   display: flex;
   flex-direction: row;
 }
 
-.content{
+.blueBackground{
   background-color: #19459b;
   width: 40vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.content{
-  background-color: #19459b;
-  width: 40vw;
-  height: 100vh;
 }
 
 .user-page{

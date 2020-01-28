@@ -2,14 +2,14 @@
 <div class="background">
   <div class="summaryContainer">
         <div class="profile">
-            <div class="left">
+            <div class="leftSummary">
                 <img class="logoBrand" src="../assets/explanade-logo-1.png" alt="" style="height:130px;width:220px;margin-top:-50px;margin-left:-20px">
                 <div class="name">
                     <h6 style="margin-bottom:0px; color:gray">Planner</h6>
                     <h1>{{itineraryDetail.user_id.name}}</h1>
                 </div>
             </div>
-            <div class="right">
+            <div class="rightSummary">
                 <div class="name">
                     <p style="margin-bottom:0px; color:gray">Booking ID</p>
                     <h6>{{this.$route.params.id.toUpperCase()}}</h6>
@@ -67,7 +67,7 @@
                 </div>
             </div>
         </div>
-         <div class="terms-condition">
+         <!-- <div class="terms-condition">
             <h6>Terms and Conditions</h6>
             <hr align= "left" style="border: 0.5px solid #6D6D6D; width:100%;">
             <p>Terms of service are the legal agreements between a service provider and a person who wants to use that service. The person must agree to abide by the terms of service in order to use the offered service. Terms of service can also be merely a disclaimer, especially regarding the use of websites.</p>
@@ -76,7 +76,7 @@
             <br>
             <button type="button" id="button" class="btn btn-info">Send Emails</button>
             <button type="button" id="button2" class="btn btn-dark">Edit</button>
-        </div>
+        </div> -->
   </div>
 </div>
 </template>
@@ -429,8 +429,7 @@ p{
     display: flex;
     max-width: 100%;
     flex-wrap: wrap;
-    margin-left:50px;
-    
+    /* margin-left:50px; */
 }
 
 .day{

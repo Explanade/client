@@ -1,6 +1,6 @@
 <template>
   <div class="listCategory" style="width:22vw;">
-    <div class="form-group">
+    <div class="form-group-itin">
         <h2 style="color:black">Select Attractions</h2>
         <br>
         <select class="form-control" id="exampleFormControlSelect1" v-model="selectedCate">

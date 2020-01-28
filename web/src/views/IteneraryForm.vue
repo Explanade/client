@@ -1,9 +1,9 @@
 <template>
-  <div class="mainContainer">
+  <div class="containerItinForm">
     <div class="button" @click="submitItinerary">
         <h5>SUBMIT</h5>
     </div>
-    <div class="button2">
+    <div class="button2" @click="homePage">
         <h5>BACK</h5>
     </div>
     <div class="left">
@@ -11,8 +11,7 @@
             <h2>START YOUR</h2>
             <h2>AWESOME PLAN</h2>
         </div>
-        <div class="maps">
-                <!-- :center="this.$store.state.itineraryDetail.activities[this.selectedDay].places[0]" -->
+        <div class="mapsCreate">
             <gmap-map
                 :center="center"
                 :zoom="12"
@@ -38,12 +37,12 @@
             </gmap-map>
         </div>
     </div>
-    <div class="input">
-        <div class="options" style="display:flex">
-            <Recommendation :restaurants="restaurants" :landmarks="landmarks" :events="events" />
+    <div class="inputItinInfo">
+        <div class="optionsCreateItin" style="display:flex; padding-left:10vw;padding-top:50px;padding-bottom:50px;padding-right:50px;background-color:white;width:60vw;margin-right:5vw;">
+            <Recommendation :restaurants="restaurants" :landmarks="landmarks" :events="events"/>
 
-            <div class="listCategory" style="width:22vw;margin-left:100px;">
-               <div class="form-group">
+            <div class="listCategory" style="width:22vw;margin-left:40px">
+               <div class="form-group-itin">
                    <div style="display:flex">
                     <h2 style="color:black">Select Days</h2>
                     <button type="button" id="button-optimized" class="btn btn-primary" @click="sortPlaces">Optimize</button>
@@ -57,8 +56,8 @@
                 <div class="options-images">
                         <div v-for="(itin, index) in activities" :key="index">
                             <div v-if="index == selectedDay">
-                                <draggable v-model="activities[index]" group="activities" @change="updateIndex()" style="min-height:50px;min-width:5vw;background-color:red">
-                                    <div v-for="(element, index2) in activities[index]" :key="element.id" class="row list my-4">
+                                <draggable v-model="activities[index]" group="activities" @change="updateIndex()" style="min-height:50px;min-width:50px;">
+                                    <div v-for="(element, index2) in activities[index]" :key="element.id"  >
                                         <ActivityCard :place="element" :index="index2" />
                                     </div>
                                 </draggable>
@@ -343,6 +342,10 @@ export default {
         this.getItinDetail()
     },
     methods:{
+
+        homePage(){
+            this.$router.push('/')
+        },
         calculateDistance(lat1, lon1, lat2, lon2, unit) {
             var radlat1 = Math.PI * lat1/180
             var radlat2 = Math.PI * lat2/180
@@ -612,25 +615,16 @@ h2{
 
 
 
-.mainContainer{
+.containerItinForm{
     height: 120vh;
     background-color: white;
     display: flex;
-    width:100%;
+    width:100vw;
     flex-direction: row;
     background-image: url('../assets/photoAssets/explanade-itinerary.jpg');
     background-size:cover;
     justify-content: center;
     align-items: center;
-}
-
-.input{
-    height: 70vh;
-    width: 80vw;
-    padding-left: 200px;
-    padding-top:70px;
-    padding-bottom:70px;
-    background-color: white;
 }
 
 .options-images{
@@ -644,10 +638,11 @@ h2{
     padding-bottom: 50px;
 }
 
-.maps{
+.mapsCreate{
     margin-top: 20px;
+    margin-left:5vw;
     height: 50vh;
-    width: 40vw;
+    width: 35vw;
     position: absolute;
     left:0px;
     background-image: url('../assets/map-template.png');
@@ -656,15 +651,17 @@ h2{
     
 }
 
-.maps:hover{
+.mapsCreate:hover{
     margin-top: 20px;
+    margin-left:5vw;
     height: 50vh;
-    width: 40vw;
+    width: 35vw;
     position: absolute;
     left:0px;
     background-image: url('../assets/map-template.png');
     background-size: cover;
-    transform: scale(1.05);
+    transition: all .2s ease-in-out;
+    transform: scale(1.02);
     box-shadow: 10px 10px 22px -5px rgba(0,0,0,0.22);
 }
 

@@ -1,6 +1,6 @@
 <template>
-  <div class="formLogin">
-        <form style="display:flex;flex-direction:row; justify-content:space-between" action="">
+  <div class="formLogin" style="justify-contentCenter">
+        <form style="display:flex;flex-direction:row;" action="">
                 <div style="width:100%;">
                     <div class="inputLogin">
                       <h4>EMAIL</h4>
@@ -13,9 +13,8 @@
                     <button style="background-color:#19459b; border-radius:0px; margin-left:15px" type="button" class="btn btn-primary" @click.prevent="login()" >Login</button>
                     <button style="background-color:#2b2b2b; border-radius:0px; margin-left:15px" type="button" class="btn btn-primary" v-on:click.prevent="register()" >Register</button>
                     <div style="margin-top:10px">
-                    <p style="margin-left:20px;font-size:18px;font-style:italic;color:grey;margin-top:20px; margin-bottom:10px">Have an google account?</p>
-                    <button style="background-color:#2b2b2b; border-radius:0px; margin-left:15px" type="button" class="btn btn-primary">Google-Signin
-                    </button>
+                      <p style="margin-left:20px;font-size:18px;font-style:italic;color:grey;margin-top:20px; margin-bottom:10px">Have an google account?</p>
+                      <button style="background-color:#2b2b2b; border-radius:0px; margin-left:15px" type="button" class="btn btn-primary">Google-Signin</button>
                     </div>
                 </div>
         </form>
@@ -48,15 +47,6 @@ export default {
 
 <style>
 
-#avatar {
-    background-image: url('http://i.stack.imgur.com/Dj7eP.jpg');
-    width: 200px;
-    height: 200px;
-    background-size: cover;
-    background-position: top center;
-    border-radius: 50%;
-}
-
 #input{
   width:100%;
 }
@@ -64,12 +54,10 @@ export default {
 .formLogin{
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   background-color:white;
   position: absolute;
   left:7vw;
   width:40vw;
-  height: 50vh;
   padding:50px;
 }
 
@@ -78,36 +66,6 @@ export default {
   margin: 20px;
 }
 
-.home{
-  height: 100vh;
-  display: flex;
-  flex-direction: row;
-
-}
-
-.content{
-  background-color: #19459b;
-  width: 40vw;
-  height: 100vh;
-}
-
-
-
-.content{
-  background-color: #19459b;
-  width: 40vw;
-  height: 100vh;
-}
-
-.user-page{
-  display: flex;
-  align-items: center;
-  background-image: url('../assets/photoAssets/explande-home.jpg');
-  height: 100vh;
-  width: 60vw;
-  background-size: cover;
-  justify-content: center;
-}
 .home{
   height: 100vh;
   display: flex;

@@ -9,7 +9,7 @@
         <h2>&</h2>
         <h2>ENJOY</h2>
       </div>
-      <div class="form" style="z-index:1">
+      <div class="formCreateHome" style="z-index:1;">
         <div class="input">
           <h4>ITENERARY NAME</h4>
           <p>Name your awesome itenerary before you gonna share it to others</p>
@@ -34,7 +34,7 @@
             @check-out-changed="setEndDate"
           />
         </div>
-          <div class="button"  style="cursor: pointer;" @click="submitItem">
+          <div class="buttonSubmit"  style="cursor: pointer;" @click="submitItem">
                 <h1>SUBMIT</h1>
           </div>
       </div>
@@ -81,6 +81,7 @@
           </div>
         </div>
       </div>
+      
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
     <div class="planner">
       <div class="backgroundPlanner">
@@ -128,7 +129,9 @@
               :style="`background-image: url('${hero.places[0].photo}');
               background-size:cover;
               display:flex;
-              justify-content:center;`">
+              justify-content:center;`"
+              @click="summaryItin(top._id)"
+              >
               </div>
               <div class="captions" style="height:30%;max-width:100%;padding:15px;">
                 <h1 style="color:black; font-weight:600;margin-top:20px;">{{top.name}}</h1>              
@@ -198,11 +201,15 @@ export default {
           confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
           if (result.value) {
-            Swal.fire(
-              'Deleted!',
-              'Your file has been deleted.',
-              'success'
-            )
+            this.$store.dispatch('deleteItinerary', id)
+              .then(({data}) => {
+                swal.fire(
+                  'Your itinerary has been delete!',
+                  '',
+                  'success'
+                )
+                this.$store.dispatch('fetchMyItinerary')
+              })
           }
         })
       },
@@ -250,7 +257,6 @@ export default {
   
           this.$store.dispatch('createItinerary', datas)
             .then(({data}) => {
-              console.log('sini')
               this.$store.commit('SET_ID_ITINERARY', data._id)
               this.$router.push(`/itinerary/make`)
             })
@@ -312,6 +318,7 @@ export default {
   min-height:70%;
   min-width:100%;
   transition: all .2s ease-in-out;
+  cursor: pointer;
 }
 
 .images:hover {
@@ -330,6 +337,7 @@ export default {
 }
 
 .button3{
+  cursor: pointer;
   height: 15vh;
   width: 12vw;
   top: 15vh;
@@ -401,6 +409,7 @@ export default {
 
 
 .button2{
+  cursor: pointer;
   height: 150px;
   width: 250px;
   top: 26vh;
@@ -529,7 +538,7 @@ h4{
 }
 
 
-.button{
+.buttonSubmit{
   background-color: #19459b;
   height: 100%;
   width: 15%;
@@ -542,7 +551,7 @@ h4{
   transition: all .2s ease-in-out;
 }
 
-.button:hover{
+.buttonSubmit:hover{
   background-color: #0a152b;
   height: 100%;
   width: 15%;
@@ -553,10 +562,10 @@ h4{
   transform: scale(1.1);
 }
 
-.form{
+.formCreateHome{
   display: flex;
   /* justify-content: space-between; */
-  /* background-color:white; */
+  background-color:white;
   position: absolute;
   bottom: 20vh;
   left:7vw;

@@ -1,16 +1,15 @@
 <template>
-        <div class="card mb-3" style="max-width: auto;max-height:15vh;margin:10px"> 
+        <div class="card mb-3" style="max-width: auto;max-height:15vh;margin:10px; cursor: pointer;"> 
             <div class="row no-gutters">
-                <div class="col-md-4">
-                    
+                <div class="col-md-4">           
                 <div :style="`background-image: url('${place.photo}');height:15vh;width:7vw; background-size:cover`">
                 </div>
                 </div>
                 <div class="col-md-8">
-                <div class="card-body" style="display:flex;justify-content:center;align-self:center;flex-direction:column;padding:30px;">
-                    <h6 style="margin-top:-10px; margin-bottom:10px" class="card-title">{{place.name}}</h6>
+                <div class="card-body" style="display:flex;margin-left:10px;align-self:center;flex-direction:column;overflow:scroll;height:15vh">
+                    <h6 style="margin-top:-10px; margin-bottom:10px; font-size:12px" class="card-title">{{place.name}}</h6>
                     {{place.photo_reference}}
-                    <p style="font-size:12px;" class="card-text">{{place.formatted_address}}</p>
+                    <p style="font-size:10px;" class="card-text">{{place.formatted_address}}</p>
                 </div>
                 </div>
             </div>

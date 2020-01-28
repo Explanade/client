@@ -1,56 +1,41 @@
 <template>
   <div class="itineraryList">
       <div class="list">
-          <div style="height:200px;width:99%;display:flex;justify-content:center;align-items:center">
+          <div style="height:200px;width:100%;display:flex;justify-content:center;align-items:center">
             <div class="input">
-                <h3>SEARCH FOR SOME PLACES</h3>
+                <h3 style="text-align:center">SEARCH FOR SOME PLACES</h3>
                 <br>
-                <input id="input" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Itenerary Name">
+                <input v-model="searchCity" id="input" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter City Name..">
             </div>
           </div>
-          <div class="list2">
-              <div class="idea">
-              <div class="images" style="height:70%;width:100%; background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover"></div>
+          <div class="itineraries">
+
+              <div class="idea" v-for="(itinerary,i) in fetching" :key="i" >
+
+                <div v-for="(hero,j) in itinerary.activities" :key="j">
+                <div v-if="hero.orderIndex == 0" style="width:auto; height:auto;">
+                  
+                  
+                  <div class="images"
+                    :style="`background-image: url('${hero.places[0].photo}');
+                    background-size:cover;
+                    height:30vh;
+                    display:flex;
+                    justify-content:center;`"
+                    @click="summaryItin(itinerary._id)"
+                  > 
+                  </div>
+
               <div class="captions" style="height:30%;max-width:100%;padding:15px;">
                   <div style="min-height:60px;margin-bottom:10px">
-                        <h1 style="color:black; font-weight:600;margin-top:20px;">Awesome 1 Week Trip in Bali</h1>              
+                        <h1 style="color:black; font-weight:600;margin-top:20px;">{{itinerary.name}}</h1>              
                 </div>    
-                <p style="color:black; font-size:15px;color:grey  "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
-                <p style="color:black; font-size:15px; margin-top:-10px;color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>Bali</p>
+                <p style="color:black; font-size:15px;color:grey  "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by {{itinerary.user_id.name}}</p>
+                <p style="color:black; font-size:15px; margin-top:-10px;color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>{{itinerary.location.name}}</p>
               </div>
             </div>
 
-            <div class="idea">
-                <div class="images" style="height:70%;width:100%; background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ9eKIRE27oUSKzAodD3qqtKboeLSLBRsnQ6sNLiOnKMa4HOKn5'); background-size:cover"></div>
-                <div class="captions" style="height:30%;max-width:100%;padding:15px;">
-                    <div style="min-height:60px;margin-bottom:10px">
-                        <h1 style="color:black; font-weight:600;margin-top:20px;margin-top:20px;">3days 2night in Bali</h1>              
-                    </div>
-                    <p style="color:black; font-size:15px;color:grey  "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
-                    <p style="color:black; font-size:15px; margin-top:-10px;color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>Bali</p>
-                </div>
             </div>
-
-            <div class="idea">
-                <div class="images" style="height:70%;width:100%; background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQwY_4fOndGpRSuxe_1MxYjFsDPc0gYLWtAc4ghT0AMrPglY2yu'); background-size:cover"></div>
-                <div class="captions" style="height:30%;max-width:100%;padding:15px;">
-                    <div style="min-height:60px;margin-bottom:10px">
-                        <h1 style="color:black; font-weight:600;margin-top:20px;margin-top:20px;">Unforgetable Moments Company Trips</h1>              
-                    </div>            
-                    <p style="color:black; font-size:15px; color:grey "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
-                    <p style="color:black; font-size:15px; margin-top:-10px; color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>Bali</p>
-                </div>
-            </div>
-
-              <div class="idea">
-                <div class="images" style="height:70%;width:100%; background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMi_GbJzOz7ycKAqETsro16E3Urw-xp6S0rvBn9ZBF3CmDWIbk'); background-size:cover"></div>
-                <div class="captions" style="height:30%;max-width:100%;padding:15px;">
-                  <div style="min-height:60px;margin-bottom:10px">
-                        <h1 style="color:black; font-weight:600;margin-top:20px;margin-top:20px;">3days 2night in Bali</h1>              
-                    </div>              
-                <p style="color:black; font-size:15px;color:grey  "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by Dwitama Alfred</p>
-                <p style="color:black; font-size:15px; margin-top:-10px;color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>Bali</p>
-                </div>
             </div>
 
           </div>
@@ -61,8 +46,40 @@
 </template>
 
 <script>
-export default {
 
+import { mapState } from 'vuex'
+
+export default {
+   name:'itineraryList',
+    data(){
+        return{
+          searchCity : ''
+        }
+    },
+    methods :{
+       summaryItin(id){
+        this.$router.push(`/summary/${id}`)
+      }
+    },
+    created(){
+      this.$store.dispatch('fetchHighlightItinerary')
+    },
+    computed : {
+      fetching(){
+        if(this.searchCity === ''){
+          return this.$store.state.itineraries
+        }else{
+          let filtered = this.$store.state.itineraries.slice(0)
+          let regex = new RegExp(this.searchCity.toLowerCase())
+          return filtered.filter(x => {
+            return regex.test(x.location.name.toLowerCase())  
+          })
+          
+          
+        }
+      }
+    
+    }
 }
 </script>
 
@@ -89,6 +106,7 @@ export default {
   height:70%;
   width:100%;
   transition: all .2s ease-in-out;
+  cursor: pointer;
 }
 
 .images:hover {
@@ -96,7 +114,6 @@ export default {
   box-shadow: 10px 10px 22px -5px rgba(0,0,0,0.22);
   transform: scale(1.05);
 }
-
 
 .input{
   padding: 30px;
@@ -119,25 +136,25 @@ export default {
   
 }
 
-.list2{
+.itineraries{
     height: 20vh;
     background-color: white;
     position:absolute;
     top:20vh;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .list{
     height: 80vh;
-    width: 70vw;
+    width: 75vw;
     background-color: white;
     position:absolute;
     margin-left:15%;
     top:30vh;
     display: flex;
     flex-wrap: wrap;
-    padding-left:100px;
     overflow-x: auto;
 }
 .itineraryList{

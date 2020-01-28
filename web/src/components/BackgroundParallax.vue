@@ -1,6 +1,6 @@
 <template>
 <div class="wrapper">
-  <div id="scene" class="container">
+  <div id="scene" class="containerParalax">
     <div data-depth="0" id="background" class="item"></div>
     <div data-depth="0.1" id="mountain" class="item"></div>
     <div data-depth="0.2" id="mountain2" class="item"></div>
@@ -35,7 +35,7 @@ export default {
   background-repeat: no-repeat;
   background-position:bottom;
   background-position-x: 40vw;
-  background-position-y: 30vw;
+  background-position-y: 60vh;
   background-image: url('../assets/parallaxAssets/explande-home-4.jpg');
   z-index: 0;
 }
@@ -49,7 +49,7 @@ export default {
   background-repeat: no-repeat;
   background-position:bottom;
   background-position-x:35vw;
-  background-position-y: 35vw;
+  background-position-y: 80vh;
   background-image: url('../assets/parallaxAssets/explande-home-3.jpg');
   z-index: 0;
 }
@@ -63,7 +63,7 @@ export default {
   background-size: cover;
   background-position:bottom;
   background-position-x: 100px;
-  background-position-y: 0px;
+  background-position-y: 0vh;
   background-image: url('../assets/parallaxAssets/explande-home-2.jpg');
   z-index: 0;
 }
@@ -77,7 +77,7 @@ export default {
   background-image: url('../assets/parallaxAssets/explande-home-1.jpg')
 }
 
-.container {
+.containerParalax {
   position: relative;
   max-width:100vw;
   height: 100vh;
