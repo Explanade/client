@@ -1,5 +1,5 @@
 <template>
-        <div class="card mb-3" style="max-width: auto;max-height:15vh;margin:10px;"> 
+        <div class="card mb-3" style="max-width: auto;max-height:15vh;margin:10px; cursor: pointer;"> 
             <div class="row no-gutters">
                 <div class="col-md-4">           
                 <div :style="`background-image: url('${place.photo}');height:15vh;width:7vw; background-size:cover`">

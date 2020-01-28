@@ -170,6 +170,15 @@ export default new Vuex.Store({
         }
       })
     },
+    deleteItinerary({ commit }, payload) {
+      return serverAPI({
+        url: `/itineraries/${payload}`,
+        method: 'delete',
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
+    },
     logout(context,payload){
       Swal.fire({
         position: 'top-end',

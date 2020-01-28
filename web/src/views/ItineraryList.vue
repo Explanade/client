@@ -106,6 +106,7 @@ export default {
   height:70%;
   width:100%;
   transition: all .2s ease-in-out;
+  cursor: pointer;
 }
 
 .images:hover {

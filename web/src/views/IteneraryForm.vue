@@ -56,8 +56,8 @@
                 <div class="options-images">
                         <div v-for="(itin, index) in activities" :key="index">
                             <div v-if="index == selectedDay">
-                                <draggable v-model="activities[index]" group="activities" @change="updateIndex()" style="min-height:50px;background-color:transparent">
-                                    <div v-for="(element, index2) in activities[index]" :key="element.id" class="row list my-4">
+                                <draggable v-model="activities[index]" group="activities" @change="updateIndex()" style="min-height:50px;min-width:50px;">
+                                    <div v-for="(element, index2) in activities[index]" :key="element.id"  >
                                         <ActivityCard :place="element" :index="index2" />
                                     </div>
                                 </draggable>
