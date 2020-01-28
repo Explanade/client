@@ -74,11 +74,8 @@ export default {
           return filtered.filter(x => {
             return regex.test(x.location.name.toLowerCase())  
           })
-          
-          
         }
       }
-    
     }
 }
 </script>
