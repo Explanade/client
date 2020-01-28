@@ -13,7 +13,7 @@
         <div class="input">
           <h4>ITENERARY NAME</h4>
           <p>Name your awesome itenerary before you gonna share it to others</p>
-          <input v-model="itinName" id="input" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Itenerary Name">
+          <input v-model="itinName" id="inputHome" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Itenerary Name">
         </div>
         <div class="input">
           <h4>DESTINATION</h4>
@@ -21,7 +21,7 @@
           <gmap-autocomplete
             @place_changed="setPlace"
             class="form-control"
-            id="input"
+            id="inputHome"
             placeholder="Enter Destination"
           >
           </gmap-autocomplete>
@@ -172,7 +172,7 @@ export default {
   name: 'home',
   components: {
     HotelDatePicker,
-    Lottie,
+    Lottie, 
     Background
   },
   data(){
@@ -247,6 +247,13 @@ export default {
         return location
       },
       submitItem(){
+        if(!this.itinName || !this.startDate || this.getLatLng){
+          swal.fire({
+            icon: 'error',
+            title: 'Cannot create itinerary',
+            text: 'Make sure to fill all information!',
+          })
+        }
         if(localStorage.token){
           const datas = {
             name : this.itinName,
@@ -305,6 +312,11 @@ export default {
   background-color: #ffda69;
   border-color:#ffda69;
   color:black
+}
+
+#inputHome{
+  border-radius: 0px;
+  height: 50px;
 }
 
 .myItin{
@@ -564,7 +576,7 @@ h4{
 
 .formCreateHome{
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   background-color:white;
   position: absolute;
   bottom: 20vh;
