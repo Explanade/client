@@ -13,7 +13,7 @@
         <div class="input">
           <h4>ITENERARY NAME</h4>
           <p>Name your awesome itenerary before you gonna share it to others</p>
-          <input id="input" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Itenerary Name">
+          <input v-model="itinName" id="input" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Itenerary Name">
         </div>
         <div class="input">
           <h4>DESTINATION</h4>
@@ -71,7 +71,7 @@
                     <h1 style="color:black; font-weight:600;margin-top:20px;">{{itinerary.name}}</h1>  
                     <p style="color:black; font-size:15px;color:grey  "><i class="fas fa-feather-alt" style="margin-right:10px"></i>by {{itinerary.user_id.name}}</p>
                     <p style="color:black; font-size:15px; margin-top:-10px;color:grey "><i class="fas fa-location-arrow" style="margin-right:10px"></i>{{itinerary.location.name}}</p>
-                     <button type="button" id="button-edit" class="btn btn-primary">Edit</button>
+                    <button type="button" id="button-edit" class="btn btn-primary" @click="editItin(itinerary._id)">Edit</button>
                     <button type="button" id="button-delete" style="margin-left:10px;" class="btn btn-primary">Delete</button>
                   </div>
                 </div>
@@ -174,7 +174,12 @@ export default {
   data(){
     return{
       defaultOptions: {animationData: animationData.default},
-      animationSpeed: 1
+      animationSpeed: 1,
+      currentCity : null,
+      startDate : null,
+      endDate : null,
+      itinName : '',
+      currentPlace: null
     }
   },
    methods: {
@@ -199,6 +204,10 @@ export default {
       },
       setEndDate(date){
         this.endDate = date
+      },
+      editItin(id){
+        this.$store.commit('SET_ID_ITINERARY', id)
+        this.$router.push(`/itinerary/make`)
       },
       getLatLng(){
         const location = {
