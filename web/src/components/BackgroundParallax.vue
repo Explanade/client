@@ -85,6 +85,7 @@ export default {
   border:1px solid red;
   display:inline-block;
   clip-path: inset(0% 0% 0% 0%);
+  overflow:hidden;
 }
 
 .item {
