@@ -71,38 +71,37 @@ export default {
       return location
     },
     submitItem(){
-      if(!localStorage.getItem('token')){
-         Swal.fire({
+      if(!this.itinName || !this.startDate || !this.endDate){
+          swal.fire({
             icon: 'error',
-            title: 'Login first',
-            text: 'you will be directed to login page',
-          }).then ((result)=>{
-            this.$router.push('/user')
+            title: 'Cannot create itinerary',
+            text: 'Make sure to fill all information!',
           })
-      }
-      else if(!this.itinName || !this.startDate || !this.endDate || !this.getLatLng()){
-        Swal.fire({
+        }
+        if(localStorage.token){
+          const datas = {
+            name : this.itinName,
+            start_date : this.startDate,
+            end_date : this.endDate,
+            location : this.getLatLng()
+          }
+  
+          this.$store.dispatch('createItinerary', datas)
+            .then(({data}) => {
+              this.$store.commit('SET_ID_ITINERARY', data._id)
+              this.$router.push(`/itinerary/make`)
+            })
+            .catch(err => {
+              this.$store.commit('SET_ERROR_MESSAGE', err)
+            })
+        }else{
+          swal.fire({
             icon: 'error',
-            title: 'Create Itinerary Error',
-            text: 'Make sure to fill all the data!',
+            title: 'Cannot create itinerary',
+            text: 'You need to login first!',
           })
-      }
-      const datas = {
-        name : this.itinName,
-        start_date : this.startDate,
-        end_date : this.endDate,
-        location : this.getLatLng()
-      }
-
-      this.$store.dispatch('createItinerary', datas)
-        .then(({data}) => {
-          console.log('sini')
-          this.$store.commit('SET_ID_ITINERARY', data._id)
-          this.$router.push(`/itinerary/make`)
-        })
-        .catch(err => {
-          this.$store.commit('SET_ERROR_MESSAGE', err)
-        })
+          this.$router.push('/user')
+        }
     }
   },
   components: {

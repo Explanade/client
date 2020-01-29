@@ -65,34 +65,52 @@
             <div class="activities">
                 <div class="activity" style="width:25vw;" v-for="(place, j) in activity" :key="j">
                     <h6>{{place.name}}</h6>
-                    <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
+                    <hr align= "left" style="border: 2px solid #848484; width:20%;">
                     <p>{{place.formatted_address}}</p>
                 </div>
             </div>
         </div>
-         <!-- <div class="terms-condition">
-            <h6>Terms and Conditions</h6>
+         <div class="terms-condition">
+            <h1>Itinerary Reviews</h1>
             <hr align= "left" style="border: 0.5px solid #6D6D6D; width:100%;">
-            <p>Terms of service are the legal agreements between a service provider and a person who wants to use that service. The person must agree to abide by the terms of service in order to use the offered service. Terms of service can also be merely a disclaimer, especially regarding the use of websites.</p>
-            <p>Terms of service are the legal agreements between a service provider and a person who wants to use that service. The person must agree to abide by the terms of service in order to use the offered service. Terms of service can also be merely a disclaimer, especially regarding the use of websites.</p>
-            <hr align= "left" style="border: 0.5px solid #6D6D6D; width:100%;">
+            <h6>Write a review</h6>
+            
+            <StarRating :active-color="'#ffda69'" v-model="ratingReview" :star-points="false" :star-size="30" style="margin-bottom:15px;"></StarRating>
+            <textarea v-model="reviewContainer" placeholder="write a review" rows="4" cols="50" class="form-control" style="resize:none;">
+            </textarea>
+            <button type="button" id="button" class="btn btn-info" @click="addReview">Add Review</button>
+            <hr align= "left" style="border: 0.5px solid #848484; width:100%;">
             <br>
-            <button type="button" id="button" class="btn btn-info">Send Emails</button>
-            <button type="button" id="button2" class="btn btn-dark">Edit</button>
-        </div> -->
+            <br>
+            <div id="reviews" v-for="(reviewList, i) in itineraryDetail.reviews" :key="i">
+                <div style="padding:15px; display:flex; flex-direction:row;">
+                    <img id="avatar-sm" :src="reviewList.user_id.profile_picture" alt="your image"/>
+                    <div style="margin-left:10px">
+                        <h5>{{reviewList.user_id.name}}</h5>
+                        <StarRating :read-only="true" style="margin-top:-15px" :rating="reviewList.score" :star-size="15" :active-color="'#ffda69'" :star-points="false" ></StarRating>
+                    </div>
+                </div>
+                <p style="font-size:20px; padding:10px; margin-top:-15px; color:#656565; font-style:italic">"{{reviewList.message}}"</p>
+                <hr align= "left" style="border: 0.5px solid #848484; width:100%;">
+            </div>
+        </div>
   </div>
 </div>
 </template>
 
 <script>
-
 import ActiviesCard from '../components/ActiviesCard'
+import StarRating from 'vue-star-rating'
+import swal from 'sweetalert2';
 export default {
     components:{
-        ActiviesCard
+        ActiviesCard,
+        StarRating
     },
     data(){
         return{
+            ratingReview: 3,
+            reviewContainer: '',
             itineraryDetail: null,
             activities: {},
             selectedDay: 0,
@@ -341,6 +359,34 @@ export default {
         this.getItinDetail()
     },
     methods:{
+        addReview(){
+            if(this.reviewContainer && localStorage.token){
+                const data = {
+                    score : this.ratingReview,
+                    message : this.reviewContainer,
+                    itinerary_id : this.$route.params.id
+                }
+                this.$store.dispatch('addReview', data)
+                    .then(({data}) => {
+                        this.ratingReview = 0
+                        this.reviewContainer = ''
+                        this.getItinDetail()
+                    })
+            }else if(this.reviewContainer == ''){
+                swal.fire({
+                    icon: 'error',
+                    title: 'Cannot add Review',
+                    text: 'make sure you fill the review!',
+                })
+            }else{
+                swal.fire({
+                    icon: 'error',
+                    title: 'Cannot add review',
+                    text: 'You need to login first!',
+                })
+                this.$router.push('/user')
+            }
+        },
         updateIndex() {
             this.center = this.activities[this.selectedDay][this.activities[this.selectedDay].length - 1]
             for (let act in this.activities) {
@@ -399,6 +445,15 @@ export default {
     border-color: #282828;
     margin-top:10px;
     border-radius: 0px;
+}
+
+#avatar-sm {
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-position: top center;
+    border-radius: 50%;
+    margin-right:10px;
 }
 
 h6{
