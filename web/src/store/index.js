@@ -20,6 +20,8 @@ export default new Vuex.Store({
     myItin : [],
     itineraries : []
   },
+
+  
   
   mutations: {
     SET_ITINERARY(state, payload) {

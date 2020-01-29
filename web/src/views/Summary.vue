@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="destinations">
-            <div style="display:flex;padding:100px;width:50vw;">
+            <div style="display:flex;padding:100px;width:50vw;justify-content:center;align-items:center;height:50vh">
             <div class="maps">
                 <gmap-map
                     :center="center"
@@ -52,8 +52,11 @@
                 <br> -->
                 <br>
                 <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
-                <p style="margin-bottom:0px; color:gray; font-size:25px;font-weight:200">Awesome trip itinerary to</p>
+                <p style="margin-bottom:0px; color:gray; font-size:20px;font-weight:200">Awesome trip itinerary to</p>
                 <h6 style="margin-bottom:0px; color:black; font-size:35px;">{{center.name}}</h6>
+                <br>
+                <p style="margin-bottom:0px; color:gray; font-size:20px;font-weight:200">Budget Estimation</p>
+                <p style="margin-bottom:0px; color:gray; font-size:20px;font-weight:600">US$ {{itineraryDetail.budget}} </p>
                 <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
             </div>
             </div>
