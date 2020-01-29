@@ -99,6 +99,7 @@
 <script>
 import ActiviesCard from '../components/ActiviesCard'
 import StarRating from 'vue-star-rating'
+import swal from 'sweetalert2';
 export default {
     components:{
         ActiviesCard,
@@ -369,6 +370,19 @@ export default {
                         this.reviewContainer = ''
                         this.getItinDetail()
                     })
+            }else if(this.reviewContainer == ''){
+                swal.fire({
+                    icon: 'error',
+                    title: 'Cannot add Review',
+                    text: 'make sure you fill the review!',
+                })
+            }else{
+                swal.fire({
+                    icon: 'error',
+                    title: 'Cannot add review',
+                    text: 'You need to login first!',
+                })
+                this.$router.push('/user')
             }
         },
         updateIndex() {

@@ -70,22 +70,37 @@ export default {
       return location
     },
     submitItem(){
-      const datas = {
-        name : this.itinName,
-        start_date : this.startDate,
-        end_date : this.endDate,
-        location : this.getLatLng()
-      }
-
-      this.$store.dispatch('createItinerary', datas)
-        .then(({data}) => {
-          console.log('sini')
-          this.$store.commit('SET_ID_ITINERARY', data._id)
-          this.$router.push(`/itinerary/make`)
-        })
-        .catch(err => {
-          this.$store.commit('SET_ERROR_MESSAGE', err)
-        })
+      if(!this.itinName || !this.startDate || !this.endDate){
+          swal.fire({
+            icon: 'error',
+            title: 'Cannot create itinerary',
+            text: 'Make sure to fill all information!',
+          })
+        }
+        if(localStorage.token){
+          const datas = {
+            name : this.itinName,
+            start_date : this.startDate,
+            end_date : this.endDate,
+            location : this.getLatLng()
+          }
+  
+          this.$store.dispatch('createItinerary', datas)
+            .then(({data}) => {
+              this.$store.commit('SET_ID_ITINERARY', data._id)
+              this.$router.push(`/itinerary/make`)
+            })
+            .catch(err => {
+              this.$store.commit('SET_ERROR_MESSAGE', err)
+            })
+        }else{
+          swal.fire({
+            icon: 'error',
+            title: 'Cannot create itinerary',
+            text: 'You need to login first!',
+          })
+          this.$router.push('/user')
+        }
     }
   },
   components: {

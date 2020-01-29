@@ -247,7 +247,7 @@ export default {
         return location
       },
       submitItem(){
-        if(!this.itinName || !this.startDate || this.getLatLng){
+        if(!this.itinName || !this.startDate || !this.endDate){
           swal.fire({
             icon: 'error',
             title: 'Cannot create itinerary',
@@ -271,6 +271,11 @@ export default {
               this.$store.commit('SET_ERROR_MESSAGE', err)
             })
         }else{
+          swal.fire({
+            icon: 'error',
+            title: 'Cannot create itinerary',
+            text: 'You need to login first!',
+          })
           this.$router.push('/user')
         }
       }
