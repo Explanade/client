@@ -247,7 +247,7 @@ export default {
         return location
       },
       submitItem(){
-        if(!this.itinName || !this.startDate || this.getLatLng){
+        if(!this.itinName || !this.startDate || !this.getLatLng()){
           swal.fire({
             icon: 'error',
             title: 'Cannot create itinerary',

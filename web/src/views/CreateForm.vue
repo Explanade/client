@@ -40,6 +40,7 @@
 
 import HotelDatePicker from 'vue-hotel-datepicker'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default {
   data(){
@@ -70,6 +71,22 @@ export default {
       return location
     },
     submitItem(){
+      if(!localStorage.getItem('token')){
+         Swal.fire({
+            icon: 'error',
+            title: 'Login first',
+            text: 'you will be directed to login page',
+          }).then ((result)=>{
+            this.$router.push('/user')
+          })
+      }
+      else if(!this.itinName || !this.startDate || !this.endDate || !this.getLatLng()){
+        Swal.fire({
+            icon: 'error',
+            title: 'Create Itinerary Error',
+            text: 'Make sure to fill all the data!',
+          })
+      }
       const datas = {
         name : this.itinName,
         start_date : this.startDate,

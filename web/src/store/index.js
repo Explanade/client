@@ -191,8 +191,8 @@ export default new Vuex.Store({
         background: 'url("/logout-notification.jpg")',
       })
 
+      localStorage.clear()
       context.commit('SET_ISLOGIN',payload)
-      localStorage.removeItem('token')
     },
     fetchHighlightItinerary(context,payload){
       serverAPI({

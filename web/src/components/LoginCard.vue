@@ -14,7 +14,12 @@
                     <button style="background-color:#2b2b2b; border-radius:0px; margin-left:15px" type="button" class="btn btn-primary" v-on:click.prevent="register()" >Register</button>
                     <div style="margin-top:10px">
                       <p style="margin-left:20px;font-size:18px;font-style:italic;color:grey;margin-top:20px; margin-bottom:10px">Have an google account?</p>
-                      <button style="background-color:#2b2b2b; border-radius:0px; margin-left:15px" type="button" class="btn btn-primary">Google-Signin</button>
+
+                     <!-- -------------------- -->
+                    
+                      <GoogleLogin style="margin-left:10px" :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin>
+                     <!-- -------------------- -->
+                  
                     </div>
                 </div>
         </form>
@@ -22,14 +27,32 @@
 </template>
 
 <script>
+
+import Swal from 'sweetalert2'
+import GoogleLogin from 'vue-google-login';
+import serverAPI from '../apis/server';
+
 export default {
   data(){
     return{
       email : '',
-      password : ''
+      password : '',
+      params: {
+        client_id:'685004490772-vbs12jca3p2uaqfnhh7kt53avms3sch3.apps.googleusercontent.com'
+      },
+      renderParams: {
+        width: 200,
+        height: 40,
+        longtitle: true,
+  
+      }
     }
   },
+  components :{
+    GoogleLogin
+  },
   methods : {
+    
     register(){
       this.$emit('isLoginPage',false)
     },
@@ -39,9 +62,39 @@ export default {
         password : this.password
       }
       this.$store.dispatch('login',payload)
-    }
+    },
+    onSuccess(googleUser) {
+            var id_token = googleUser.getAuthResponse().id_token;
+            serverAPI({
+                method : 'post',
+                url : 'user/googleLogin',
+                data : {
+                    token : id_token
+                }
+            })
+            .then(({data})=>{
+                Swal.fire(
+                    `Hello ${data.user.name}!`,
+                    'Now you are signed in',
+                    'success'
+                )
+                localStorage.setItem('token',data.token)
+                this.email = ''
+                this.password = ''
+                this.$store.commit('SET_ISLOGIN',true)
+                this.$router.push('/')
+            })
+            .catch(err => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Wrong email/password', 
+                })
 
- }
+                console.log(err)
+            })
+    }
+  }
 }
 </script>
 
