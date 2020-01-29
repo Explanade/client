@@ -222,7 +222,18 @@ export default new Vuex.Store({
       .catch(err => {
         console.log(err)
       })
-    }
+    },
+    addReview(context, payload){
+      return serverAPI({
+        method: 'post',
+        url:'/reviews/',
+        data : payload,
+        headers:{
+          token : localStorage.getItem('token')
+        }
+      })
+    },
+
   },
   
 
