@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="destinations">
-            <div style="display:flex;padding:100px;width:50vw;">
+            <div style="display:flex;padding:100px;width:50vw;justify-content:center;align-items:center;height:50vh">
             <div class="maps">
                 <gmap-map
                     :center="center"
@@ -52,8 +52,11 @@
                 <br> -->
                 <br>
                 <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
-                <p style="margin-bottom:0px; color:gray; font-size:25px;font-weight:200">Awesome trip itinerary to</p>
+                <p style="margin-bottom:0px; color:gray; font-size:20px;font-weight:200">Awesome trip itinerary to</p>
                 <h6 style="margin-bottom:0px; color:black; font-size:35px;">{{center.name}}</h6>
+                <br>
+                <p style="margin-bottom:0px; color:gray; font-size:20px;font-weight:200">Budget Estimation</p>
+                <p style="margin-bottom:0px; color:gray; font-size:20px;font-weight:600">US$ {{itineraryDetail.budget}} </p>
                 <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
             </div>
             </div>
@@ -65,31 +68,33 @@
             <div class="activities">
                 <div class="activity" style="width:25vw;" v-for="(place, j) in activity" :key="j">
                     <h6>{{place.name}}</h6>
-                    <hr align= "left" style="border: 2px solid #6D6D6D; width:20%;">
+                    <hr align= "left" style="border: 2px solid #848484; width:20%;">
                     <p>{{place.formatted_address}}</p>
                 </div>
             </div>
         </div>
          <div class="terms-condition">
-            <h4>Itinerary Reviews</h4>
+            <h1>Itinerary Reviews</h1>
             <hr align= "left" style="border: 0.5px solid #6D6D6D; width:100%;">
             <h6>Write a review</h6>
-            <StarRating :active-color="'#ffda69'" v-model="ratingReview" :star-points="false" style="margin-bottom:15px;"></StarRating>
+            
+            <StarRating :active-color="'#ffda69'" v-model="ratingReview" :star-points="false" :star-size="30" style="margin-bottom:15px;"></StarRating>
             <textarea v-model="reviewContainer" placeholder="write a review" rows="4" cols="50" class="form-control" style="resize:none;">
             </textarea>
             <button type="button" id="button" class="btn btn-info" @click="addReview">Add Review</button>
-            <hr align= "left" style="border: 0.5px solid #6D6D6D; width:100%;">
+            <hr align= "left" style="border: 0.5px solid #848484; width:100%;">
+            <br>
             <br>
             <div id="reviews" v-for="(reviewList, i) in itineraryDetail.reviews" :key="i">
                 <div style="padding:15px; display:flex; flex-direction:row;">
                     <img id="avatar-sm" :src="reviewList.user_id.profile_picture" alt="your image"/>
-                    <div>
+                    <div style="margin-left:10px">
                         <h5>{{reviewList.user_id.name}}</h5>
-                        <StarRating :read-only="true" style="margin-top:-15px" :rating="reviewList.score" :star-size="20" :active-color="'#ffda69'" :star-points="false" ></StarRating>
+                        <StarRating :read-only="true" style="margin-top:-15px" :rating="reviewList.score" :star-size="15" :active-color="'#ffda69'" :star-points="false" ></StarRating>
                     </div>
                 </div>
-                <p style="font-size:1.2rem; padding:10px; margin-top:-15px;">{{reviewList.message}}</p>
-                <hr align= "left" style="border: 0.5px solid #6D6D6D; width:100%;">
+                <p style="font-size:20px; padding:10px; margin-top:-15px; color:#656565; font-style:italic">"{{reviewList.message}}"</p>
+                <hr align= "left" style="border: 0.5px solid #848484; width:100%;">
             </div>
         </div>
   </div>

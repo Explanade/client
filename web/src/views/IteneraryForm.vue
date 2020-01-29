@@ -45,7 +45,7 @@
                <div class="form-group-itin">
                    <div style="display:flex">
                     <h2 style="color:black">Select Days</h2>
-                    <button type="button" id="button-optimized" class="btn btn-primary" @click="sortPlaces">Optimize</button>
+                    <button type="button" id="button-optimized" class="btn btn-primary" @click="sortPlaces">Optimize Itinerary</button>
                    </div>
                     <br>
                 
@@ -485,6 +485,9 @@ export default {
     transform: scale(1.1);
 }
 
+.optimized-icon:hover{
+    
+}
 
 .test {
 overflow: auto;

@@ -40,6 +40,7 @@
 
 import HotelDatePicker from 'vue-hotel-datepicker'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default {
   data(){

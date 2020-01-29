@@ -221,6 +221,7 @@ export default {
       },
       createItinerary(){
         this.$router.push('/create')
+        window.scrollTo(0,0)
       },
       setPlace(place) {
         this.currentPlace = place;

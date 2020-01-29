@@ -20,6 +20,8 @@ export default new Vuex.Store({
     myItin : [],
     itineraries : []
   },
+
+  
   
   mutations: {
     SET_ITINERARY(state, payload) {
@@ -191,8 +193,8 @@ export default new Vuex.Store({
         background: 'url("/logout-notification.jpg")',
       })
 
+      localStorage.clear()
       context.commit('SET_ISLOGIN',payload)
-      localStorage.removeItem('token')
     },
     fetchHighlightItinerary(context,payload){
       serverAPI({
