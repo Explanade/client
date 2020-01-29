@@ -342,7 +342,6 @@ export default {
         this.getItinDetail()
     },
     methods:{
-
         homePage(){
             this.$router.push('/')
         },
