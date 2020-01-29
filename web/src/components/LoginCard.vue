@@ -4,11 +4,11 @@
                 <div style="width:100%;">
                     <div class="inputLogin">
                       <h4>EMAIL</h4>
-                      <input v-model="email" id="input" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Destination" required>
+                      <input v-model="email" id="input" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Email" required>
                     </div>
                     <div class="inputLogin">
                       <h4>PASSWORD</h4>
-                      <input v-model="password" id="input" type="password" class="form-control" aria-describedby="emailHelp" placeholder="Enter Destination" required>
+                      <input v-model="password" id="input" type="password" class="form-control" aria-describedby="emailHelp" placeholder="Enter Password" required>
                     </div>
                     <button style="background-color:#19459b; border-radius:0px; margin-left:15px" type="button" class="btn btn-primary" @click.prevent="login()" >Login</button>
                     <button style="background-color:#2b2b2b; border-radius:0px; margin-left:15px" type="button" class="btn btn-primary" v-on:click.prevent="register()" >Register</button>
