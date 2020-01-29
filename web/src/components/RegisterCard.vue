@@ -4,15 +4,15 @@
       <div style="width:50%">
           <div class="inputRegister">
             <h4>FULL NAME</h4>
-            <input v-model="fullname" id="inputRegister" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Destination">
+            <input v-model="fullname" id="inputRegister" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Full Name">
           </div>
           <div class="inputRegister">
             <h4>EMAIL</h4>
-            <input v-model="email" id="inputRegister" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Destination">
+            <input v-model="email" id="inputRegister" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Email">
           </div>
           <div class="inputRegister">
             <h4>PASSWORD</h4>
-            <input v-model="password" id="inputRegister" type="password" class="form-control" aria-describedby="emailHelp" placeholder="Enter Destination">
+            <input v-model="password" id="inputRegister" type="password" class="form-control" aria-describedby="emailHelp" placeholder="Enter Password">
           </div>
           <button style="background-color:#19459b; border-radius:0px; margin-left:15px" type="submit" class="btn btn-primary">Register</button>
           <button style="background-color:#2b2b2b; border-radius:0px; margin-left:15px" type="button" class="btn btn-primary" @click="loginPage()" >Back</button>

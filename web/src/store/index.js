@@ -192,6 +192,10 @@ export default new Vuex.Store({
         marginTop:'50px',
         background: 'url("/logout-notification.jpg")',
       })
+      
+      router.push({
+        name:'home'
+      })
 
       localStorage.clear()
       context.commit('SET_ISLOGIN',payload)
